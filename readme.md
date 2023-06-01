@@ -7,6 +7,7 @@
       - [Step 1: Install Anaconda Distribution](#step-1-install-anaconda-distribution)
       - [Step 2: Clone the workshop repository](#step-2-clone-the-workshop-repository)
     - [1.2 Option 2: Run on Anaconda Cloud](#12-option-2-run-on-anaconda-cloud)
+  - [2. Verify Your Environment](#2-verify-your-environment)
 
 
 ## 0. Overview
@@ -33,3 +34,7 @@ Anaconda is the easiest way to get started with Python and Jupyter Notebook. Go 
 
 
 ### 1.2 Option 2: Run on Anaconda Cloud
+
+
+## 2. Verify Your Environment
+
