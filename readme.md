@@ -33,6 +33,8 @@ This repository contains materials for the ADSA NANP Modeling Workshop on model 
 
 Please make sure to set up your environment before the workshop. You can choose to run the workshop materials on your local machine or on Anaconda Cloud.
 
+[back to top](#adsa-nanp-modeling-workshop---model-validation)
+
 ### 1.1 Option 1 (recommended): Run on your local machine
 
 To ensure the best quality of this workshop and to avoid any internet connectivity issues, we recommend that you run the workshop materials on your local machine. To do so, you will need to install `Python` and `Jupyter Notebook`, which is an interactive coding environment, on your machine.
@@ -65,6 +67,8 @@ Open the file `verify.ipynb`. Follow the instruction in the notebook to run the 
 
 <img src="res/local_verify.png" width="600">
 
+[back to top](#adsa-nanp-modeling-workshop---model-validation)
+
 ### 1.2 Option 2: Run on Anaconda Cloud
 
 If you encounter any issues with the local environment setup, you can choose to run the workshop materials online. The advantage of this option is that you do not need to install any software on your machine. However, you will need to have a stable internet connection during the workshop.
@@ -95,6 +99,8 @@ On the left panel of the dashboard, click `ADSA_modelvalidation` and open the fi
 
 <img src="res/online_verify.png" width="600">
 
+[back to top](#adsa-nanp-modeling-workshop---model-validation)
+
 ## 2. Getting Started
 
 Now you are ready to start the workshop! We will cover three important topics in model validation. Please use the jupyter notebooks in this repository to follow along with the following topics:
@@ -110,3 +116,5 @@ How do we validate a model (e.g., a random forest) that includes hyperparameters
 ### 2.3 `note03_factor_validation.ipynb`
 
 How does the method of splitting data based on different experimental factors influence our conclusions during model validation?
+
+[back to top](#adsa-nanp-modeling-workshop---model-validation)
