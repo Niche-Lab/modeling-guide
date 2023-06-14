@@ -41,31 +41,31 @@ To ensure the best quality of this workshop and to avoid any internet connectivi
 
 #### 1.1.1: Install Anaconda Distribution
 
-<img src="res/local_download.png" width="600">
+<img src="res/readme/local_download.png" width="600">
 
 `Anaconda` is the easiest way to get started with `Python` and `Jupyter Notebook`. Go to <https://www.anaconda.com/download> to download the `Anaconda` distribution and install it on your machine. You DO NOT need to change any settings during the installation.
 
-<img src="res/local_install.png" width="600">
+<img src="res/readme/local_install.png" width="600">
 
 #### 1.1.2: Download the workshop repository
 
 GO to <https://github.com/Niche-Squad/ADSA_modelvalidation> and click the green button `Code` -> `Download ZIP` to download the workshop repository. Unzip the downloaded file and save it to a location on your machine.
 
-<img src="res/local_clone.png" width="600">
+<img src="res/readme/local_clone.png" width="600">
 
 #### 1.1.3: Verify your environment
 
 Open the `Anaconda Navigator` and launch `Jupyter Notebook`.
 
-<img src="res/local_anaconda.png" width="600">
+<img src="res/readme/local_anaconda.png" width="600">
 
 In the `Jupyter Notebook`, navigate to the workshop repository folder that you just unzipped.
 
-<img src="res/local_browse.png" width="600">
+<img src="res/readme/local_browse.png" width="600">
 
 Open the file `verify.ipynb`. Follow the instruction in the notebook to run the verification code block. If you can run the code block without any errors, you are all set for the workshop!
 
-<img src="res/local_verify.png" width="600">
+<img src="res/readme/local_verify.png" width="600">
 
 [back to top](#adsa-nanp-modeling-workshop---model-validation)
 
@@ -77,13 +77,13 @@ If you encounter any issues with the local environment setup, you can choose to 
 
 Anaconda offers a free cloud service that allows you to run `Jupyter Notebook` on the cloud. It requires you to register an account for the service. Go to <https://www.anaconda.com/code-in-the-cloud> and follow the instructions to register an account.
 
-<img src="res/online_registration.png" width="600">
+<img src="res/readme/online_registration.png" width="600">
 
 #### 1.2.2: Clone the workshop repository
 
 Once you log in to your Anaconda Cloud account, you will see a dashboard. Go to `Other` section and open `Terminal`.
 
-<img src="res/online_dashboard.png" width="600">
+<img src="res/readme/online_dashboard.png" width="600">
 
 In `Terminal`, run the following command to clone the workshop repository to your cloud account:
 
@@ -91,13 +91,13 @@ In `Terminal`, run the following command to clone the workshop repository to you
 git clone https://github.com/Niche-Squad/ADSA_modelvalidation
 ```
 
-<img src="res/online_clone.png" width="600">
+<img src="res/readme/online_clone.png" width="600">
 
 #### 1.2.3: Verify the online environment
 
 On the left panel of the dashboard, click `ADSA_modelvalidation` and open the file `verify.ipynb`. Follow the instruction in the notebook to run the verification code block. If you can run the code block without any errors, you are all set for the workshop!
 
-<img src="res/online_verify.png" width="600">
+<img src="res/readme/online_verify.png" width="600">
 
 [back to top](#adsa-nanp-modeling-workshop---model-validation)
 
@@ -108,6 +108,8 @@ Now you are ready to start the workshop! We will cover three important topics in
 ### 2.1 `note01_train_test_split.ipynb`
 
 Why is it necessary to split our data into training and testing sets for the purpose of model validation?
+
+<img src="res/ex1/output_OLS.png" width="800">
 
 ### 2.2 `note02_hyperparameter.ipynb`
 
