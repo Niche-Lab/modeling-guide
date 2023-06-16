@@ -2,6 +2,8 @@
 
 Author: [James Chen](<https://www.apsc.vt.edu/OurPeople/Faculty/james-chen.html>)
 
+Repository: <https://github.com/Niche-Squad/ADSA_modelvalidation>
+
 - [ADSA NANP Modeling Workshop - Model Validation](#adsa-nanp-modeling-workshop---model-validation)
   - [0. Overview](#0-overview)
   - [1. Environment Setup](#1-environment-setup)
@@ -106,6 +108,7 @@ On the left panel of the dashboard, click `ADSA_modelvalidation` and open the fi
 Now you are ready to start the workshop! We will cover three important topics in model validation. Please use the jupyter notebooks in this repository to follow along with the following topics:
 
 ### 2.1 `note01_train_test_split.ipynb`
+
 
 Why is it necessary to split our data into training and testing sets for the purpose of model validation?
 
