@@ -4,33 +4,39 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 
 
-def vis_bw(data, figsize=(12, 8)):
-    plt.figure(figsize=figsize)
-    sns.lineplot(x="month", y="bw", hue="sire", data=data)
-
-
-def sim_bw(sdu=100, sde=100, n_months=24, n_sires=3, n_off=10, seed=0):
-    np.random.seed(seed)
+def sim_bw(sdu=100, sde=50, n_months=24, n_sires=3, n_off=10):
     # constants
     n_cows = n_sires * n_off
     n = n_months * n_cows
     # dataframe
-    data = init_data(n_months, n_sires, n_off)
+    data = _init_data(n_months, n_sires, n_off)
     # incidence matrix
-    X = make_X(data)
-    Z = make_Z(data, n_months, n_sires)
+    X = _make_X(data)
+    Z = _make_Z(data, n_months, n_sires)
     # fixed effects
-    b = define_b()
+    b = _define_b()
     # random effects
-    u = sample_u(sdu, n_months, n_sires)
-    e = sample_e(sde, n)
+    u = _sample_u(sdu, n_months, n_sires)
+    e = _sample_e(sde, n)
     # simulate
     data["bw"] = X @ b + Z @ u + e
+    # correct pseudo sires for the computational covenience
+    # {1, 2, 3} -> {3, 4, 5}
+    data["sire"] += 2
     # return
     return data
 
 
-def init_data(n_months=24, n_sires=3, n_off=10):
+def vis_bw(data, figsize=(12, 8)):
+    sns.set_theme(style="whitegrid", palette="Set2")
+    plt.figure(figsize=figsize)
+    sns.lineplot(x="month", y="bw", hue="sire", data=data)
+
+
+# private ---------------------------------------------------------------------
+
+
+def _init_data(n_months=24, n_sires=3, n_off=10):
     n = n_months * n_sires * n_off
     data = np.zeros((n, 3))  # cow, sires, months
     count = 0
@@ -40,84 +46,168 @@ def init_data(n_months=24, n_sires=3, n_off=10):
                 data[count, :] = [i, j, k]
                 count += 1
     data = pd.DataFrame(data, columns=["sire", "cow", "month"], dtype=int)
+    # add three arbitrary predictors
+    data["x1"] = np.random.normal(0, 1, n)
+    data["x2"] = np.random.normal(0, 1, n)
+    data["x3"] = np.random.normal(0, 1, n)
     # return
     return data
 
 
-def define_b():
+def _define_b():
+    # reference
+    # https://extension.psu.edu/growth-charts-for-dairy-heifers
+    # range from 100-150 lbs to 1300-1500 lbs
     # fixed effects
     b = (
         np.array(
             [
-                [100]
-                + [80] * 10  # intercept  # first 10 months gains 50 lbs per month
-                + [50] * 5  # next 5 months gains 30 lbs per month
-                + [30] * 5  # next 5 months gains 20 lbs per month
-                + [20] * 4  # next 4 months gains 10 lbs per month
+                [100]  # intercept
+                + [100] * 10  # first 10 months gains 50 lbs per month
+                + [70] * 5  # next 5 months gains 30 lbs per month
+                + [10] * 5  # next 5 months gains 20 lbs per month
+                + [5] * 4  # next 4 months gains 10 lbs per month
             ]
         )
         .flatten()
         .cumsum()
     )
+    # arbitrary predictors effects (x1, x2, x3)
+    b = np.concatenate((b, np.array([50, 100, 200])))
     return b
 
 
-def sample_A(n):
-    a = np.identity(n)
-    for i in range(1, n):
-        for j in range(i):
-            a[i, j] = a[j, i] = 1 / np.random.choice([2, 4, 8])
-    return a
-
-
-def sample_e(sde, n):
-    return np.random.normal(0, sde, n)
-
-
-def sample_u(sdu, n_months=24, n_sires=3):
-    A = sample_A(n_sires)
-    vu = np.random.normal(0, sdu) ** 2
+def _sample_u(sdu, n_months=24, n_sires=3):
+    # random effects
+    n_test = int(n_sires / 3)
+    n_train = n_sires - n_test
+    ped = pd.DataFrame(
+        {
+            "id": [1, 2] + list(range(3, 3 + n_sires)),
+            "sire": [0, 0] + [1] * n_train + [0] * n_test,
+            "dam": [0, 0] + [2] * n_train + [0] * n_test,
+        }
+    )
+    A = _get_A(ped)[-n_sires:, -n_sires:]
+    vu = sdu**2
     ucov = vu * A
-    u = np.random.multivariate_normal(np.zeros(n_sires), ucov, n_months + 1)
+    u = np.random.multivariate_normal(
+        [0] * n_train + [100] * n_test, ucov, n_months + 1
+    )
     u = u.T.reshape(-1)  # s1, s1m1, s1m2,...,s1m24, s2, s2m1,...
     return u
 
 
-def make_X(data):
+def _get_A(df_ped):
+    print("--- Simulated Pedigree ---")
+    print(df_ped)
+    print("--------------------------")
+    n = len(df_ped)
+    A = np.identity(n)
+    for i in range(n):
+        s = df_ped.loc[i, "sire"] - 1  # matrix index
+        d = df_ped.loc[i, "dam"] - 1  # matrix index
+        for j in range(i):
+            if s != -1 and d != -1:
+                ajs = A[s, j]
+                ajd = A[d, j]
+                A[i, j] = 0.5 * (ajs + ajd)
+                A[j, i] = A[i, j]
+                A[i, i] = 1 + 0.5 * A[s, d]
+            elif s == -1 and d != -1:
+                ajd = A[d, j]
+                A[i, j] = 0.5 * ajd
+                A[j, i] = A[i, j]
+                A[i, i] = 1
+            elif s != -1 and d == -1:
+                ajs = A[s, j]
+                A[i, j] = 0.5 * ajs
+                A[j, i] = A[i, j]
+                A[i, i] = 1
+            else:
+                A[i, j] = 0
+                A[j, i] = A[i, j]
+                A[i, i] = 1
+    return A
+
+
+def _sample_e(sde, n):
+    # random effects
+    return np.random.normal(0, sde, n)
+
+
+def _make_X(data):
     n = data.shape[0]
     # month effects (fixed)
-    X = pd.get_dummies(data["month"], prefix="m").to_numpy() * 1
+    X_month = pd.get_dummies(data["month"], prefix="m").to_numpy() * 1
+    # arbitrary predictors
+    X_arb = data[["x1", "x2", "x3"]].to_numpy() * 1
+    # concatenate
+    X = np.concatenate((X_month, X_arb), axis=1)
     # add intercept
     X = np.concatenate((np.ones((n, 1)), X), axis=1)
     # return
     return X
 
 
-def make_Z(data, n_months=24, n_sires=3):
+def _make_Z(data, n_months=24, n_sires=3):
     # I. sire effects
     Zs = pd.get_dummies(data["sire"], prefix="s").to_numpy() * 1
 
     # II. interaction sire and month
     n = data.shape[0]
     # create interaction terms
-    data.loc[:, "m/s"] = data["month"].astype(str) + "_" + data["sire"].astype(str)
-    pd_dummy = pd.get_dummies(data["m/s"], prefix="m/s")
-    # create pd_temp with all columns
-    col_all = [
-        "m/s_%d_%d" % (i, j)
-        for i in range(1, n_months + 1)
-        for j in range(1, n_sires + 1)
-    ]
-    pd_temp = pd.DataFrame(np.zeros((n, len(col_all))), columns=col_all)
-    # assign columns from data to pd_temp
-    for col in pd_dummy.columns:
-        if col in col_all:
-            pd_temp.loc[:, col] = pd_dummy.loc[:, col]
-    # convert to numpy
-    Zinter = pd_temp.to_numpy() * 1
+    inter_terms = data["month"].astype(str) + "_" + data["sire"].astype(str)
+    pd_dummy = pd.get_dummies(inter_terms, prefix="m/s")
 
-    # III. concatenate Zs and Zinter
-    Z = np.concatenate((Zs, Zinter), axis=1)
+    # III. create Z
+    Z = np.zeros((n, n_months * n_sires + n_sires))
+    i = 0
+    for s in range(n_sires):
+        Z[:, i] = Zs[:, s]
+        i += 1
+        for m in range(n_months):
+            col = "m/s_%d_%d" % (m + 1, s + 1)
+            Z[:, i] = pd_dummy.loc[:, col]
+            i += 1
 
     # IV. return
     return Z
+
+
+# data = sim_bw()
+# vis_bw(data)
+
+
+# constants
+n_cows = n_sires * n_off
+n = n_months * n_cows
+# dataframe
+data = _init_data(n_months, n_sires, n_off)
+# incidence matrix
+X = _make_X(data)
+Z = _make_Z(data, n_months, n_sires)
+# fixed effects
+b = _define_b()
+# random effects
+u = _sample_u(sdu, n_months, n_sires)
+
+e = _sample_e(sde, n)
+# simulate
+data["bw"] = X @ b + Z @ u + e
+# correct pseudo sires for the computational covenience
+# {1, 2, 3} -> {3, 4, 5}
+data["sire"] += 2
+
+sns.set_theme(style="whitegrid", palette="Set2")
+plt.figure(figsize=(12, 8))
+sns.heatmap(X, cmap="Blues", cbar=False)
+sns.heatmap(Z, cmap="Blues", cbar=False)
+sns.heatmap(u.reshape((1, -1)), cmap="Blues", cbar=False)
+
+
+A = np.array([[1, 2, 3], [2, 1, 3], [3, 3, 1]])
+
+I = np.eye(2)
+
+np.kron(A, I)

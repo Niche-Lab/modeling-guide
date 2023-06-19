@@ -1,8 +1,9 @@
 import numpy as np
 import pandas as pd
+from sklearn.linear_model import LinearRegression
 
 
-def make_data(n, p, rank=-1, p_assoc=0, dist="normal"):
+def make_data(n, p, rank=-1, p_assoc=0, dist="normal", precision=4):
     """
     Generate a random dataset with X having n observations and p variables and a target variable Y.
     The first p_assoc variables are associated with the target variable.
@@ -27,8 +28,8 @@ def make_data(n, p, rank=-1, p_assoc=0, dist="normal"):
     y : array-like of shape (n,)
         The target values.
     """
-    # Generate n random variables
-    X = np.random.rand(n, p).round(4)
+    # generate n random variables
+    X = np.random.normal(loc=0, scale=1, size=(n, p))
 
     # if the matrix is not full-rank
     if rank != -1:
@@ -39,6 +40,7 @@ def make_data(n, p, rank=-1, p_assoc=0, dist="normal"):
         # reconstruct the matrix X
         X = U.dot(np.diag(S)).dot(V)
 
+    # if there is no association between X and Y
     if p_assoc == 0:
         if dist == "normal":
             Y = np.random.normal(loc=0.0, scale=1, size=n)
@@ -50,14 +52,15 @@ def make_data(n, p, rank=-1, p_assoc=0, dist="normal"):
             raise ValueError(
                 "dist must be one of 'normal', 'exponential', or 'uniform'."
             )
+    # if there are p_assoc variables associated with Y
     else:
         # Y = Xb + error
-        beta = np.random.uniform(low=0, high=1, size=p_assoc)
+        beta = np.random.normal(loc=0, scale=1, size=p_assoc)
         idx_p = np.random.choice(p, p_assoc, replace=False)
-        error = np.random.normal(loc=0, scale=0.5, size=n)
+        error = np.random.normal(loc=0, scale=1, size=n)
         Y = X[:, idx_p].dot(beta) + error
 
-    return X, Y
+    return X.round(precision), Y.round(precision)
 
 
 def get_dataframe(X, y):
@@ -72,9 +75,9 @@ def get_dataframe(X, y):
     return data
 
 
-def get_r2(x, y):
+def get_r(x, y):
     """
-    Compute the squared correlation coefficient R^2.
+    Compute the Pearson's correlation coefficient r.
 
     Parameters
     ----------
@@ -85,7 +88,22 @@ def get_r2(x, y):
 
     Returns
     -------
-    r2 : float
-        The squared correlation coefficient R^2.
+    rr : float
+        The Pearson's correlation coefficient r.
     """
-    return np.corrcoef(x, y)[0, 1] ** 2
+    return np.corrcoef(x, y)[0, 1]
+
+
+def get_p_value(dist, threshold):
+    dist = np.array(dist)
+    bol_pass = dist > threshold
+    prop_pass = np.mean(bol_pass)
+    p_value = 1 - prop_pass
+    return p_value.round(4)
+
+
+def get_yhat_by_ols(X, y):
+    linear_model = LinearRegression()
+    linear_model.fit(X, y)
+    y_hat = linear_model.predict(X)
+    return y_hat
