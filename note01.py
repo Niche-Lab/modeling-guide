@@ -87,13 +87,6 @@ def get_p_value(dist, threshold):
     return p_value.round(4)
 
 
-def get_yhat_by_ols(X, y):
-    linear_model = LinearRegression()
-    linear_model.fit(X, y)
-    y_hat = linear_model.predict(X)
-    return y_hat
-
-
 def ols_r_dist(n, p, niter, p_assoc=0):
     # run the simulation
     dist_r = []
