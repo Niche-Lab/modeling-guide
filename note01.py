@@ -1,6 +1,11 @@
-import numpy as np
-import pandas as pd
-from sklearn.linear_model import LinearRegression
+# python libs imports
+import numpy as np  # linear algebra, use `np`as the alias
+import pandas as pd  # dataframe, use `pd` as the alias
+from scipy.stats import pearsonr  # correlation coefficient
+from sklearn.linear_model import LinearRegression  # OLS
+from sklearn.model_selection import train_test_split
+from matplotlib import pyplot as plt  # native visualization
+import seaborn as sns  # visualization but more friendly interface
 
 
 def make_data(n, p, rank=-1, p_assoc=0, dist="normal", precision=4):
@@ -75,30 +80,10 @@ def get_dataframe(X, y):
     return data
 
 
-def get_r(x, y):
-    """
-    Compute the Pearson's correlation coefficient r.
-
-    Parameters
-    ----------
-    x : array-like of shape (n,)
-        The true values.
-    y : array-like of shape (n,)
-        The predicted values.
-
-    Returns
-    -------
-    rr : float
-        The Pearson's correlation coefficient r.
-    """
-    return np.corrcoef(x, y)[0, 1]
-
-
 def get_p_value(dist, threshold):
     dist = np.array(dist)
-    bol_pass = dist > threshold
-    prop_pass = np.mean(bol_pass)
-    p_value = 1 - prop_pass
+    bol_pass = dist <= threshold
+    p_value = np.mean(bol_pass)
     return p_value.round(4)
 
 
@@ -106,4 +91,40 @@ def get_yhat_by_ols(X, y):
     linear_model = LinearRegression()
     linear_model.fit(X, y)
     y_hat = linear_model.predict(X)
+    return y_hat
+
+
+def ols_r_dist(n, p, niter, p_assoc=0):
+    # run the simulation
+    dist_r = []
+    for i in range(niter):
+        X, y = make_data(n, p, p_assoc=p_assoc)  # sample a dataset
+        y_hat = get_yhat_by_ols(X, y)  # obtain the fitted values
+        r = pearsonr(y, y_hat)[0]  # the first element is the correlation coefficient
+        dist_r.append(r)  # concatenate the corre
+    return np.array(dist_r)
+
+
+def ols_r_dist_val(n, p, niter, p_assoc=0):
+    dist_r = []
+    for i in range(niter):
+        X, y = make_data(n, p, p_assoc=p_assoc)
+        x_train, x_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
+        y_hat = get_yhat_by_ols_val(x_train, x_test, y_train)
+        r = pearsonr(y_test, y_hat)[0]
+        dist_r.append(r)
+    return np.array(dist_r)
+
+
+def get_yhat_by_ols(X, y):
+    linear_model = LinearRegression()
+    linear_model.fit(X, y)
+    y_hat = linear_model.predict(X)
+    return y_hat
+
+
+def get_yhat_by_ols_val(x_train, x_test, y_train):
+    linear_model = LinearRegression()
+    linear_model.fit(x_train, y_train)
+    y_hat = linear_model.predict(x_test)
     return y_hat

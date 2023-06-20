@@ -21,7 +21,7 @@ Repository: <https://github.com/Niche-Squad/ADSA_modelvalidation>
     - [2.3 `note03_factor_validation.ipynb`](#23-note03_factor_validationipynb)
 
 **⚠️IMPORTANT⚠️
-This repository is under development. Please check back one week (*June 18th, 2023*) before the workshop for the final version of the workshop materials**
+This repository is under development. The first two notes are finalized for the workshop. The third note is still under development and should be finalized by *June 21, 2023***
 
 ## 0. Overview
 
@@ -112,11 +112,14 @@ Now you are ready to start the workshop! We will cover three important topics in
 
 Why is it necessary to split our data into training and testing sets for the purpose of model validation?
 
-<img src="res/ex1/output_OLS.png" width="800">
+<img src="res/note01_cover.png" width="800">
 
 ### 2.2 `note02_hyperparameter.ipynb`
 
 How do we validate a model (e.g., a random forest) that includes hyperparameters?
+
+<img src="res/note02_hyperparam.png" width="800">
+
 
 ### 2.3 `note03_factor_validation.ipynb`
 
