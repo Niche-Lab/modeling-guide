@@ -31,6 +31,10 @@ def vis_bw(data, figsize=(12, 8)):
     sns.set_theme(style="whitegrid", palette="Set2")
     plt.figure(figsize=figsize)
     sns.lineplot(x="month", y="bw", hue="sire", data=data)
+    plt.xlim(1, 24)
+    plt.xlabel("Month")
+    plt.ylabel("Body weight (lbs)")
+    plt.title("Simulated body weight")
 
 
 # private ---------------------------------------------------------------------
@@ -99,6 +103,7 @@ def _sample_u(sdu, n_months=24, n_sires=3):
 
 
 def _get_A(df_ped):
+    # Mrode, R. A. (2014). Linear models for the prediction of animal breeding values.
     print("--- Simulated Pedigree ---")
     print(df_ped)
     print("--------------------------")
@@ -175,39 +180,39 @@ def _make_Z(data, n_months=24, n_sires=3):
     return Z
 
 
-# data = sim_bw()
-# vis_bw(data)
+# # data = sim_bw()
+# # vis_bw(data)
 
 
-# constants
-n_cows = n_sires * n_off
-n = n_months * n_cows
-# dataframe
-data = _init_data(n_months, n_sires, n_off)
-# incidence matrix
-X = _make_X(data)
-Z = _make_Z(data, n_months, n_sires)
-# fixed effects
-b = _define_b()
-# random effects
-u = _sample_u(sdu, n_months, n_sires)
+# # constants
+# n_cows = n_sires * n_off
+# n = n_months * n_cows
+# # dataframe
+# data = _init_data(n_months, n_sires, n_off)
+# # incidence matrix
+# X = _make_X(data)
+# Z = _make_Z(data, n_months, n_sires)
+# # fixed effects
+# b = _define_b()
+# # random effects
+# u = _sample_u(sdu, n_months, n_sires)
 
-e = _sample_e(sde, n)
-# simulate
-data["bw"] = X @ b + Z @ u + e
-# correct pseudo sires for the computational covenience
-# {1, 2, 3} -> {3, 4, 5}
-data["sire"] += 2
+# e = _sample_e(sde, n)
+# # simulate
+# data["bw"] = X @ b + Z @ u + e
+# # correct pseudo sires for the computational covenience
+# # {1, 2, 3} -> {3, 4, 5}
+# data["sire"] += 2
 
-sns.set_theme(style="whitegrid", palette="Set2")
-plt.figure(figsize=(12, 8))
-sns.heatmap(X, cmap="Blues", cbar=False)
-sns.heatmap(Z, cmap="Blues", cbar=False)
-sns.heatmap(u.reshape((1, -1)), cmap="Blues", cbar=False)
+# sns.set_theme(style="whitegrid", palette="Set2")
+# plt.figure(figsize=(12, 8))
+# sns.heatmap(X, cmap="Blues", cbar=False)
+# sns.heatmap(Z, cmap="Blues", cbar=False)
+# sns.heatmap(u.reshape((1, -1)), cmap="Blues", cbar=False)
 
 
-A = np.array([[1, 2, 3], [2, 1, 3], [3, 3, 1]])
+# A = np.array([[1, 2, 3], [2, 1, 3], [3, 3, 1]])
 
-I = np.eye(2)
+# I = np.eye(2)
 
-np.kron(A, I)
+# np.kron(A, I)

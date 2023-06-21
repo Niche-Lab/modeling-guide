@@ -27,9 +27,9 @@ This repository is under development. The first two notes are finalized for the 
 
 This repository contains materials for the ADSA NANP Modeling Workshop on model validation. This workshop is designed to offer a hands-on introduction to the prevalent risks involved in evaluating predictive models. We will run through several simulations to demonstrate the importance of model validation, aiming to answer the following questions:
 
-- Why is it necessary to split our data into training and testing sets for the purpose of model validation?
-- How do we validate a model (e.g., a random forest) that includes hyperparameters?
-- How does the method of splitting data based on different experimental factors influence our conclusions during model validation?
+- Why is it necessary to split our data in model validation?
+- How to appropriately tune hyperparameters in a model?
+- How does different splitting methods influence our conclusions during model validation?
 
 ## 1. Environment Setup
 
@@ -109,20 +109,20 @@ Now you are ready to start the workshop! We will cover three important topics in
 
 ### 2.1 `note01_train_test_split.ipynb`
 
-
-Why is it necessary to split our data into training and testing sets for the purpose of model validation?
+Why is it necessary to split our data in model validation?
 
 <img src="res/note01_cover.png" width="800">
 
 ### 2.2 `note02_hyperparameter.ipynb`
 
-How do we validate a model (e.g., a random forest) that includes hyperparameters?
+How to appropriately tune hyperparameters in a model?
 
 <img src="res/note02_hyperparam.png" width="800">
 
-
 ### 2.3 `note03_factor_validation.ipynb`
 
-How does the method of splitting data based on different experimental factors influence our conclusions during model validation?
+How does different splitting methods influence our conclusions during model validation?
+
+<img src="res/note03_split.png" width="800">
 
 [back to top](#adsa-nanp-modeling-workshop---model-validation)
