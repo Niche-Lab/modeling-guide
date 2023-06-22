@@ -2,6 +2,9 @@ import numpy as np
 import pandas as pd
 import seaborn as sns
 import matplotlib.pyplot as plt
+from scipy.stats import pearsonr
+from sklearn.metrics import mean_squared_error
+import statsmodels.formula.api as smf
 
 
 def sim_bw(sdu=100, sde=50, n_months=24, n_sires=3, n_off=10):
