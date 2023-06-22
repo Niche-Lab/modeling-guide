@@ -21,7 +21,8 @@ Repository: <https://github.com/Niche-Squad/ADSA_modelvalidation>
     - [2.3 `note03_factor_validation.ipynb`](#23-note03_factor_validationipynb)
 
 **⚠️IMPORTANT⚠️
-This repository is under development. The first two notes are finalized for the workshop. The third note is still under development and should be finalized by *June 21, 2023***
+
+Make sure you can successfully run the verification code block in the notebook `verify.ipynb` before the workshop on June 25, 2023.**
 
 ## 0. Overview
 
