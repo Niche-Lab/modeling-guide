@@ -30,11 +30,83 @@ def sim_bw(sdu=100, sde=50, n_months=24, n_sires=3, n_off=10):
 def vis_bw(data, figsize=(12, 8)):
     sns.set_theme(style="whitegrid", palette="Set2")
     plt.figure(figsize=figsize)
-    sns.lineplot(x="month", y="bw", hue="sire", data=data)
+    sns.lineplot(x="month", y="bw", hue="sire", palette=["C0", "C1", "C2"], data=data)
     plt.xlim(1, 24)
     plt.xlabel("Month")
     plt.ylabel("Body weight (lbs)")
     plt.title("Simulated body weight")
+
+
+def merge_train_test(data_train, data_test):
+    col_final = ["cow", "sire", "month", "observed_bw", "predicted_bw", "split"]
+
+    # test
+    data_all = data_test.loc[:, ["cow", "sire", "month", "bw", "bw_pre"]]
+    data_all.loc[:, "split"] = "test"
+    data_all.columns = col_final
+
+    # train
+    data_train.loc[:, "predicted_bw"] = data_train["bw"]
+    data_train.loc[:, "split"] = "train"
+    data_train_tmp = data_train.loc[
+        :, ["cow", "sire", "month", "bw", "predicted_bw", "split"]
+    ]
+    data_train_tmp.columns = col_final
+
+    # merge and return
+    data_all = pd.concat([data_all, data_train_tmp], axis=0)
+    data_all = data_all.melt(
+        id_vars=["cow", "sire", "month", "split"],
+        value_vars=["observed_bw", "predicted_bw"],
+    )
+    data_all.loc[data_all["split"] == "train", "variable"] = "trained_bw"
+    return data_all
+
+
+def fit_and_predict(data_train, data_test):
+    # learn coefficients from the training ste
+    model_ols = smf.ols("bw ~ month + x1 + x2 + x3", data_train).fit()
+    # predict on the testing set
+    data_test.loc[:, "bw_pre"] = model_ols.predict(data_test)
+    # evaluation
+    obs = data_test["bw"]
+    pre = data_test["bw_pre"]
+    # evaluation
+    r = pearsonr(obs, pre)[0].round(3)
+    mse = mean_squared_error(obs, pre).round(3)
+    # print results
+    print(f"r = {r}, mse = {mse}")
+    # merge
+    data_all = merge_train_test(data_train, data_test)
+    return data_all, r, mse
+
+
+def vis_linechart(data_test):
+    data_plot = data_test.melt(id_vars=["sire", "month"], value_vars=["bw", "bw_pre"])
+    plot = sns.relplot(
+        x="month",
+        y="value",
+        hue="variable",
+        style="variable",
+        col="sire",
+        col_wrap=2,
+        kind="line",
+        height=3,
+        aspect=1.5,
+        data=data_plot,
+    )
+    (
+        plot.map(plt.axvline, x=16, color="k", linestyle="--")
+        .set_axis_labels("Month", "Body weight (lb)")
+        .tight_layout(w_pad=0)
+    )
+
+
+def vis_obspre(data_test, r, mse):
+    sns.scatterplot(x="bw", y="bw_pre", hue="sire", data=data_test)
+    plt.title(f"Model accuracy: r = {r}, mse = {mse}")
+    plt.xlabel("Observed body weight (lbs)")
+    plt.ylabel("Predicted body weight (lbs)")
 
 
 # private ---------------------------------------------------------------------
