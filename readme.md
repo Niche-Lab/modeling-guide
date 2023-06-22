@@ -20,9 +20,9 @@ Repository: <https://github.com/Niche-Squad/ADSA_modelvalidation>
     - [2.2 `note02_hyperparameter.ipynb`](#22-note02_hyperparameteripynb)
     - [2.3 `note03_factor_validation.ipynb`](#23-note03_factor_validationipynb)
 
-**⚠️IMPORTANT⚠️
+**⚠️IMPORTANT⚠️**
 
-Make sure you can successfully run the verification code block in the notebook `verify.ipynb` before the workshop on June 25, 2023.**
+**Make sure you can successfully run the verification code block in the notebook `verify.ipynb` before the workshop on June 25, 2023**
 
 ## 0. Overview
 
