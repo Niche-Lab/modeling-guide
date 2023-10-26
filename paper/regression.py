@@ -35,26 +35,21 @@ def print_status(x, y):
     print(f"RMSE = {rmse(x, y):.2f}")
 
 
-RCORR = 0.5
+RCORR = 0.3
 NOISE = 1 - RCORR
 BLOCK_EFF = 3
-SEED = 24060
+SEED = 24061
 
 np.random.seed(SEED)
-obs = np.concatenate([np.random.normal(2, 1, 50), np.random.normal(-2, 1, 50)])
-
+obs = np.concatenate(
+    [
+        np.random.normal(BLOCK_EFF, 1, 50),
+        np.random.normal(-BLOCK_EFF, 1, 50),
+    ]
+)
 pred_1 = obs * RCORR + np.random.normal(0, NOISE, 100)
-ax = sns.scatterplot(x=obs, y=pred_1)
-print_status(obs, pred_1)
-
-pred_2 = pred_1 * 3
-ax = sns.scatterplot(x=obs, y=pred_2)
-print_status(obs, pred_2)
-
-pred_3 = pred_1**3
-ax = sns.scatterplot(x=obs, y=pred_3)
-print_status(obs, pred_3)
-
+pred_2 = pred_1 * 5
+pred_3 = pred_1**5
 pred_4 = []
 for i, o in enumerate(obs):
     if o > 0:
@@ -62,8 +57,38 @@ for i, o in enumerate(obs):
     else:
         pred_4 += [pred_1[i] + np.random.normal(-BLOCK_EFF, NOISE)]
 pred_4 = np.array(pred_4)
+
+
+ax = sns.scatterplot(x=obs, y=pred_1)
+print_status(obs, pred_1)
+# Correlation r2 = 0.69
+# Determination r2 = 0.47
+# RMSE = 2.41
+
+ax = sns.scatterplot(x=obs, y=pred_2)
+print_status(obs, pred_2)
+# Correlation r2 = 0.69
+# Determination r2 = -0.21
+# RMSE = 3.63
+
+ax = sns.scatterplot(x=obs, y=pred_3)
+print_status(obs, pred_3)
+# Correlation r2 = 0.13
+# Determination r2 = -59.19
+# RMSE = 25.56
+
 ax = sns.scatterplot(x=obs, y=pred_4)
 print_status(obs, pred_4)
+# Correlation r2 = 0.88
+# Determination r2 = 0.80
+# RMSE = 1.49
 
 print_status(obs[obs > 0], pred_4[obs > 0])
 print_status(obs[obs < 0], pred_4[obs < 0])
+# Correlation r2 = 0.11
+# Determination r2 = -0.71
+# RMSE = 1.46
+
+# Correlation r2 = 0.06
+# Determination r2 = -1.10
+# RMSE = 1.52
