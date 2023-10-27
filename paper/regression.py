@@ -1,19 +1,17 @@
 import numpy as np
 import matplotlib as plt
 import seaborn as sns
+from sklearn.metrics import r2_score
 
 
-def pearson_r2(x, y):
+def pearson_r(x, y):
     x_mu = np.mean(x)
     y_mu = np.mean(y)
     x_std = np.sqrt(np.mean((x - x_mu) ** 2))
     y_std = np.sqrt(np.mean((y - y_mu) ** 2))
     covxy = np.mean((x - x_mu) * (y - y_mu))
     r = covxy / (x_std * y_std)
-    return r**2
-
-
-from sklearn.metrics import r2_score
+    return r
 
 
 def rmse(x, y):
@@ -28,10 +26,10 @@ def determination_r2(obs, pred):
 
 
 def print_status(x, y):
-    print(f"Correlation r2 = {pearson_r2(x, y):.2f}")
-    # print(f"Numpy Correlation r2 = {np.corrcoef(x, y)[0, 1]**2:.2f}")
+    print(f"Correlation r = {pearson_r(x, y):.2f}")
+    print(f"Numpy Correlation r2 = {np.corrcoef(x, y)[0, 1]**2:.2f}")
     print(f"Determination r2 = {determination_r2(x, y):.2f}")
-    # print(f"Sklearn r2 = {r2_score(x, y):.2f}")
+    print(f"Sklearn r2 = {r2_score(x, y):.2f}")
     print(f"RMSE = {rmse(x, y):.2f}")
 
 
@@ -61,34 +59,34 @@ pred_4 = np.array(pred_4)
 
 ax = sns.scatterplot(x=obs, y=pred_1)
 print_status(obs, pred_1)
-# Correlation r2 = 0.69
+# Correlation r = 0.83
 # Determination r2 = 0.47
 # RMSE = 2.41
 
 ax = sns.scatterplot(x=obs, y=pred_2)
 print_status(obs, pred_2)
-# Correlation r2 = 0.69
+# Correlation r = 0.83
 # Determination r2 = -0.21
 # RMSE = 3.63
 
 ax = sns.scatterplot(x=obs, y=pred_3)
 print_status(obs, pred_3)
-# Correlation r2 = 0.13
+# Correlation r = 0.36
 # Determination r2 = -59.19
 # RMSE = 25.56
 
 ax = sns.scatterplot(x=obs, y=pred_4)
 print_status(obs, pred_4)
-# Correlation r2 = 0.88
+# Correlation r = 0.94
 # Determination r2 = 0.80
 # RMSE = 1.49
 
 print_status(obs[obs > 0], pred_4[obs > 0])
 print_status(obs[obs < 0], pred_4[obs < 0])
-# Correlation r2 = 0.11
+# Correlation r = 0.33
 # Determination r2 = -0.71
 # RMSE = 1.46
 
-# Correlation r2 = 0.06
+# Correlation r = 0.25
 # Determination r2 = -1.10
 # RMSE = 1.52
