@@ -71,51 +71,61 @@ Current practices in dairy science usually report both R2 and RMSE, and sometime
 
 ## Classification
 
-Classification models are used to predict categorical outcomes, such as healthy or sick, susceptible or resistant, and high or low yield. This section provides another hypothetical example illustrating a deceived model evaluation due to the choice of performance metrics. The example is based on a binary classification problem, where there are two possible outcomes: positive (+) and negative (-) in 100 samples. The ground truth is that 20 samples are positive and 80 samples are negative. The imbalanced distribution intent to simulate a sceneraio where the positive outcome of interest is rare, which is commonly encountered in abnormality detection problem. The prediction outcome is illustrated in a pair of confusion matrices (Figure 2). The confusion matrix is a 2x2 table that summarizes the prediction results. The rows represent the ground truth, and the columns represent the prediction. TP, FP, FN, and TN stand for true positive, false positive, false negative, and true negative, respectively. Clearly, the prediction is not ideal, as the model only have 25% of chance to correctly predict the positive samples, which is worse than a random guess that has 50% correct rate. This example intends to demonstrate that the choice of performance metrics can significantly influence the evaluation results.
+Classification models aim to predict categorical outcomes such as 'healthy' or 'sick', 'susceptible' or 'resistant', and 'high yield' or 'low yield'. This section presents a hypothetical example to highlight how the choice of performance metrics can lead to misleading model evaluations. Consider a binary classification model trained on ten samples—four positives (+) and six negatives (-). The model produces a list of probabilities between 0 and 1, indicating the likelihood that each sample belongs to the positive class (Table 2).
 
+| Ground Truth | Prediction Probability |
+|--------------|------------------------|
+| (+) | 0.99 |
+| (-) | 0.70 |
+| (+) | 0.38 |
+| (+) | 0.33 |
+| (+) | 0.26 |
+| (-) | 0.16 |
+| (-) | 0.15 |
+| (-) | 0.14 |
+| (-) | 0.12 |
+| (-) | 0.07 |
+
+
+This example aims to simulate a scenario where the positive outcome is rare, which is commonly encountered in abnormality detection tasks. If a threshold of 0.5 is used to classify samples as positive, the following confusion matrix summarizes the model performance (Figure 2). The model has only a 25% chance of correctly identifying positive samples, which is worse than a random guess with a 50% accuracy rate. This highlights the importance of choosing appropriate performance metrics for evaluation.
 
 |  |   |Prediction| Prediction|
 |--|---|-----|-----|
 |  |   | (+) | (-) |
-| Ground Truth | (+) | 5 | 15 |
-| Ground Truth | (-) | 5 | 75 |
-
-|  |   |Prediction| Prediction|
-|--|---|-----|-----|
-|  |   | (+) | (-) |
-| Ground Truth | (+) | 75 | 5 |
-| Ground Truth | (-) | 15 | 5 |
-
+| Ground Truth | (+) | 1 | 3 |
+| Ground Truth | (-) | 1 | 5 |
 
 ### Accuracy
 
 $$
-Accuracy = \frac{TP + TN}{TP + TN + FP + FN}
+Accuracy = \frac{TP + TN}{TP + TN + FP + FN} = \frac{Total Correct Predictions}{Total Predictions}
+\tag{6}
 $$
 
-Accuracy is the most straightforward metrics in classifcaiton problem. It counts the ratio of correct predictions over the total number of predictions. Based on the definition, the accuracy computed from the confusion matrix (figure 2a) should be 80% and might be considered as a good performance. However, caution must be exercised when applying this metric to imbalanced datasets. By simply predicting all samples as negative, the model can also achieve the same level of accuracy. Solely reporting accuracy as the metric in evaluating a classification model is not sufficient. Hence, other metrics are needed to provide a more comprehensive evaluation.
+Accuracy is a straightforward metric in classification problems, as defined in Equation 6. Here, TP, TN, FP, and FN represent true positive, true negative, false positive, and false negative, respectively. Based on this definition (Equation 6), the model performance from the example is 60%, which may appear to be better than random guesses (50%). However, this metric can be misleading when applied to imbalanced datasets, warranting the use of additional metrics for a comprehensive evaluation. However, caution must be exercised when applying this metric to imbalanced datasets. In such cases, a model could achieve a misleadingly high accuracy by simply predicting the majority class for all samples. For example, by predicting all samples as negative in an imbalanced dataset where negatives are predominant, the model could still achieve high accuracy. This demonstrates that solely relying on accuracy is insufficient for evaluating a classification model, particularly when dealing with imbalanced datasets. Therefore, it is crucial to consider additional metrics for a more comprehensive and robust evaluation.
 
-### Precision, Recall, and F1 Score
+
+### Precision, Recall, and Precision-Curve
 
 $$
-Precision = \frac{TP}{TP + FP}
+Precision = \frac{TP}{TP + FP} = \frac{TP}{Total Predicted Positive}
 $$
 $$
-Recall = \frac{TP}{TP + FN}
-$$
-$$
-F1 = 2 \times \frac{Precision \times Recall}{Precision + Recall}
+Recall (Sensitivity) = \frac{TP}{TP + FN} = \frac{TP}{Total Actual Positive}
 $$
 
-Precision and recall provide another view of classification performance. Precision 
+Precision evaluates the proportion of true positive predictions among all positive predictions. It effectively measures how reliable a positive prediction is. Recall, or sensitivity, measures the proportion of true positives among all actual positives. It gauges how effectively the model identifies positive samples. For instance, if the threshold is set as low as 0.1, the model is prone to making false positives, resulting in low precision. A high rate of false positives could be particularly costly in applications like <example 1>, where unnecessary treatments could be administered based on these incorrect results. Conversely, a low threshold can yield high recall as the model is less likely to miss actual positives. In situations where failing to identify a positive instance can have severe consequences, such as <example 2> failing to detect a disease in its early stages, high recall could be more valuable.
+
+The trade-off between precision and recall becomes critical here. Increasing precision generally decreases recall and vice versa. This is known as the precision-recall trade-off (<ref>). Therefore, depending on the specific application and the associated costs of false positives and false negatives, one may choose to prioritize one metric over the other.
+
+When the metrics of precision and recall are applied to the presented hypothetical example, the precision is 0.5 and the recall is 0.25. Both metrics are lower than the metric accuracy of 0.6, highlighting the importance of reporting multiple metrics to comprehensively evaluate the model performance. However, the pitfall still exists. Both the metrics focus on the positive samples, the bias towards the positive samples can be misleading, especially when the imbalanced dataset is evaluated. For example, without changing any model parameters but to swap the sample labels, that is, the positive samples are now negative and vice versa, an overoptimistic evaluation can be concluded (Figure 2b). The new precision and recall are 0.625 and 0.833, respectively. This result is clearly misleading. Although this pitfall can be avoided by reporting metrics of negative examples, such as specificity, a robust and label-invariant metric is still needed for a comparable evaluation.
 
 
 
+### Receiver Operating Characteristic (ROC) Curve
 
-Two matrices represent the same classification outcomes, but the second table Table 1b swap the positive and negative labels. 
+The Receiver Operating Characteristic (ROC) curve is a common way to 
 
-
-### Sensitivity and Specificity
 
 ###  Matthews Correlation Coefficient (MCC)
 
@@ -126,3 +136,8 @@ The downside of MCC is that it cannot be intepreted directly to the
 ### Intersection over Union (IoU)
 
 ### Mean Average Precision (mAP)
+
+### Other classification metrics
+
+
+

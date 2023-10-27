@@ -1,11 +1,6 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
-SEED = 24061
-
-# Set the random seed for reproducibility
-np.random.seed(SEED)
-
 
 class Evaluation:
     def __init__(self):
@@ -148,27 +143,21 @@ class Category:
         self.labels = np.ones(n) if positive else np.zeros(n)
 
 
-e.labels
-e.logits
+np.random.seed(24061)
+e = Evaluation()
+e.calculate_ROC()
+e.vis_ROC()
+np.trapz(e.ROC["recall"], e.ROC["fpr"])
+e.calculate_PR()
+e.vis_PR()
+np.trapz(e.PR["precision"], e.PR["recall"])
+
 
 np.random.seed(24061)
 e = Evaluation()
 e.calculate_ROC(pos_is_1=False)
 e.vis_ROC()
-e.calculate_ROC(pos_is_1=True)
-e.vis_ROC()
-
-np.trapz(e.ROC["recall"], e.ROC["fpr"])
-
 e.calculate_PR(pos_is_1=False)
 e.vis_PR()
+np.trapz(e.ROC["recall"], e.ROC["fpr"])
 np.trapz(e.PR["precision"], e.PR["recall"])
-
-
-e.ROC["recall"]
-
-AUC = np.trapz(TPR_list, FPR_list)
-AUC
-
-2 * 8 * 4 * 6
-384**0.5
