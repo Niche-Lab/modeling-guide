@@ -8,7 +8,10 @@ class Evaluation:
         self.logits = self.predictions.logits
         self.labels = self.predictions.labels
         self.sorted_label = None
+        self.ROC = None
+        self.PR = None
 
+    def reset(self):
         self.ROC = dict(
             {
                 "recall": [],
@@ -30,6 +33,7 @@ class Evaluation:
         self.sorted_label = self.labels[sorted_indices].copy()
 
     def calculate_PR(self, pos_is_1=True):
+        self.reset()
         POS_LBS = 1 if pos_is_1 else 0
         if pos_is_1:
             self.sort(descending=True)
@@ -49,6 +53,7 @@ class Evaluation:
             self.PR["recall"].append(TP / (TP + FN))
 
     def calculate_ROC(self, pos_is_1=True):
+        self.reset()
         POS_LBS = 1 if pos_is_1 else 0
         if pos_is_1:
             self.sort(descending=True)
@@ -144,20 +149,37 @@ class Category:
 
 
 np.random.seed(24061)
+
 e = Evaluation()
 e.calculate_ROC()
 e.vis_ROC()
-np.trapz(e.ROC["recall"], e.ROC["fpr"])
-e.calculate_PR()
-e.vis_PR()
-np.trapz(e.PR["precision"], e.PR["recall"])
-
-
-np.random.seed(24061)
-e = Evaluation()
+print(np.trapz(e.ROC["recall"], e.ROC["fpr"]))
 e.calculate_ROC(pos_is_1=False)
 e.vis_ROC()
+print(np.trapz(e.ROC["recall"], e.ROC["fpr"]))
+
+
+e.calculate_PR()
+e.vis_PR()
+print(np.trapz(e.PR["precision"], e.PR["recall"]))
+
 e.calculate_PR(pos_is_1=False)
 e.vis_PR()
-np.trapz(e.ROC["recall"], e.ROC["fpr"])
-np.trapz(e.PR["precision"], e.PR["recall"])
+print(np.trapz(e.PR["precision"], e.PR["recall"]))
+
+
+# MCC
+import sklearn.metrics as metrics
+
+mcc = []
+for t in np.arange(0.0, 1.0, 0.1):
+    mcc.append(metrics.matthews_corrcoef(e.labels, e.logits > t))
+
+plt.figure()
+plt.plot(mcc, marker="o")
+plt.xlim([0, 10])
+plt.ylim([0.0, 1.0])
+plt.xlabel("Threshold")
+plt.ylabel("MCC")
+plt.title("Matthews Correlation Coefficient")
+plt.show()
