@@ -160,7 +160,7 @@ shifted_palette = original_palette[1:] + [original_palette[0]]
 sns.set_theme(style="whitegrid")
 sns.set_palette(shifted_palette)
 data_fg1 = data.query("Metric == 'RMSE' and Method != 'In-Sample'")
-fig, axes = plt.subplots(1, 2, figsize=(12, 6))
+fig, axes = plt.subplots(1, 2, figsize=(15, 6))
 for i, m in enumerate(["Bias", "Variance"]):
     axes[i].axhline(
         y=0,
@@ -177,9 +177,11 @@ for i, m in enumerate(["Bias", "Variance"]):
     )
     axes[i].set_xlabel("Sample Size (N)")
     axes[i].set_ylabel(m)
+axes[0].set_title("Bias")
 axes[0].get_legend().remove()
 axes[0].set_ylim(-0.12, 0.2)
-axes[1].set_ylim(-0.005, 0.05)
+axes[1].set_title("Variance")
+axes[1].set_ylim(-0.005, 0.045)
 fig.suptitle("Bias and Variance of RMSE by Method")
 
 # figure 2
