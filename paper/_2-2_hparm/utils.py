@@ -24,7 +24,7 @@ def sample_data(n, p):
 
 
 def cor_score(y_true, y_pred):
-    return pearsonr(y_true, y_pred)[0] ** 2
+    return pearsonr(y_true, y_pred)[0]
 
 
 def get_PLSR_score(x_train, y_train, x_test, y_test, n_comp):
@@ -34,9 +34,9 @@ def get_PLSR_score(x_train, y_train, x_test, y_test, n_comp):
 
 def get_SVR_score(x_train, y_train, x_test, y_test, kernel):
     model = SVR(kernel=kernel).fit(x_train, y_train)
-    return model.score(x_test, y_test)
-    # pred = model.predict(x_test)
-    # return cor_score(y_test, pred)
+    # return model.score(x_test, y_test)
+    pred = model.predict(x_test)
+    return cor_score(y_test, pred)
 
 
 def suggest_kernel(x_train, y_train, x_test, y_test):

@@ -1,5 +1,5 @@
 import numpy as np
-import matplotlib as plt
+import matplotlib.pyplot as plt
 import seaborn as sns
 from sklearn.metrics import r2_score
 
@@ -55,6 +55,14 @@ for i, o in enumerate(obs):
     else:
         pred_4 += [pred_1[i] + np.random.normal(-BLOCK_EFF, NOISE)]
 pred_4 = np.array(pred_4)
+
+
+fig, axes = plt.subplots(2, 2, figsize=(10, 10))
+sns.scatterplot(x=obs, y=pred_1, ax=axes[0, 0])
+sns.scatterplot(x=obs, y=pred_2, ax=axes[0, 1])
+sns.scatterplot(x=obs, y=pred_3, ax=axes[1, 0])
+sns.scatterplot(x=obs, y=pred_4, ax=axes[1, 1])
+fig.savefig("regression.png", dpi=300)
 
 
 ax = sns.scatterplot(x=obs, y=pred_1)
