@@ -1,5 +1,3 @@
-from tracemalloc import Snapshot
-from matplotlib import pyplot as plt
 import numpy as np
 from sklearn.model_selection import KFold
 import pandas as pd
@@ -20,7 +18,7 @@ N_FT_SELECT = 50
 N_ITER = 1000
 K = 5
 SEED = 24061
-FILE_OUT = "hparm.csv"
+FILE_OUT = "hparm2.csv"
 
 np.random.seed(SEED)
 pd.DataFrame(columns=["approach", "r", "iter"]).to_csv(
@@ -64,10 +62,13 @@ for i in range(N_ITER):
     # scenario 3: RV, R/V
     score_k = []
     kfold_out = KFold(n_splits=K)
-    for idx_train_out, idx_test in kfold_out.split(X):
+    # ft select (RVT)
+    idx_select = idx_top_ft(X, Y, N_FT_SELECT)
+    X_select = X[:, idx_select]
+    for idx_train_out, idx_test in kfold_out.split(X_select):
         # outer split
-        X_train_o, Y_train_o = X[idx_train_out], Y[idx_train_out]
-        X_test, Y_test = X[idx_test], Y[idx_test]
+        X_train_o, Y_train_o = X_select[idx_train_out], Y[idx_train_out]
+        X_test, Y_test = X_select[idx_test], Y[idx_test]
 
         kernels = []
         kfold_in = KFold(n_splits=K)
@@ -75,16 +76,11 @@ for i in range(N_ITER):
             # inner split
             X_train, Y_train = X_train_o[idx_train], Y_train_o[idx_train]
             X_val, Y_val = X_train_o[idx_val], Y_train_o[idx_val]
-            # ft select (RV)
-            idx_select = idx_top_ft(X_train_o, Y_train_o, N_FT_SELECT)
-            X_train, X_val = X_train[:, idx_select], X_val[:, idx_select]
             # hp tuning (R/V)
             kernel = suggest_kernel(X_train, Y_train, X_val, Y_val)
             kernels.append(kernel)
 
         kernel_select = count_most_freq_str(kernels)
-        idx_select_o = idx_top_ft(X_train_o, Y_train_o, N_FT_SELECT)
-        X_train_o, X_test = X_train_o[:, idx_select_o], X_test[:, idx_select_o]
         score_k.append(
             get_SVR_score(X_train_o, Y_train_o, X_test, Y_test, kernel_select)
         )
@@ -125,8 +121,42 @@ for i in range(N_ITER):
 
 
 # # visualization
-# data = pd.read_csv(FILE_OUT)
+data = pd.read_csv("hparm.csv")
+
+# set s1, s3 to the column: val=1
+data.loc[:, ["use val"]] = 0
+data.loc[data["approach"].isin(["s3", "s4"]), ["use val"]] = 1
+
+data.loc[:, ["select train"]] = 0
+data.loc[data["approach"].isin(["s2", "s4"]), ["select train"]] = 1
+
+from matplotlib import pyplot as plt
+import seaborn as sns
+
+sns.set_theme(style="whitegrid")
+sns.set_palette("Set3")
+g = sns.boxplot(
+    x="select train",
+    y="r",
+    hue="use val",
+    gap=0.05,
+    data=data,
+)
+g.axhline(y=0, color="black", linestyle="--", linewidth=0.7)
+g.set_yticks(ticks=np.arange(-0.5, 1, 0.1), minor=True)
+plt.savefig("hparm.png", dpi=300)
 
 
-# sns.boxplot(x="approach", y="r", data=data)
-# plt.axhline(y=0, color="black", linestyle="--", linewidth=0.7)
+# summary
+data.groupby("approach").median()
+# s1 0.797384	499.5	0.0	0.0
+# s2 0.112664	499.5	0.0	1.0
+# s3 0.761103	499.5	1.0	0.0
+# s4 -0.007723	499.5   1.0 1.0
+st = data.query("approach == 's2'")["r"].values
+# check p-value greater than 0
+from scipy.stats import ttest_1samp
+
+ttest_1samp(st, 0)
+
+np.mean(st > 0)
