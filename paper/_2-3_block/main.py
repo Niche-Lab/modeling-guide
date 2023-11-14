@@ -1,6 +1,8 @@
 # CONSTANTS
 from random import shuffle
 from IPython import core
+import numpy as np
+import pandas as pd
 
 
 N_SAMPLE = 100
@@ -11,33 +13,50 @@ BLOCK_EFF = 3
 K = 5
 N_BLOCK = int(N_SAMPLE / K)
 
+scores = {"block": [None] * N_ITER, "random": [None] * N_ITER}
 
-X, Y = sample_data(N_SAMPLE, N_FT)
-data = pd.DataFrame({"Y": Y, "block": np.repeat(range(K), N_BLOCK)})
-data["Y"] = data["Y"] + data["block"] * BLOCK_EFF
-Y = data["Y"].values
+for i in range(N_ITER):
+    X, Y = sample_data(N_SAMPLE, N_FT)
+    data = pd.DataFrame({"Y": Y, "block": np.repeat(range(K), N_BLOCK)})
+    data["Y"] = data["Y"] + data["block"] * BLOCK_EFF
+    Y = data["Y"].values
+    block_eff = data["block"].values + np.random.normal(0, 1, N_SAMPLE)
+    X = np.column_stack((X, block_eff))
 
-# block CV
-ik = 0
-idx_train = data["block"] != ik
-idx_test = data["block"] == ik
-x_train, x_test = X[idx_train], X[idx_test]
-y_train, y_test = Y[idx_train], Y[idx_test]
-model = LinearRegression().fit(x_train, y_train)
-y_pred = model.predict(x_test)
-cor_score(y_test, y_pred)
+    # block CV
+    score_tmp = [None] * K
+    for k in range(K):
+        idx_train = data["block"] != k
+        idx_test = data["block"] == k
+        x_train, x_test = X[idx_train], X[idx_test]
+        y_train, y_test = Y[idx_train], Y[idx_test]
+        model = LinearRegression().fit(x_train, y_train)
+        y_pred = model.predict(x_test)
+        score = cor_score(y_test, y_pred)
+        # score = model.score(x_test, y_test)
+        score_tmp[k] = score
+    scores["block"][i] = np.mean(score_tmp)
 
-# random CV
-kfold = KFold(n_splits=K, shuffle=True)
-idx_train, idx_test = next(kfold.split(X))
-x_train, x_test = X[idx_train], X[idx_test]
-y_train, y_test = Y[idx_train], Y[idx_test]
-model = LinearRegression().fit(x_train, y_train)
-y_pred = model.predict(x_test)
-cor_score(y_test, y_pred)
+    # random CV
+    score_tmp = [None] * K
+    kfold = KFold(n_splits=K, shuffle=True, random_state=SEED + i)
+    for k, (idx_train, idx_test) in enumerate(kfold.split(X)):
+        x_train, x_test = X[idx_train], X[idx_test]
+        y_train, y_test = Y[idx_train], Y[idx_test]
+        model = LinearRegression().fit(x_train, y_train)
+        y_pred = model.predict(x_test)
+        score = cor_score(y_test, y_pred)
+        # score = model.score(x_test, y_test)
+        score_tmp[k] = score
+    scores["random"][i] = np.mean(score_tmp)
+
+df_scores = pd.DataFrame(scores).melt()
+df_scores.columns = ["CV", "correlation r"]
+# visualize
+sns.boxplot(x="CV", y="correlation r", hue="CV", data=df_scores)
+
 
 # visualization
-
 data_block = data.copy()
 data_block["color"] = data_block["block"].apply(lambda x: "fold " + str(x + 1))
 
