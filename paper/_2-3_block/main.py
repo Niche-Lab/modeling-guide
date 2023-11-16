@@ -1,10 +1,7 @@
-# CONSTANTS
-from random import shuffle
-from IPython import core
 import numpy as np
 import pandas as pd
 
-
+# CONSTANTS
 N_SAMPLE = 100
 N_FT = 10
 N_ITER = 1000
@@ -21,7 +18,7 @@ for i in range(N_ITER):
     data["Y"] = data["Y"] + data["block"] * BLOCK_EFF
     Y = data["Y"].values
     block_eff = data["block"].values + np.random.normal(0, 1, N_SAMPLE)
-    X = np.column_stack((X, block_eff))
+    X[:, 0] = block_eff
 
     # block CV
     score_tmp = [None] * K
@@ -53,6 +50,9 @@ for i in range(N_ITER):
 df_scores = pd.DataFrame(scores).melt()
 df_scores.columns = ["CV", "correlation r"]
 # visualize
+import seaborn as sns
+import matplotlib.pyplot as plt
+
 sns.boxplot(x="CV", y="correlation r", hue="CV", data=df_scores)
 
 

@@ -11,3 +11,7 @@ def sample_data(n, p):
     X = np.random.normal(0, 1, (n, p))
     Y = np.random.normal(0, 1, n)
     return X, Y
+
+
+def cor_score(y_true, y_pred):
+    return pearsonr(y_true, y_pred)[0]
