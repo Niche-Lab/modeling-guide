@@ -49,6 +49,15 @@ for i in range(N_ITER):
 
 df_scores = pd.DataFrame(scores).melt()
 df_scores.columns = ["CV", "correlation r"]
+df_scores.groupby("CV").describe()
+
+# CV		count	mean	    std	        min	        25%	        50%	        75%	        max
+# block	1000.0	-0.000913	0.105148	-0.291289	-0.077904	-0.002662	0.073747	0.345795
+# random	1000.0	0.768008	0.040494	0.608462	0.742000	0.770647	0.796504	0.870709
+
+# p-value
+
+
 # visualize
 import seaborn as sns
 import matplotlib.pyplot as plt
