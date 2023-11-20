@@ -1,3 +1,5 @@
+from cProfile import label
+from matplotlib import markers
 import numpy as np
 import matplotlib.pyplot as plt
 
@@ -11,20 +13,6 @@ class Evaluation:
         self.ROC = None
         self.PR = None
 
-    def reset(self):
-        self.ROC = dict(
-            {
-                "recall": [],
-                "fpr": [],
-            }
-        )
-        self.PR = dict(
-            {
-                "precision": [1],
-                "recall": [0],
-            }
-        )
-
     def sort(self, descending=True):
         if descending:
             sorted_indices = np.argsort(-self.logits)
@@ -33,7 +21,12 @@ class Evaluation:
         self.sorted_label = self.labels[sorted_indices].copy()
 
     def calculate_PR(self, pos_is_1=True):
-        self.reset()
+        self.PR = dict(
+            {
+                "precision": [1],
+                "recall": [0],
+            }
+        )
         POS_LBS = 1 if pos_is_1 else 0
         if pos_is_1:
             self.sort(descending=True)
@@ -53,7 +46,12 @@ class Evaluation:
             self.PR["recall"].append(TP / (TP + FN))
 
     def calculate_ROC(self, pos_is_1=True):
-        self.reset()
+        self.ROC = dict(
+            {
+                "recall": [],
+                "fpr": [],
+            }
+        )
         POS_LBS = 1 if pos_is_1 else 0
         if pos_is_1:
             self.sort(descending=True)
@@ -149,37 +147,126 @@ class Category:
 
 
 np.random.seed(24061)
+import seaborn as sns
 
+# calculate metrics
 e = Evaluation()
-e.calculate_ROC()
-e.vis_ROC()
-print(np.trapz(e.ROC["recall"], e.ROC["fpr"]))
+
+
+# PLOT ROC --------------------
+e.calculate_ROC(pos_is_1=True)
+recall, fpr = e.ROC["recall"], e.ROC["fpr"]
 e.calculate_ROC(pos_is_1=False)
-e.vis_ROC()
-print(np.trapz(e.ROC["recall"], e.ROC["fpr"]))
+recall_r, fpr_r = e.ROC["recall"], e.ROC["fpr"]
+
+# get the first two color from the palette Set3
+colors = sns.color_palette("Set2", 2)
+# plot
+fig, ax = plt.subplots(figsize=(8, 8))
+ax.plot(
+    fpr,
+    recall,
+    # marker="o",
+    markersize=10,
+    color=colors[0],
+    label="ROC",
+)
+ax.plot(
+    fpr_r,
+    recall_r,
+    # marker="o",
+    markersize=10,
+    color=colors[1],
+    label="ROC (Inversed label)",
+)
+# show legend
+ax.set_xlabel("False Positive Rate")
+ax.set_ylabel("True Positive Rate")
+ax.set_title("Receiver Operating Characteristic Curve")
+# random guess
+ax.plot([0, 1], [0, 1], linestyle="--", color="grey", label="Random Guess")
+# set ticks
+ax.set_xticks(np.arange(0, 1.1, 0.1))
+ax.set_yticks(np.arange(0, 1.1, 0.1))
+ax.set_ylim([-0.05, 1.05])
+# set grid
+ax.grid(which="major", axis="both", linestyle="--")
+ax.grid(which="minor", axis="both", linestyle="--")
+ax.legend(loc="lower right")
+plt.show()
+
+fig.savefig("ROC.png", dpi=300)
+print("ROC AUC: ", np.trapz(e.ROC["recall"], e.ROC["fpr"]))
 
 
-e.calculate_PR()
-e.vis_PR()
-print(np.trapz(e.PR["precision"], e.PR["recall"]))
-
+# PLOT PR --------------------
+e.calculate_PR(pos_is_1=True)
+rc, pr = e.PR["recall"], e.PR["precision"]
 e.calculate_PR(pos_is_1=False)
-e.vis_PR()
-print(np.trapz(e.PR["precision"], e.PR["recall"]))
+rc_r, pr_r = e.PR["recall"], e.PR["precision"]
+# plot
+fig, ax = plt.subplots(figsize=(8, 8))
+ax.plot(
+    rc,
+    pr,
+    # marker="o",
+    markersize=10,
+    color=colors[0],
+    label="PR",
+)
+ax.plot(
+    rc_r,
+    pr_r,
+    # marker="o",
+    markersize=10,
+    color=colors[1],
+    label="PR (Inversed label)",
+)
+# show legend
+ax.set_xlabel("Recall")
+ax.set_ylabel("Precision")
+ax.set_title("Precision-Recall Curve")
+# set ticks
+ax.set_xticks(np.arange(0, 1.1, 0.1))
+ax.set_yticks(np.arange(0, 1.1, 0.1))
+ax.set_ylim([-0.05, 1.05])
+# set grid
+ax.grid(which="major", axis="both", linestyle="--")
+ax.grid(which="minor", axis="both", linestyle="--")
+ax.legend(loc="lower right")
+plt.show()
+fig.savefig("PR.png", dpi=300)
+print("PR AUC: ", np.trapz(e.PR["precision"], e.PR["recall"]))
 
 
 # MCC
 import sklearn.metrics as metrics
 
+lb, lg = e.labels, e.logits
+lb_r, lg_r = 1 - lb, 1 - lg
+
 mcc = []
-for t in np.arange(0.0, 1.0, 0.1):
-    mcc.append(metrics.matthews_corrcoef(e.labels, e.logits > t))
+mcc_r = []
+for t in np.arange(0.0, 1.0, 0.05):
+    mcc.append(metrics.matthews_corrcoef(lb, lg > t))
+    mcc_r.append(metrics.matthews_corrcoef(lb_r, lg_r > t))
 
 plt.figure()
-plt.plot(mcc, marker="o")
-plt.xlim([0, 10])
+plt.plot(
+    mcc,
+    color=colors[0],
+    label="PR (Inversed label)",
+)
+plt.plot(
+    mcc_r,
+    color=colors[1],
+    label="PR (Inversed label)",
+)
+
+plt.xlim([1, len(mcc) - 1])
 plt.ylim([0.0, 1.0])
 plt.xlabel("Threshold")
 plt.ylabel("MCC")
 plt.title("Matthews Correlation Coefficient")
 plt.show()
+plt.savefig("MCC.png", dpi=300)

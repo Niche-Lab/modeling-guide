@@ -56,12 +56,42 @@ for i, o in enumerate(obs):
         pred_4 += [pred_1[i] + np.random.normal(-BLOCK_EFF, NOISE)]
 pred_4 = np.array(pred_4)
 
-
+SIZE = 100
+sns.set_style("whitegrid")
+sns.set_palette("Set2")
 fig, axes = plt.subplots(2, 2, figsize=(10, 10))
-sns.scatterplot(x=obs, y=pred_1, ax=axes[0, 0])
-sns.scatterplot(x=obs, y=pred_2, ax=axes[0, 1])
-sns.scatterplot(x=obs, y=pred_3, ax=axes[1, 0])
-sns.scatterplot(x=obs, y=pred_4, ax=axes[1, 1])
+sns.scatterplot(
+    x=obs,
+    y=pred_1,
+    ax=axes[0, 0],
+    color="grey",
+    s=SIZE,
+)
+sns.scatterplot(
+    x=obs,
+    y=pred_2,
+    ax=axes[0, 1],
+    color="grey",
+    s=SIZE,
+)
+sns.scatterplot(
+    x=obs,
+    y=pred_3,
+    ax=axes[1, 0],
+    color="grey",
+    s=SIZE,
+)
+sns.scatterplot(
+    x=obs,
+    y=pred_4,
+    ax=axes[1, 1],
+    hue=obs > 0,
+    s=SIZE,
+)
+# remove legend
+axes[1, 1].get_legend().remove()
+
+
 fig.savefig("regression.png", dpi=300)
 
 
