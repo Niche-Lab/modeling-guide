@@ -169,7 +169,7 @@ ax.plot(
     # marker="o",
     markersize=10,
     color=colors[0],
-    label="ROC",
+    label="ROC (Original labels)",
 )
 ax.plot(
     fpr_r,
@@ -177,7 +177,7 @@ ax.plot(
     # marker="o",
     markersize=10,
     color=colors[1],
-    label="ROC (Inversed label)",
+    label="ROC (Inversed labels)",
 )
 # show legend
 ax.set_xlabel("False Positive Rate")
@@ -212,7 +212,7 @@ ax.plot(
     # marker="o",
     markersize=10,
     color=colors[0],
-    label="PR",
+    label="PR (Original labels)",
 )
 ax.plot(
     rc_r,
@@ -220,7 +220,7 @@ ax.plot(
     # marker="o",
     markersize=10,
     color=colors[1],
-    label="PR (Inversed label)",
+    label="PR (Inversed labels)",
 )
 # show legend
 ax.set_xlabel("Recall")
@@ -255,12 +255,12 @@ plt.figure()
 plt.plot(
     mcc,
     color=colors[0],
-    label="PR (Inversed label)",
+    label="MCC (Original labels)",
 )
 plt.plot(
     mcc_r,
     color=colors[1],
-    label="PR (Inversed label)",
+    label="MCC (Inversed labels)",
 )
 
 plt.xlim([1, len(mcc) - 1])
@@ -268,5 +268,5 @@ plt.ylim([0.0, 1.0])
 plt.xlabel("Threshold")
 plt.ylabel("MCC")
 plt.title("Matthews Correlation Coefficient")
-plt.show()
+plt.legend(loc="upper right")
 plt.savefig("MCC.png", dpi=300)
