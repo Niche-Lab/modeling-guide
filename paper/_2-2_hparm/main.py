@@ -1,3 +1,4 @@
+import os
 import numpy as np
 from sklearn.model_selection import KFold
 import pandas as pd
@@ -134,7 +135,7 @@ from matplotlib import pyplot as plt
 import seaborn as sns
 
 sns.set_theme(style="whitegrid")
-sns.set_palette("Set3")
+sns.set_palette("Set2")
 g = sns.boxplot(
     x="select train",
     y="r",
@@ -143,6 +144,8 @@ g = sns.boxplot(
     data=data,
 )
 g.axhline(y=0, color="black", linestyle="--", linewidth=0.7)
+# remove legend
+g.get_legend().remove()
 g.set_yticks(ticks=np.arange(-0.5, 1, 0.1), minor=True)
 plt.savefig("hparm.png", dpi=300)
 
@@ -152,8 +155,8 @@ data.groupby("approach").median()
 # s1 0.797384	499.5	0.0	0.0
 # s2 0.112664	499.5	0.0	1.0
 # s3 0.761103	499.5	1.0	0.0
-# s4 -0.007723	499.5   1.0 1.0
-st = data.query("approach == 's2'")["r"].values
+# s4 -0.007723	499.5   1.0 1.0, p-value=0.562
+st = data.query("approach == 's4'")["r"].values
 # check p-value greater than 0
 from scipy.stats import ttest_1samp
 

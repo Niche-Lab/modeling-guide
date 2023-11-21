@@ -1,59 +1,88 @@
+import os
+from tkinter import N
 import numpy as np
 import pandas as pd
 
+os.chdir("../_2-3_block")
 # CONSTANTS
 N_SAMPLE = 100
 N_FT = 10
-N_ITER = 1000
+N_RUN = 1000
+BLOCK_EFF = [0.5, 1, 1.5, 2, 2.5, 3]
+N_ITER = N_RUN * len(BLOCK_EFF)
 SEED = 24061
-BLOCK_EFF = 3
 K = 5
 N_BLOCK = int(N_SAMPLE / K)
 
-scores = {"block": [None] * N_ITER, "random": [None] * N_ITER}
+np.random.seed(SEED)
+scores = {
+    "iter": [None] * N_ITER,
+    "effect": [None] * N_ITER,
+    "block": [None] * N_ITER,
+    "random": [None] * N_ITER,
+}
+for i, block in enumerate(BLOCK_EFF):
+    print("block_eff: %f" % block)
+    for j in range(N_RUN):
+        iter = i * N_RUN + j
+        X, Y = sample_data(N_SAMPLE, N_FT)
+        data = pd.DataFrame({"Y": Y, "block": np.repeat(range(K), N_BLOCK)})
+        data["Y"] = data["Y"] + data["block"] * block
+        Y = data["Y"].values
+        block_eff = data["block"].values + np.random.normal(0, 1, N_SAMPLE)
+        X[:, 0] = block_eff
 
-for i in range(N_ITER):
-    X, Y = sample_data(N_SAMPLE, N_FT)
-    data = pd.DataFrame({"Y": Y, "block": np.repeat(range(K), N_BLOCK)})
-    data["Y"] = data["Y"] + data["block"] * BLOCK_EFF
-    Y = data["Y"].values
-    block_eff = data["block"].values + np.random.normal(0, 1, N_SAMPLE)
-    X[:, 0] = block_eff
+        scores["iter"][iter] = j
+        scores["effect"][iter] = block
+        # block CV
+        score_tmp = [None] * K
+        for k in range(K):
+            idx_train = data["block"] != k
+            idx_test = data["block"] == k
+            x_train, x_test = X[idx_train], X[idx_test]
+            y_train, y_test = Y[idx_train], Y[idx_test]
+            model = LinearRegression().fit(x_train, y_train)
+            y_pred = model.predict(x_test)
+            score = cor_score(y_test, y_pred)
+            # score = model.score(x_test, y_test)
+            score_tmp[k] = score
+        scores["block"][iter] = np.mean(score_tmp)
 
-    # block CV
-    score_tmp = [None] * K
-    for k in range(K):
-        idx_train = data["block"] != k
-        idx_test = data["block"] == k
-        x_train, x_test = X[idx_train], X[idx_test]
-        y_train, y_test = Y[idx_train], Y[idx_test]
-        model = LinearRegression().fit(x_train, y_train)
-        y_pred = model.predict(x_test)
-        score = cor_score(y_test, y_pred)
-        # score = model.score(x_test, y_test)
-        score_tmp[k] = score
-    scores["block"][i] = np.mean(score_tmp)
+        # random CV
+        score_tmp = [None] * K
+        kfold = KFold(n_splits=K, shuffle=True, random_state=SEED + iter)
+        for k, (idx_train, idx_test) in enumerate(kfold.split(X)):
+            x_train, x_test = X[idx_train], X[idx_test]
+            y_train, y_test = Y[idx_train], Y[idx_test]
+            model = LinearRegression().fit(x_train, y_train)
+            y_pred = model.predict(x_test)
+            score = cor_score(y_test, y_pred)
+            # score = model.score(x_test, y_test)
+            score_tmp[k] = score
+        scores["random"][iter] = np.mean(score_tmp)
 
-    # random CV
-    score_tmp = [None] * K
-    kfold = KFold(n_splits=K, shuffle=True, random_state=SEED + i)
-    for k, (idx_train, idx_test) in enumerate(kfold.split(X)):
-        x_train, x_test = X[idx_train], X[idx_test]
-        y_train, y_test = Y[idx_train], Y[idx_test]
-        model = LinearRegression().fit(x_train, y_train)
-        y_pred = model.predict(x_test)
-        score = cor_score(y_test, y_pred)
-        # score = model.score(x_test, y_test)
-        score_tmp[k] = score
-    scores["random"][i] = np.mean(score_tmp)
+df_scores = pd.DataFrame(scores)
+df_scores = df_scores.melt(
+    id_vars=["iter", "effect"], var_name="CV", value_name="correlation r"
+)
+df_scores.loc[:, ["effect", "CV", "correlation r"]].groupby(["effect", "CV"]).aggregate(
+    "median"
+)
 
-df_scores = pd.DataFrame(scores).melt()
-df_scores.columns = ["CV", "correlation r"]
-df_scores.groupby("CV").describe()
-
-# CV		count	mean	    std	        min	        25%	        50%	        75%	        max
-# block	1000.0	-0.000913	0.105148	-0.291289	-0.077904	-0.002662	0.073747	0.345795
-# random	1000.0	0.768008	0.040494	0.608462	0.742000	0.770647	0.796504	0.870709
+# correlation r
+# effect	CV
+# 0.5	block	0.001939
+# random	0.382582
+# 1.0	block	-0.009064
+# random	0.623485
+# 1.5	block	0.002237
+# random	0.705711
+# 2.0	block	-0.001324
+# random	0.744552
+# 2.5	block	0.006413
+# random	0.761071
+# 3.0	block	0.002597
+# random	0.771366
 
 # p-value
 
@@ -62,7 +91,19 @@ df_scores.groupby("CV").describe()
 import seaborn as sns
 import matplotlib.pyplot as plt
 
-sns.boxplot(x="CV", y="correlation r", hue="CV", data=df_scores)
+fig, ax = plt.subplots(figsize=(10, 6))
+sns.set_theme(style="whitegrid")
+sns.set_palette("Set2")
+plt.axhline(y=0, color="black", linestyle="--", linewidth=0.7)
+sns.boxplot(
+    x="effect",
+    y="correlation r",
+    hue="CV",
+    data=df_scores,
+)
+# rm legend
+ax.get_legend().remove()
+plt.savefig("cv.png", dpi=300)
 
 
 # visualization
@@ -109,7 +150,7 @@ axes[1].set_title("Random Cross Validation")
 axes[1].set_xlabel("Block Level")
 axes[1].set_ylabel("Response Variable (Y)")
 plt.tight_layout()
-
+plt.savefig("folds.png", dpi=300)
 
 data
 
