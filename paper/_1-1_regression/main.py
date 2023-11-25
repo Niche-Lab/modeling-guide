@@ -48,6 +48,7 @@ obs = np.concatenate(
 pred_1 = obs * RCORR + np.random.normal(0, NOISE, 100)
 pred_2 = pred_1 * 5
 pred_3 = pred_1**5
+pred_3[np.abs(pred_3) < 16.7] = 0
 pred_4 = []
 for i, o in enumerate(obs):
     if o > 0:
