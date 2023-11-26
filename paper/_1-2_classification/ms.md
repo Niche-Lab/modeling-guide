@@ -1,6 +1,6 @@
 ## Classification
 
-Classification models aim to predict categorical outcomes such as 'healthy' or 'sick', 'susceptible' or 'resistant', and 'high yield' or 'low yield'. This section presents a hypothetical example to highlight how the choice of performance metrics can lead to misleading model evaluations. Consider a binary classification model predicted on ten samples, of which four are positive (+) and six are negative (-), and the model produces a list of probabilities between 0 and 1, indicating the likelihood that each sample belongs to the positive class. The prediction can be expressed as the following joint probability distribution:
+Classification models aim to predict categorical outcomes such as 'healthy' or 'sick,' 'susceptible' or 'resistant,' and 'high yield' or 'low yield.’ This section presents a hypothetical example to highlight how the choice of different performance metrics can lead to different interpretations of a model's effectiveness. The example focuses on binary classification, where the outcome is either positive (Y=1) or negative (Y=0). Suppose a binary classification model always outputs a probability between 0 and 1, indicating the likelihood that a sample belongs to the positive class. It assumes that the model has high confidence in correctly predicting 1 out of 4 positive samples, and 5 out of 6 negative samples. This example intends to illustrate a scenario where the positive outcome is rare, such as predicting the onset of a calving event in dairy cows (Ouellet et al 2016 and Borchers 2017). The model performance can be summarized in the following probability distribution:
 
 $$
 P(X, Y) = \begin{cases}
@@ -11,7 +11,7 @@ P(X, Y) = \begin{cases}
 \end{cases}
 $$
 
-Where $X$ is a random variable representing the predicted probabilities, and $Y$ representing the ground truth labels. $\text{Uniform}(a, b)$ denotes a uniform distribution between $a$ and $b$. Table 1 shows ten samples drawn from this distribution to simulate the model predictions.
+Where $X$ is a random variable representing the predicted probabilities sampled from a uniform distribution $\text{Uniform}(a, b)$ between $a$ and $b$, and $Y$ representing the ground truth labels. The simulated result is shown in Figure 2
 
 | Ground Truth | Prediction Probability |
 |--------------|------------------------|
@@ -26,13 +26,22 @@ Where $X$ is a random variable representing the predicted probabilities, and $Y$
 | (-) | 0.12 |
 | (-) | 0.07 |
 
-This example illustrates a scenario where the positive outcome is rare, which is commonly encountered in abnormality detection tasks. Before judging the prediction outcomes, a threshold that defines how the the prediction probability is converted to a binary outcome is needed. If a prediction probability is greater than the threshold, the sample is classified as positive. In this example, the threshold is set to 0.5 for simplicity, the following confusion matrix summarizes the model performance (Figure 2a). Noted that the threshold can be adjusted for specific applications and change the confusion matrix accordingly.
-
 |  |   |Prediction| Prediction|
 |--|---|-----|-----|
 |  |   | (+) | (-) |
 | Ground Truth | (+) | 1 | 3 |
 | Ground Truth | (-) | 1 | 5 |
+
+Figure 2. Simulated hypothetical example of binary classification. (upper) The ground truth and prediction probability. (lower) The confusion matrix of the prediction at a threshold of 0.5. Follwed by classification metrics of accuracy, precision, recall, MMC, PR curve AUC, and ROC curve AUC. The performance of the original labels serves as a baseline for comparision. Any better performance metrics from the reversed labels are highlighted in bold and underscored.
+
+A threshold is needed to convert the prediction probability to a binary outcome. If the prediction probability is greater than the threshold, the sample is classified as positive. In this example, the threshold is set to 0.5 for simplicity. Take the 3rd sample as an example, the prediction probability is 0.38, which is less than the threshold, so the sample is classified as negative and considered as a false negative. Noted that the threshold can be adjusted to optimize the model performance for specific applications.
+
+
+
+
+and the confusion matrix will change accordingly.
+
+ Before judging the prediction outcomes, a threshold that defines how the the prediction probability is converted to a binary outcome is needed. If a prediction probability is greater than the threshold, the sample is classified as positive. In this example, the threshold is set to 0.5 for simplicity, the following confusion matrix summarizes the model performance (Figure 2a). Noted that the threshold can be adjusted for specific applications and change the confusion matrix accordingly.
 
 ### Accuracy
 
