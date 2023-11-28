@@ -65,20 +65,20 @@ In the hypothetical example, setting a threshold of 0.5 yields precision and rec
 
 However, it is worth re-emphasizing that precision and recall focus predominantly on positive samples. Inappropriately assigning a predominant background event as the positive class can lead to skewed interpretations. This pitfall is demonstrated in this example by inverting the labels. At a threshold of 0.50, precision increases from 0.50 to 0.63, and recall jumps from 0.25 to 0.83. With the threshold set at 0.25, precision drops to 0.66 from 0.80, while recall remains unchanged. The PR AUC also rises from 0.76 to 0.94. Such shifts in metrics, driven merely by label rearrangement unrelated to the data or model characteristics, underscore the importance of label-invariant metrics that remain unaffected by label assignments.
 
-
-
 ### Receiver Operating Characteristic (ROC) Curve
 
-The Receiver Operating Characteristic (ROC) curve is a label-invariant and threshold-invariant alternative to the PR curve. The x-axis is the false positive rate (FPR) and the y-axis is the true positive rate (TPR), which is equivalent to recall.
+The Receiver Operating Characteristic (ROC) curve is another crucial tool for assessing a model's performance across various thresholds, plotting one minus specificity against sensitivity. Unlike metrics that focus solely on positive samples, the ROC curve accounts for both positive and negative samples, making it a label-invariant metric. Specificity is plotted on the x-axis and sensitivity on the y-axis, calculated at different thresholds (Figure 3, Right).
 
+The equations for specificity and sensitivity are as follows:
 $$
-FPR = \frac{FP}{FP + TN} = \frac{FP}{Total Actual Negative}
+Specificity = \frac{FP}{FP + TN} = \frac{FP}{Total Actual Negative}
 $$
 $$
-TPR (recall) = \frac{TP}{TP + FN} = \frac{TP}{Total Actual Positive}
+Sensitivity = \frac{TP}{TP + FN} = \frac{TP}{Total Actual Positive}
 $$
 
-The ROC curve can be intepreted as how much cost is needed to capture true positives. If the curve climbs steeply from the left side, it means that the model can capture most true positives with a low cost of false positives. A random guess, which yield a 50% chance of making a correct prediction, is represented by a diagnoal line in the ROC curve. This curve is widely used in reporting genetics markers in Genome-Wide Association Studies (GWAS) [ref 7-9], as whether the top-associated markers (i.e., prediction with high positive probability) can be identified is more important than considering the entire list of prediction quality. In the hypothetical example, the ROC curve show a labe-invariant AUC of 0.875, which is the same for both the original labels and the reversed labels. However, such high metric may still mislead the conclusion of model evalution, as it does not reflect the poor quality that the model has in predicting positive samples.
+A model effectiveness as depicted on the ROC curve is gauged by how closely a point on the curve approaches the top-left corner. A steep ascent from the left side of the curve signifies the model's ability to correctly identify most true positives while incurring a low rate of false positives. A random guess, with a 50% chance of correct prediction, corresponds to a diagonal line on the ROC curve. In dairy science, the ROC curve has been extensively utilized, for example, in predicting mastitis from milk composition (Jensen, 2016) and diagnosing pregnancy using spectroscopy technology (Deelhez, 2020). In this hypothetical example, the ROC curve also demonstrates robustness and label-invariance with a consistent Area Under the Curve (AUC) of 0.875, regardless of whether the original or inverted labels are used.
+
 
 ###  Matthews Correlation Coefficient (MCC)
 
