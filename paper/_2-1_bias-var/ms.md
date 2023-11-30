@@ -33,12 +33,11 @@ $$
 \end{align*}
 $$
 
-
 ## Bias-Variance Trade-off
 
 From the equpation above, a trade-off relationship between the bias and variance can be observed given a constant validation MSE. With the fixed sample size and model complexity in K-fold CV, the choice of $K$ is the major factor that affects the bias and variance of the model validation. When the $K$ is set larger, each training set $\mathcal{D}_{\text{-k}}$ is larger in size, whcih means the model is trained on a dataset that is more representative of the population of interest, leading to lower bias. However, because the test set $\mathcal{D}_{\text{k}}$ is relatively small in size, the validation variance can be high due to the high sensitivity to the specific data points in the test set $\mathcal{D}_{\text{k}}$. On the other hand, with fewer folds when $K$ is set smaller, each training set $\mathcal{D}_{\text{-k}}$ is smaller, leading to worse representation of the population and higher bias. However, the test set $\mathcal{D}_{\text{k}}$ is larger in size, in which the estimate from each fold is more stable and therefore the validation variance is lower.
 
-Leave-one-out cross validation (LOOCV) is a special case of K-fold CV where $K$ is equal to sample size $\mathcal{N}$ in the complete dataset $\mathcal{D}$. It is known for an unbiased estimation of the model performance, since the training set $\mathcal{D}_{\text{-k}}$ has good representative sample size $\mathcal{N} - 1$. However, as the trade-off discussion suggested, the validation variance can be also high as there is only one sample being tested in each fold. It is worth noting that the unbiased estimation in LOOCV can only be achieved when all $K$ folds are tested. If an incomplete LOOCV is conducted, the validation bias can also be high due to its nature of high validation variance. Therefore, LOOCV should be avoided when the dataset is large and the training process is costly in time or computational resources. A detailed discussion of the trade-off has been discussed in (ref1, ref2).
+Leave-one-out cross validation (LOOCV) is a variant of K-fold CV where $K$ equals the sample size $\mathcal{N}$ of the complete dataset $\mathcal{D}$. It provides an unbiased estimation of model performance because the training set $\mathcal{D}_{\text{-k}}$ closely resembles the unseen population of interest, given its size of $\mathcal{N} - 1$. However, as the trade-off discussion suggested, this method can lead to high validation vairance due to the evaluation of the model on only one sample at a time. The true unbiased nature of LOOCV is fully realized only when all K folds are utilized. Performing an incomplete LOOCV can introduce significant bias because of the inherent high validation variance, which often occurs when training each model iteration is prohibitively time-consuming or computationally demanding. In certain contexts, such as genomic prediction, strategies like the one described by Cheng et al. leverage the matrix inverse lemma, which allows for computational savings by avoiding the inversion of large matrices in each fold. This technique significantly reduces the dependency of computational resources on sample size (Cheng et al., 2017). Van Dixhoorn et al. exemplify the use of LOOCV with a small dataset, aiming to predict cow resilience (van Dixhoorn et al., 2018). Nevertheless, for large datasets, LOOCV is generally not recommended due to computational inefficiency. The bias-variance trade-off associated with LOOCV has been extensively explored in the statistical literature (Hastie et al., 2009; Cowley and Talbot, 2010).
 
 ## Simulation Objectives and Hypothesis
 
@@ -80,7 +79,16 @@ After obtaining the estimated target variable $\hat{Y_k}$ or $\hat{Y}$, the esti
 
 ## Results
 
-The 100-iteration simulation results were summarized in the box plots to examine the validation bias and variance distribution. The figure 1 focuses on examining the bias changes across different estimators and sample sizes. Regardless of estimator and metric, the bias decreases as the sample size escalated. Although LOOCV has been considered as the 
+Figure 5. Simulation results of validation bias from 1000 sampling iterations. Multiple performance estimators across different sample sizes were color-coded. Three metrics: r, R^2, and RMSE, were displayed in the column facets.
+
+Figure 6. Simulation results of validation bias and variance from 1000 sampling iterations. Multiple performance estimators across different sample sizes were color-coded. Only RMSE was displayed. Bias and variance were listed in the left and right facets, respectively.
+
+The simulation results were summarized in the box plots to examine the validation bias and variance distribution (Figure 5, 6). The figure 5 focuses on examining the bias changes across different estimators and sample sizes. Regardless of estimator and metric, the bias decreases as the sample size escalated. In-sample estimator shows over estimation among all sample sizes and metrics, suggesting that a CV is necessary to obtain an unbiased performance estimation. In terms of the CV estimators, when the metric is correlation r, 2-, 5-, and 10-fold CV show an more unbiased estimation than LOOCV across all sample sizes. LOOCV generally under-estimate the model performance. However, when the metric is $R^2$ or RMSE, LOOCV shows the least biased estimation among all the estimators. Although K-fold CV shows a higher bias than LOOCV, the bias difference become negligible when the sample size reaches 500. 
+
+
+
+
+ Although LOOCV has been considered as the 
 
 
 When the metrics are $R^2$ or RMSE, LOOCV 
