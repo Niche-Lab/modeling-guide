@@ -83,26 +83,15 @@ Figure 5. Simulation results of validation bias from 1000 sampling iterations. M
 
 Figure 6. Simulation results of validation bias and variance from 1000 sampling iterations. Multiple performance estimators across different sample sizes were color-coded. Only RMSE was displayed. Bias and variance were listed in the left and right facets, respectively.
 
-The simulation results were summarized in the box plots to examine the validation bias and variance distribution (Figure 5, 6). The figure 5 focuses on examining the bias changes across different estimators and sample sizes. Regardless of estimator and metric, the bias decreases as the sample size escalated. In-sample estimator shows over estimation among all sample sizes and metrics, suggesting that a CV is necessary to obtain an unbiased performance estimation. In terms of the CV estimators, when the metric is correlation r, 2-, 5-, and 10-fold CV show an more unbiased estimation than LOOCV across all sample sizes. LOOCV generally under-estimate the model performance. However, when the metric is $R^2$ or RMSE, LOOCV shows the least biased estimation among all the estimators. Although K-fold CV shows a higher bias than LOOCV, the bias difference become negligible when the sample size reaches 500. 
+The simulation results, depicted in box plots (Figure 5, 6), explored the validation bias and variance distribution. Figure 5 examines the bias alterations across various estimators and sample sizes. Independent of the estimator and metric, the bias diminishes with increasing sample sizes. The in-sample estimator consistently overestimates across all metrics and sample sizes, underscoring the necessity of cross-validation (CV) for unbiased performance evaluation.
+In CV estimators, although LOOCV is traditionally viewed as unbiased, it shows underestimation in model performance, especially when the metric is correlation coefficient (r). Comparatively, 2-, 5-, and 10-fold CV provide a more unbiased estimation than LOOCV for all sample sizes. However, for metrics like $R^2$ or RMSE, LOOCV emerges as the least biased estimator. While K-fold CV exhibits higher bias than LOOCV, this difference dwindles when the sample size exceeds 500. Notably, 10-fold CV, contrary to expectations, demonstrates higher bias than 5-fold CV for small sample sizes (50 and 100) in the $R^2$ metric, though this disparity also becomes insignificant at larger sample sizes (N = 500).
 
 
 
+Considering that there is only one data point tested in LOOCV, the validation variance is only applicable to the metric RMSE, which allows conducting an evaluation on a single data point. Figure 6 inllustrates the bias and variance in the RMSE across different performance estimators as a function of sample size $\text{N}$. Both the bias and variance in RMSE are observed to decrease as the sample size increases, which meet the hypothesis. The LOOCV is found to have the least biased estimation among all the estimators. Although 2-fold CV shows the highest bias, however, the bias did not show a significant decrease when the sample size increases. And all estimator shows similar bias when the sample size reaches 500. Regarding validation variance, LOOCV exhibits a consistently higher value as compared to other estimators across all sample sizes. Furthermore, it is observed that a lower number of folds $K$ correlates with reduced variance, which is also consistent with the hypothesis.
 
- Although LOOCV has been considered as the 
+Considering LOOCV’s singular data point testing, its validation variance is pertinent only for RMSE, which permits single data point evaluations. Figure 6 illustrates the bias and variance in RMSE across different performance estimators as a function of sample size (N). Both bias and variance in RMSE decrease as sample size increases, aligning with the hypothesis. LOOCV provides the least biased estimation, while 2-fold CV exhibits the highest bias without significant reduction at larger sample sizes. However, biases across all estimators converge at a sample size of 500. In terms of validation variance, LOOCV consistently shows higher values than other estimators for all sample sizes. Additionally, a lower number of folds (K) correlates with reduced variance, which is also in line with the hypothesized trend.
 
+### Conclusion
 
-When the metrics are $R^2$ or RMSE, LOOCV 
-
-
-
-
-
-The to observe the trade-off relatinoship
-
-Considering that there is only one data point tested in LOOCV, the validation variance is only applicable to the metric RMSE. Figure 1.1 inllustrates the bias and variance in the RMSE across different performanc estimators as a function of sample size $\text{N}$. Both the bias and variance in RMSE are observed to decrease as the sample size increases, which meet the hypothesis. The LOOCV is found to have the least biased estimation among all the estimators. Although 2-fold CV shows the highest bias, however, the bias did not show a significant decrease when the sample size increases. And all estimator shows similar bias when the sample size reaches 500. Rregarding validation variance, LOOCV exhibits a consistently higher value as compared to other estimators across all sample sizes. Furthermore, it is observed that a lower number of folds $K$ correlates with reduced variance, which is also consistent with the hypothesis.
-
-
-When including other metrics suchs as $r$ and $R^2$ (figure 1.2), and In-Sample approach into the discussion, the 
-
-
-## Conclusion
+In conclusion, when conducting model validation, it is crucial to consider the estimator and sample size, as they significantly influence bias and variance. Larger sample sizes generally lead to reduced bias and variance, enhancing the reliability of the validation process. For unbiased performance estimation, CV methods, such as K-fold CV and LOOCV, are preferable than in-sample estimation. LOOCV often provides less biased estimations for certain metrics but can exhibit higher variance. It is also noteworthy that the number of folds in K-fold CV can affect bias and variance; thus, experimenting with different numbers of folds, especially in smaller sample sizes, can be beneficial. Ultimately, the selection of appropriate validation techniques should be tailored to the specific context of the dataset and the objectives of the modeling exercise, ensuring a robust and reliable assessment of model performance.
