@@ -24,13 +24,6 @@ Including model selection process within the cross validation is crucial to avoi
 
 The objective of this simulation study is to examine the effect of improper model selection implementation on validation bias. The focus will be on the model selection procedures of feature selection and hyperparameter tuning. The study hypothesizes that utilizing the test set inappropriately during any stage of model selection will lead to a significant overestimation of model performance.
 
-## Simulation Design
-
-This study simulated a regression task using a Support Vector Regressor (SVR) model, 
-
-Your simulation design description is detailed, but it can be condensed for brevity and clarity without losing critical information:
-
----
 
 ## Simulation Design
 
