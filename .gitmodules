@@ -1,0 +1,3 @@
+[submodule "arXiv_latex_template"]
+	path = arXiv_latex_template
+	url = https://github.com/Niche-Squad/arXiv_latex_template
