@@ -65,7 +65,7 @@ Another aspect of model validation is the variance of the estimated performance.
 
 Combining the Equations~\ref{eq_bias} and~\ref{eq_var}, the mean squared error (MSE) of the model validation can be decomposed as:
 
-\begin{equation} \label{eq_mse}
+\begin{equation} \label{eq_tradeoff}
     \begin{split}
         \mathrm{MSE}&=\mathbb{E}[(\hat{g}(f_{\mathcal{D}_{\text{-k}}})-G(f_\mathcal{D}))^2]\\
         &=\mathbb{E}[{\hat{g}}^2(f_{\mathcal{D}_{\text{-k}}})] - 2\mathbb{E}[g(f_{D_\text{-k}})]G(f_\mathcal{D})+G^2(f_\mathcal{D}) +\\
