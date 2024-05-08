@@ -67,17 +67,17 @@ Regression models aim to predict continuous variables and are commonly employed 
 \end{equation}
 
 where $y_i$ and $\hat{y}_i$ are the true and predicted values, respectively, and $n$ is the sample size. Both metrics preserve the scale of the original data, making them easy to interpret in real-world units. Additionally, compared to MAE, RMSE penalizes large errors more due to the squared term, making it more sensitive to outliers. In the cow production, monitoring animal body weight is a common practice to aid in the management of dairy cows. Studies by Song et al. and Xavier et al. have utilized RMSE to assess the effectiveness of three-dimensional cameras in estimating dairy cow body weight, yielding RMSE values of 41.2 kg and 12.1 kg, respectively \citep{song_automated_2018,xavier_use_2022}. These figures provide a straightforward value for farmers to gauge whether the prediction error is tolerable, considering their specific operational costs and management thresholds. In essence, RMSE translates complex model accuracy into practical insights for productive agricultural units.
-When evaluating the same model across different traits, which may have different scales, a common practice is to express error metrics in a scale-free manner. This can be achieved by expressing RMSE as a percent of the mean observed value, such as root mean squared percentage error (RMSPE), or as a Root Mean Standard Deviation Ratio (RSR) that normalizes the RMSE by the standard deviation of the observed values:
+When evaluating the same model across different traits, which may have different scales, a common practice is to express error metrics in a scale-free manner. This can be achieved by expressing RMSE as a percent of the deviation from the observed value, such as root mean squared percentage error (RMSPE), or as a Root Mean Standard Deviation Ratio (RSR) that normalizes the RMSE by the standard deviation of the observed values:
 
 \begin{equation} \label{eq_rmspe}
-    \text{RMSPE} = \frac{\text{RMSE}}{\bar{y}}
+    \text{RMSPE} = \sqrt{\frac{1}{n} \sum_{i=1}^{n} (\frac{y_i - \hat{y}_i}{y_i})^2}
 \end{equation}
 
 \begin{equation} \label{eq_rsr}
     \text{RSR} = \frac{\text{RMSE}}{\sigma_y}
 \end{equation}
 
-where $\bar{y}$ and $\sigma_y$ are the mean and standard deviation of the observed values, respectively. When expressed as a percent, RMSPE typically ranges from 0 and above, with values closer to 0 indicating perfect prediction. Much like expressing RMSE as a percent, RSR is valuable to interpret RMSE in terms of the context of the variance in the observations. Values below 1 suggest that the model yields predictions less variable than the standard deviation, while values above 1 suggest that the prediction is imprecise.
+where $\sigma_y$ is the standard deviation of the observed values. When expressed as a percent, RMSPE typically ranges from 0 and above, with values closer to 0 indicating perfect prediction. Much like expressing RMSE as a percent, RSR is valuable to interpret RMSE in terms of the context of the variance in the observations. Values below 1 suggest that the model yields predictions less variable than the standard deviation, while values above 1 suggest that the prediction is imprecise.
 
 On the other hand, Pearson's correlation coefficients (r) and the coefficient of determination (R$^2$) are two common linearity-based metrics:
 \begin{equation} \label{eq_r}
