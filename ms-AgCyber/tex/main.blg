@@ -3,44 +3,46 @@ Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
 The top-level auxiliary file: main.aux
 The style file: unsrt.bst
 Database file #1: references.bib
-You've used 3 entries,
+Warning--empty journal in lecun_generalization_1989
+You've used 41 entries,
             1791 wiz_defined-function locations,
-            461 strings with 4131 characters,
-and the built_in function-call counts, 963 in all, are:
-= -- 94
-> -- 36
+            659 strings with 13112 characters,
+and the built_in function-call counts, 11974 in all, are:
+= -- 1018
+> -- 713
 < -- 2
-+ -- 13
-- -- 10
-* -- 52
-:= -- 140
-add.period$ -- 11
-call.type$ -- 3
-change.case$ -- 3
++ -- 253
+- -- 212
+* -- 1140
+:= -- 1955
+add.period$ -- 126
+call.type$ -- 41
+change.case$ -- 40
 chr.to.int$ -- 0
-cite$ -- 3
-duplicate$ -- 50
-empty$ -- 91
-format.name$ -- 10
-if$ -- 231
+cite$ -- 42
+duplicate$ -- 389
+empty$ -- 1023
+format.name$ -- 212
+if$ -- 2497
 int.to.chr$ -- 0
-int.to.str$ -- 3
-missing$ -- 3
-newline$ -- 18
-num.names$ -- 3
-pop$ -- 15
+int.to.str$ -- 41
+missing$ -- 42
+newline$ -- 209
+num.names$ -- 41
+pop$ -- 52
 preamble$ -- 1
 purify$ -- 0
 quote$ -- 0
-skip$ -- 33
+skip$ -- 150
 stack$ -- 0
-substring$ -- 64
-swap$ -- 23
+substring$ -- 1099
+swap$ -- 58
 text.length$ -- 2
 text.prefix$ -- 0
 top$ -- 0
 type$ -- 0
-warning$ -- 0
-while$ -- 9
-width$ -- 4
-write$ -- 36
+warning$ -- 1
+while$ -- 116
+width$ -- 43
+write$ -- 456
+(There was 1 warning)
