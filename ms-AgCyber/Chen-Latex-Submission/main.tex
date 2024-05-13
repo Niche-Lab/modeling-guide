@@ -1,0 +1,65 @@
+\documentclass{article}
+
+\usepackage{arxiv}
+
+\usepackage[utf8]{inputenc} % allow utf-8 input
+\usepackage[T1]{fontenc}    % use 8-bit T1 fonts
+\usepackage{hyperref}       % hyperlinks
+\usepackage{url}            % simple URL typesetting
+\usepackage{booktabs}       % professional-quality tables
+\usepackage{amsfonts}       % blackboard math symbols
+\usepackage{amsmath}        % popular math symbols
+\usepackage{nicefrac}       % compact symbols for 1/2, etc.
+\usepackage{microtype}      % microtypography
+\usepackage{lipsum}		% Can be removed after putting your text content
+\usepackage{graphicx}
+\usepackage{natbib}
+\usepackage{doi}
+\usepackage{setspace} % double spacing
+\usepackage{lineno} % line numbering
+\graphicspath{ {./media/} }
+
+\title{Common Pitfalls in Evaluating Model Performance and Strategies for Avoidance}
+
+\author{
+	\href{https://orcid.org/0000-0002-2018-0702}{\includegraphics[scale=0.06]{orcid.pdf}\hspace{1mm}C. P. James Chen}\thanks{Corresponding author: James Chen \texttt{<niche@vt.edu>}}\\
+	School of Animal Sciences\\
+	Virginia Tech\\
+	Blacksburg, VA 24061 \\
+	\texttt{niche@vt.edu} \\
+    \And
+	\href{https://orcid.org/0000-0001-5713-012X}{\includegraphics[scale=0.06]{orcid.pdf}\hspace{1mm}Robin. R. White} \\
+	School of Animal Sciences\\
+	Virginia Tech\\
+	Blacksburg, VA 24061 \\
+	\texttt{rrwhite@vt.edu}
+}
+
+
+
+
+\renewcommand{\shorttitle}{\textit{Common Pitfalls in Evaluating Model Performance}}
+
+\doublespacing
+\linenumbers
+
+\begin{document}
+\maketitle
+
+\input{content/_0_abstract.tex}
+
+\newpage
+\input{content/_1_introduction.tex}
+\input{content/_2_approach.tex}
+\input{content/_3_result.tex}
+\input{content/_4_conclusion.tex}
+
+\newpage
+%Bibliography
+\bibliographystyle{unsrt}
+\bibliography{references}
+
+\newpage
+\input{content/_9_sup.tex}
+
+\end{document}
