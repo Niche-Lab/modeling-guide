@@ -28,7 +28,7 @@ Including the model selection process within the cross-validation is essential t
 
 \subsection{Cross Validation Design with Block Effects}
 
-Blocking is an essential approach in experimental design to control for variations that can confound the variable of interest. For instance, Lahart et al. investigated the dry matter intake of grazing cows using mid-infrared (MIR) spectroscopy technology across multiple herds under varying experimental conditions \citep{lahart_predicting_2019}. Given the significant variation between herds, which may contribute to individual differences in both dry matter intake and MIR spectra, it is crucial to consider the herd as a blocking factor before evaluating the predictability of dry matter intake using MIR spectra. This consideration should also extend to model validation. In the cited study, variations in dry matter intake, the primary focus of the prediction model, were observed to exceed one standard deviation among some herds. In cross-validation, if samples from the same herd are assigned to different folds, with one fold used as the test set, the model is likely to achieve high accuracy. This accuracy may largely result from explaining the inter-herd variation rather than individual variations in dry matter intake, leading to an overestimation of model performance. To avoid this pitfall, block cross-validation, where each block (i.e., herd in this example) is used as a fold, is recommended for unbiased model validation.
+Blocking is an essential approach in experimental design to control for variations that can confound the variable of interest. For instance, Lahart et al. investigated the dry matter intake of grazing cows using mid-infrared (MIR) spectroscopy technology across multiple herds under varying experimental conditions \citep{lahart_predicting_2019}. Given the significant variation between herds, which may contribute to individual differences in both dry matter intake (i.e., response variable) and MIR spectra (i.e., independent variables), it is crucial to consider the herd as a blocking factor before evaluating the predictability of dry matter intake using MIR spectra. This consideration should also extend to model evaluation. In the cited study, variations in dry matter intake, the primary focus of the prediction model, were observed to exceed one standard deviation among some herds. In cross-validation, if samples from the same herd are assigned to different folds, with one fold used as the test set, the model is likely to achieve high accuracy. This accuracy may largely result from explaining the inter-herd variation rather than individual variations in dry matter intake, leading to an overestimation of model performance. To avoid this pitfall, block cross-validation, where each block (i.e., herd in this example) is used as a fold, is recommended for unbiased model evaluation.
 Literature reviews have indicated that block cross-validation effectively evaluates model performance on external or unseen datasets \citep{bresolin_infrared_2020}. In the same study by Lahart et al., three cross-validation strategies were compared: random cross-validation (Random CV), which randomly assigns samples to folds; within-herd validation, training and testing the model within each herd; and across-herd validation (Block CV), where each herd is used as a fold and tested in turn. The results showed that performance estimates in block CV were noticeably lower than the other two strategies, supporting the hypothesis that ignoring block effects inflates model performance. Other studies considering block effects, including diet \citep{grelet_potential_2020}, herd \citep{rovere_prediction_2021}, and farm location \citep{adriaens_productive_2020, mota_real-time_2022}, have shown similar results in cross-validation, demonstrating block CV's effectiveness in evaluating model performance on external datasets.
 
 \subsection{Model Performance Metrics}
@@ -37,7 +37,7 @@ Model performance metrics serve as quantitative indicators for evaluating model 
 
 \subsubsection{Metrics in Regression Tasks}
 
-\begin{table}
+\begin{table}[H]
     \caption{Summary of model performance metrics for regression tasks.}
     \centering
     \begin{tabular}{llll}
@@ -46,9 +46,9 @@ Model performance metrics serve as quantitative indicators for evaluating model 
         \midrule
         Root mean square error (RMSE) & Error-Based & No & [0, $\infty$] \\
         Mean absolute error (MAE) & Error-Based & No & [0, $\infty$] \\
-        Root mean squared percentage error (RMSPE) & Error-Based & Yes & [0, 1] \\
-        Root mean standard deviation ratio (RSR) & Error-Based & Yes & [0, 1] \\
-        Pearon's correlation coefficient (r) & Linearity-Based  & Yes & [-1, 1] \\
+        Root mean squared percentage error (RMSPE) & Error-Based & Yes & [0, $\infty$] \\
+        Root mean standard deviation ratio (RSR) & Error-Based & Yes & [0, $\infty$] \\
+        Pearson's correlation coefficient (r) & Linearity-Based  & Yes & [-1, 1] \\
         Coefficient of determination (R$^2$) & Linearity-Based & Yes & [-$\infty$, 1] \\
         Lin's concordance correlation coefficient (CCC) & Linearity-Based & Yes & [-1, 1] \\
         \bottomrule
@@ -56,7 +56,9 @@ Model performance metrics serve as quantitative indicators for evaluating model 
     \label{tab:metrics-reg}
 \end{table}
 
-Regression models aim to predict continuous variables and are commonly employed in diverse applications, such as estimating body condition scores \citep{spoliansky_development_2016, yukun_automatic_2019}, body weight \citep{song_automated_2018,xavier_use_2022}, milk composition \citep{rovere_prediction_2021,mota_real-time_2022,mantysaari_body_2019,frizzarin_predicting_2021}, efficiency of feed resource usage \citep{grelet_potential_2020, appuhamy_prediction_2016,de_souza_predicting_2018}, and early-lactation behavior \citep{van_dixhoorn_indicators_2018}. The metrics in regression tasks evaluate the agreement between the predicted value $\hat{y}$ and the true values $y$. The agreement can be generally quantified in two ways: error-based metrics and linearity-based metrics. The metrics are summarized in Table~\ref{tab:metrics-reg}. Error-based metrics focus on the deviation of each pair of predicted and true values, while linearity-based metrics consider overall linear relationships between the predictions and the truths. The root mean square error (RMSE) and the mean absolute error (MAE) are two common error-based metrics:
+Regression models aim to predict continuous variables and are commonly employed in diverse applications, such as estimating body condition scores \citep{spoliansky_development_2016, yukun_automatic_2019}, body weight \citep{song_automated_2018,xavier_use_2022}, milk composition \citep{rovere_prediction_2021,mota_real-time_2022,mantysaari_body_2019,frizzarin_predicting_2021}, efficiency of feed resource usage \citep{grelet_potential_2020, appuhamy_prediction_2016,de_souza_predicting_2018}, and early-lactation behavior \citep{van_dixhoorn_indicators_2018}. The metrics in regression tasks evaluate the agreement between the predicted value $\hat{y}$ and the true values $y$. The agreement can be generally quantified in two ways: error-based metrics and linearity-based metrics. The metrics are summarized in Table~\ref{tab:metrics-reg}. 
+
+Error-based metrics focus on the deviation of each pair of predicted and true values, while linearity-based metrics consider overall linear relationships between the predictions and the truths. The root mean square error (RMSE) and the mean absolute error (MAE) are two common error-based metrics:
 
 \begin{equation} \label{eq_rmse}
 \text{RMSE} = \sqrt{\frac{1}{n} \sum_{i=1}^{n} (y_i - \hat{y}_i)^2}
@@ -116,8 +118,9 @@ where $r$ is the Pearson correlation coefficient. The CCC is a comprehensive met
 
 \subsubsection{Metrics in Classification Tasks}
 
+Classification models aim to predict categorical outcomes such as 'healthy' or 'sick,' 'susceptible' or 'resistant,' and 'high yield' or 'low yield.’ To evaluate classification performance, one must first establish a confidence threshold to dichotomize the prediction probabilities. For instance, if a prediction probability exceeds the threshold, the sample is predicted as a positive sample. It is worth mentioning that this threshold is adjustable to fine-tune model performance for particular uses. The discussed metrics in classification tasks are summarized in Table~\ref{tab:metrics-cls}.
 
-\begin{table}
+\begin{table}[H]
     \caption{Summary of model performance metrics for classification tasks.}
     \centering
     \begin{tabular}{llll}
@@ -128,15 +131,14 @@ where $r$ is the Pearson correlation coefficient. The CCC is a comprehensive met
         Precision & No & No \\
         Recall & No & No \\
         F1 score & No & No \\
+        Matthews correlation coefficient (MCC) & Yes & No \\
         Area under the precision-recall curve (AUC-PR) & No & Yes \\
         Area under the receiver operating characteristic curve (AUC-ROC) & Yes & Yes \\
-        Matthews correlation coefficient (MCC) & Yes & Yes \\
+        Area under the MCC curve (AUC-MCC) & Yes & Yes \\
         \bottomrule
     \end{tabular}
     \label{tab:metrics-cls}
 \end{table}
-
-Classification models aim to predict categorical outcomes such as 'healthy' or 'sick,' 'susceptible' or 'resistant,' and 'high yield' or 'low yield.’ To evaluate classification performance, one must first establish a confidence threshold to dichotomize the prediction probabilities. For instance, if a prediction probability exceeds the threshold, the sample is predicted as a positive sample. It is worth mentioning that this threshold is adjustable to fine-tune model performance for particular uses. The discussed metrics in classification tasks are summarized in Table~\ref{tab:metrics-cls}.
 
 Accuracy is the most straightforward metric for evaluating classification models:
 

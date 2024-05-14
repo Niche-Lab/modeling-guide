@@ -2,18 +2,19 @@
 
 \subsection{Study 1: The Impact of Estimator Choice and Sample Size on Model Evaluation Reliability}
 
-The simulation results, depicted in box plots (Figure ~\ref{fig:s1_bias} and ~\ref{fig:s1_var}), explored the evaluation bias and variance distribution. Figure ~\ref{fig:s1_bias} examines the bias alterations across various estimators and sample sizes. Independent of the estimator and metric, the bias diminishes with increasing sample sizes. The in-sample estimator consistently overestimates across all metrics and sample sizes, underscoring the necessity of CV for unbiased performance evaluation. In CV estimators, although LOOCV is traditionally viewed as unbiased, it shows underestimation in model performance, especially when the metric is correlation coefficient (r). Comparatively, 2-, 5-, and 10-fold CV provide a more unbiased estimation than LOOCV for all sample sizes. However, for metrics like $R^2$ or RMSE, LOOCV emerges as the least biased estimator. While K-fold CV exhibits higher bias than LOOCV, this difference dwindles when the sample size exceeds 500. Notably, 10-fold CV, contrary to expectations, demonstrates higher bias than 5-fold CV for small sample sizes (50 and 100) in the $R^2$ metric, though this disparity also becomes insignificant at larger sample sizes.
-
-\begin{figure}[h]
+\begin{figure}[H]
     \centering
     \includegraphics[width=1\textwidth]{fig_s1_bias.jpg}
     \caption{Simulation results of evaluation bias from 1000 sampling iterations. Multiple performance estimators across different sample sizes were color-coded. Three metrics: $r$, $R^2$, and RMSE, were displayed in the column facets.}
     \label{fig:s1_bias}
 \end{figure}
 
+The simulation results, depicted in box plots (Figure ~\ref{fig:s1_bias} and ~\ref{fig:s1_var}), explored the evaluation bias and variance distribution. Figure ~\ref{fig:s1_bias} examines the bias alterations across various estimators and sample sizes. Independent of the estimator and metric, the bias diminishes with increasing sample sizes. The in-sample estimator consistently overestimates across all metrics and sample sizes, underscoring the necessity of CV for unbiased performance evaluation. In CV estimators, although LOOCV is traditionally viewed as unbiased, it shows underestimation in model performance, especially when the metric is correlation coefficient (r). Comparatively, 2-, 5-, and 10-fold CV provide a more unbiased estimation than LOOCV for all sample sizes. However, for metrics like $R^2$ or RMSE, LOOCV emerges as the least biased estimator. While K-fold CV exhibits higher bias than LOOCV, this difference dwindles when the sample size exceeds 500. Notably, 10-fold CV, contrary to expectations, demonstrates higher bias than 5-fold CV for small sample sizes (50 and 100) in the $R^2$ metric, though this disparity also becomes insignificant at larger sample sizes.
+
+
 Considering LOOCV’s singular data point testing, its evaluation variance is pertinent only for RMSE, which permits single data point evaluations. Figure ~\ref{fig:s1_var} illustrates the bias and variance in RMSE across different performance estimators as a function of sample size N. Both bias and variance in RMSE decrease as sample size increases, aligning with the hypothesis. LOOCV provides the least biased estimation, while 2-fold CV exhibits the highest bias without significant reduction at larger sample sizes. However, biases across all estimators converge at a sample size of 500. In terms of evaluation variance, LOOCV consistently shows higher values than other estimators for all sample sizes. Additionally, a lower number of folds K correlates with reduced variance, which is also in line with the hypothesized trend.
 
-\begin{figure}[h]
+\begin{figure}[H]
     \centering
     \includegraphics[width=1\textwidth]{fig_s1_var.jpg}
     \caption{Simulation results of evaluation bias and variance from 1000 sampling iterations. Multiple performance estimators across different sample sizes were color-coded. Only RMSE was displayed. Bias and variance were listed in the left and right facets, respectively.}
@@ -26,7 +27,7 @@ In conclusion, when conducting model evaluation, it is crucial to consider the e
 
 The evaluation bias was visualized using box plots (Figure ~\ref{fig:s2_results}), with the feature selection factor (FS) on the x-axis and hyperparameter tuning (HT) distinguished by color — green for incorrect and yellow for correct implementation. The y-axis represents the evaluation bias as measured by the correlation coefficient. The results indicate a clear overestimation of model performance when feature selection is applied to the entire dataset, regardless of hyperparameter tuning. The median biases were 0.797 for “FS=0; HT=0” and 0.761 for “FS=0; HT=1”. Moreover, inappropriate evaluation in hyperparameter tuning resulted in a significant bias (p-value < 0.001) with a median of 0.113 for “FS=1; HT=0”. The only scenario without bias significantly occurred when both feature selection and hyperparameter tuning were correctly incorporated within the cross-validation process “FS=1; HT=1”, yielding a median bias of -0.008. These findings align with the initial hypothesis and the prevailing literature, reinforcing that model selection must be integrated into the cross-validation workflow to prevent an overestimation of model performance.
 
-\begin{figure}[h]
+\begin{figure}
     \centering
     \includegraphics[width=.7\textwidth]{fig_s2_results.jpg}
     \caption{The evaluation bias of the four model selection strategies.}
@@ -55,9 +56,9 @@ In this simulation, an ANOVA table (Table ~\ref{tab:anova}), calculated from a s
     \label{tab:anova}
 \end{table}
 
-In conclusion, block CV proves to be a vital tool in assessing the generalizability and accuracy of a predictive model, especially in contexts where block effects, such as herd variations, play a significant role in both the predicting features and response variable. The random CV strategy, which randomly assigns samples to folds without considering block effects, tends to overestimate model performance. This study recommends that block CV be used as a benchmark in model validation, especially when block effects are present
+In conclusion, block CV proves to be a vital tool in assessing the generalizability and accuracy of a predictive model, especially in contexts where block effects, such as herd variations, play a significant role in both the predicting features and response variable. The random CV strategy, which randomly assigns samples to folds without considering block effects, tends to overestimate model performance. This study recommends that block CV be used as a benchmark in model evaluation, especially when block effects are present
 
-\begin{figure}[h]
+\begin{figure}
     \centering
     \includegraphics[width=1\textwidth]{fig_s3_results.jpg}
     \caption{Bias in model performance estimation by Block CV and Random CV across 1000 iterations. The dashed line represents the null hypothesis that the mean performance estimate is zero.}
@@ -66,7 +67,7 @@ In conclusion, block CV proves to be a vital tool in assessing the generalizabil
 
 \subsection{Study 4: Different Regression Metrics Illustrate Different Aspects of Model Performance}
 
-\begin{figure}[h]
+\begin{figure}
     \centering
     \includegraphics[width=.9\textwidth]{fig_s4_reg.jpg}
     \caption{Scatter plots display the same observations against four different prediction scenarios in the given hypothetical example. Scenario "Baseline" serves as a baseline for the metrics, with any metric better than the baseline highlighted in bold and underscored, and any worse metric colored in red.}
