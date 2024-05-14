@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2022.5.26)  13 MAY 2024 23:22
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2022.5.26)  14 MAY 2024 00:10
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -518,7 +518,7 @@ File: orcid.pdf Graphic file (type pdf)
 <use orcid.pdf>
 Package pdftex.def Info: orcid.pdf  used on input line 49.
 (pdftex.def)             Requested size: 6.14267pt x 6.14267pt.
- (./content/_0_abstract.tex
+ (./_0_abstract.tex
 LaTeX Font Info:    Trying to load font information for T1+phv on input line 4.
  (/usr/local/texlive/2022/texmf-dist/tex/latex/psnfss/t1phv.fd
 File: t1phv.fd 2020/03/25 scalable font definitions for T1/phv.
@@ -530,7 +530,7 @@ Package microtype Info: Loading generic protrusion settings for font family
 ) [1
 
 
-{/usr/local/texlive/2022/texmf-var/fonts/map/pdftex/updmap/pdftex.map} <./orcid.pdf>] (./content/_1_introduction.tex [2]
+{/usr/local/texlive/2022/texmf-var/fonts/map/pdftex/updmap/pdftex.map} <./orcid.pdf>] (./_1_introduction.tex [2]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [3]
@@ -561,7 +561,7 @@ l.173
       ]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [10]) [11] (./content/_2_approach.tex
+ [10]) [11] (./_2_approach.tex
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [12]
@@ -569,10 +569,10 @@ LaTeX Font Info:    Trying to load font information for TS1+ptm on input line 30
  (/usr/local/texlive/2022/texmf-dist/tex/latex/psnfss/ts1ptm.fd
 File: ts1ptm.fd 2001/06/04 font definitions for TS1/ptm.
 )
-<./media//fig_s2_schemes.jpg, id=302, 7638.5375pt x 3961.80125pt>
-File: ./media//fig_s2_schemes.jpg Graphic file (type jpg)
-<use ./media//fig_s2_schemes.jpg>
-Package pdftex.def Info: ./media//fig_s2_schemes.jpg  used on input line 46.
+<fig_s2_schemes.jpg, id=302, 7638.5375pt x 3961.80125pt>
+File: fig_s2_schemes.jpg Graphic file (type jpg)
+<use fig_s2_schemes.jpg>
+Package pdftex.def Info: fig_s2_schemes.jpg  used on input line 46.
 (pdftex.def)             Requested size: 469.75499pt x 243.62213pt.
 
 
@@ -583,27 +583,27 @@ pdfTeX warning (ext4): destination with the same identifier (name{figure.1}) has
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
 l.58 
-      <./media//fig_s2_schemes.jpg>]
-<./media//fig_s3_block.jpg, id=318, 7840.29124pt x 3824.2875pt>
-File: ./media//fig_s3_block.jpg Graphic file (type jpg)
-<use ./media//fig_s3_block.jpg>
-Package pdftex.def Info: ./media//fig_s3_block.jpg  used on input line 61.
+      <./fig_s2_schemes.jpg>]
+<fig_s3_block.jpg, id=318, 7840.29124pt x 3824.2875pt>
+File: fig_s3_block.jpg Graphic file (type jpg)
+<use fig_s3_block.jpg>
+Package pdftex.def Info: fig_s3_block.jpg  used on input line 61.
 (pdftex.def)             Requested size: 469.75499pt x 229.09723pt.
  [15
 pdfTeX warning (ext4): destination with the same identifier (name{figure.2}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
 l.72 
-      <./media//fig_s3_block.jpg>] [16]) [17] (./content/_3_result.tex
-<./media//fig_s1_bias.jpg, id=345, 7664.635pt x 2814.515pt>
-File: ./media//fig_s1_bias.jpg Graphic file (type jpg)
-<use ./media//fig_s1_bias.jpg>
-Package pdftex.def Info: ./media//fig_s1_bias.jpg  used on input line 7.
+      <./fig_s3_block.jpg>] [16]) [17] (./_3_result.tex
+<fig_s1_bias.jpg, id=345, 7664.635pt x 2814.515pt>
+File: fig_s1_bias.jpg Graphic file (type jpg)
+<use fig_s1_bias.jpg>
+Package pdftex.def Info: fig_s1_bias.jpg  used on input line 7.
 (pdftex.def)             Requested size: 469.75499pt x 172.47107pt.
-<./media//fig_s1_var.jpg, id=350, 6714.08376pt x 2911.87875pt>
-File: ./media//fig_s1_var.jpg Graphic file (type jpg)
-<use ./media//fig_s1_var.jpg>
-Package pdftex.def Info: ./media//fig_s1_var.jpg  used on input line 19.
+<fig_s1_var.jpg, id=350, 6714.08376pt x 2911.87875pt>
+File: fig_s1_var.jpg Graphic file (type jpg)
+<use fig_s1_var.jpg>
+Package pdftex.def Info: fig_s1_var.jpg  used on input line 19.
 (pdftex.def)             Requested size: 469.75499pt x 203.71904pt.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
@@ -613,7 +613,7 @@ pdfTeX warning (ext4): destination with the same identifier (name{figure.3}) has
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
 l.23 
-      <./media//fig_s1_bias.jpg>]
+      <./fig_s1_bias.jpg>]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [19
@@ -621,11 +621,11 @@ pdfTeX warning (ext4): destination with the same identifier (name{figure.4}) has
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
 l.29 
-      <./media//fig_s1_var.jpg>]
-<./media//fig_s2_results.jpg, id=364, 2921.91624pt x 2249.40375pt>
-File: ./media//fig_s2_results.jpg Graphic file (type jpg)
-<use ./media//fig_s2_results.jpg>
-Package pdftex.def Info: ./media//fig_s2_results.jpg  used on input line 32.
+      <./fig_s1_var.jpg>]
+<fig_s2_results.jpg, id=364, 2921.91624pt x 2249.40375pt>
+File: fig_s2_results.jpg Graphic file (type jpg)
+<use fig_s2_results.jpg>
+Package pdftex.def Info: fig_s2_results.jpg  used on input line 32.
 (pdftex.def)             Requested size: 328.82706pt x 253.13281pt.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
@@ -635,16 +635,16 @@ pdfTeX warning (ext4): destination with the same identifier (name{figure.5}) has
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
 l.60 
-      <./media//fig_s2_results.jpg>]
-<./media//fig_s3_results.jpg, id=373, 6459.13126pt x 4021.0225pt>
-File: ./media//fig_s3_results.jpg Graphic file (type jpg)
-<use ./media//fig_s3_results.jpg>
-Package pdftex.def Info: ./media//fig_s3_results.jpg  used on input line 63.
+      <./fig_s2_results.jpg>]
+<fig_s3_results.jpg, id=373, 6459.13126pt x 4021.0225pt>
+File: fig_s3_results.jpg Graphic file (type jpg)
+<use fig_s3_results.jpg>
+Package pdftex.def Info: fig_s3_results.jpg  used on input line 63.
 (pdftex.def)             Requested size: 469.75499pt x 292.42166pt.
-<./media//fig_s4_reg.jpg, id=374, 4047.12pt x 3902.58pt>
-File: ./media//fig_s4_reg.jpg Graphic file (type jpg)
-<use ./media//fig_s4_reg.jpg>
-Package pdftex.def Info: ./media//fig_s4_reg.jpg  used on input line 72.
+<fig_s4_reg.jpg, id=374, 4047.12pt x 3902.58pt>
+File: fig_s4_reg.jpg Graphic file (type jpg)
+<use fig_s4_reg.jpg>
+Package pdftex.def Info: fig_s4_reg.jpg  used on input line 72.
 (pdftex.def)             Requested size: 422.77661pt x 407.66902pt.
 
 Underfull \vbox (badness 1337) has occurred while \output is active []
@@ -659,7 +659,7 @@ pdfTeX warning (ext4): destination with the same identifier (name{figure.6}) has
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
 l.79 
-      <./media//fig_s3_results.jpg>]
+      <./fig_s3_results.jpg>]
 Underfull \vbox (badness 3364) has occurred while \output is active []
 
  [22
@@ -667,11 +667,11 @@ pdfTeX warning (ext4): destination with the same identifier (name{figure.7}) has
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
 l.79 
-      <./media//fig_s4_reg.jpg>]
-<./media//fig_s5_cls.jpg, id=385, 3270.2175pt x 3418.7725pt>
-File: ./media//fig_s5_cls.jpg Graphic file (type jpg)
-<use ./media//fig_s5_cls.jpg>
-Package pdftex.def Info: ./media//fig_s5_cls.jpg  used on input line 84.
+      <./fig_s4_reg.jpg>]
+<fig_s5_cls.jpg, id=385, 3270.2175pt x 3418.7725pt>
+File: fig_s5_cls.jpg Graphic file (type jpg)
+<use fig_s5_cls.jpg>
+Package pdftex.def Info: fig_s5_cls.jpg  used on input line 84.
 (pdftex.def)             Requested size: 375.80542pt x 392.86366pt.
 
 
@@ -688,29 +688,29 @@ pdfTeX warning (ext4): destination with the same identifier (name{figure.8}) has
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
 l.92 
-      <./media//fig_s5_cls.jpg>]
-<./media//fig_s5_curve.jpg, id=397, 5446.3475pt x 2963.07pt>
-File: ./media//fig_s5_curve.jpg Graphic file (type jpg)
-<use ./media//fig_s5_curve.jpg>
-Package pdftex.def Info: ./media//fig_s5_curve.jpg  used on input line 95.
+      <./fig_s5_cls.jpg>]
+<fig_s5_curve.jpg, id=397, 5446.3475pt x 2963.07pt>
+File: fig_s5_curve.jpg Graphic file (type jpg)
+<use fig_s5_curve.jpg>
+Package pdftex.def Info: fig_s5_curve.jpg  used on input line 95.
 (pdftex.def)             Requested size: 469.75499pt x 255.54245pt.
  [25
 pdfTeX warning (ext4): destination with the same identifier (name{figure.9}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
 l.103 
-       <./media//fig_s5_curve.jpg>]
-<./media//fig_s5_mcc.jpg, id=406, 4213.7425pt x 2618.78375pt>
-File: ./media//fig_s5_mcc.jpg Graphic file (type jpg)
-<use ./media//fig_s5_mcc.jpg>
-Package pdftex.def Info: ./media//fig_s5_mcc.jpg  used on input line 107.
+       <./fig_s5_curve.jpg>]
+<fig_s5_mcc.jpg, id=406, 4213.7425pt x 2618.78375pt>
+File: fig_s5_mcc.jpg Graphic file (type jpg)
+<use fig_s5_mcc.jpg>
+Package pdftex.def Info: fig_s5_mcc.jpg  used on input line 107.
 (pdftex.def)             Requested size: 375.80542pt x 233.52257pt.
 ) [26
 pdfTeX warning (ext4): destination with the same identifier (name{figure.10}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
 l.59 \newpage
-              <./media//fig_s5_mcc.jpg>] (./content/_4_conclusion.tex) [27] (./main.bbl [28] [29] [30]) [31] (./content/_9_sup.tex
+              <./fig_s5_mcc.jpg>] (./_4_conclusion.tex) [27] (./main.bbl [28] [29] [30]) [31] (./_9_sup.tex
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [32]
@@ -724,15 +724,15 @@ Package rerunfilecheck Info: File `main.out' has not changed.
 (rerunfilecheck)             Checksum: 91CE405C96A9F5E1BE5823B820150E0D;6287.
  ) 
 Here is how much of TeX's memory you used:
- 14113 strings out of 478268
- 229646 string characters out of 5846347
- 648018 words of memory out of 5000000
- 31626 multiletter control sequences out of 15000+600000
+ 14101 strings out of 478268
+ 228620 string characters out of 5846347
+ 647948 words of memory out of 5000000
+ 31616 multiletter control sequences out of 15000+600000
  539666 words of font info for 250 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 70i,20n,77p,3279b,607s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 70i,20n,77p,3271b,607s stack positions out of 10000i,1000n,20000p,200000b,200000s
 {/usr/local/texlive/2022/texmf-dist/fonts/enc/dvips/base/8r.enc}{/usr/local/texlive/2022/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc}</usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/cm-super/sftt0900.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/cm-super/sftt1000.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/urw/times/utmbi8a.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on main.pdf (35 pages, 10785120 bytes).
+Output written on main.pdf (35 pages, 10785122 bytes).
 PDF statistics:
  564 PDF objects out of 1000 (max. 8388607)
  478 compressed objects within 5 object streams
