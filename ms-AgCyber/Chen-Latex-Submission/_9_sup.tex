@@ -111,7 +111,7 @@ The squared Pearson correlation coefficient, \( r^2 \), is not necessarily equiv
     \end{split}
 \end{equation}
 
-With the assumption that \(\bar{\hat{Y}} = \bar{Y}\), which typically holds when \(\epsilon \sim N(0, \sigma^2)\), the squared correlation coefficient \( r^2 \) is expressed as follows:
+With the assumption that \(\bar{\hat{Y}} = \bar{Y}\), which typically holds when \(\mathbb{E}[\epsilon] = 0\), the squared correlation coefficient \( r^2 \) is expressed as follows:
 
 \begin{equation} \label{eq_pf_r2}
     \begin{split}
@@ -120,9 +120,9 @@ With the assumption that \(\bar{\hat{Y}} = \bar{Y}\), which typically holds when
         &= \frac{\text{var}(\hat{Y})}{\text{var}(Y)} \\
         &= \frac{\sum\limits_{i=1}^{n}(\hat{Y}_i - \bar{\hat{Y}})^2}{\sum\limits_{i=1}^{n}(Y_i - \bar{Y})^2} \\
         &= \frac{\sum\limits_{i=1}^{n}(\hat{Y}_i - \bar{Y})^2}{\sum\limits_{i=1}^{n}(Y_i - \bar{Y})^2} \\
-        &= \frac{SS_{\text{residual}}}{SS_{\text{total}}} \\
+        &= \frac{SS_{\text{regression}}}{SS_{\text{total}}} \\
         &= R^2
     \end{split}
 \end{equation}
 
-where \(SS_{\text{residual}}\) is the residual sum of squares and \(SS_{\text{total}}\) is the total sum of squares. Each \(Y_i\) and \(\hat{Y}_i\) are the ith elements of the actual response vector \(Y\) and the predicted response vector \(\hat{Y}\), while \(\bar{Y}\) and \(\bar{\hat{Y}}\) are their respective means. This proof highlights that under certain assumptions, \( r^2 \) and \( R^2 \) can indeed be equivalent, but such conditions are specific to least squares regression where errors are normally distributed and predictions are unbiased estimates of the actual values.
+where \(SS_{\text{regression}}\) is the variation explained by the model and \(SS_{\text{total}}\) is the total sum of squares. Each \(Y_i\) and \(\hat{Y}_i\) are the ith elements of the actual response vector \(Y\) and the predicted response vector \(\hat{Y}\), while \(\bar{Y}\) and \(\bar{\hat{Y}}\) are their respective means. This proof highlights that under certain assumptions, \( r^2 \) and \( R^2 \) can indeed be equivalent, but such conditions are specific to least squares regression where errors are normally distributed and predictions are unbiased estimates of the actual values.
