@@ -1,8 +1,8 @@
-PWD /Users/niche/_03_Papers/2024/modeling-guide/ms-AgCyber/Chen-Latex-Submission
+PWD /Users/niche/projects/modeling-guide/ms
 INPUT /usr/local/texlive/2022/texmf.cnf
 INPUT /usr/local/texlive/2022/texmf-dist/web2c/texmf.cnf
 INPUT /usr/local/texlive/2022/texmf-var/web2c/pdftex/pdflatex.fmt
-INPUT /Users/niche/_03_Papers/2024/modeling-guide/ms-AgCyber/Chen-Latex-Submission/main.tex
+INPUT /Users/niche/projects/modeling-guide/ms/main.tex
 OUTPUT main.log
 INPUT /usr/local/texlive/2022/texmf-dist/tex/latex/base/article.cls
 INPUT /usr/local/texlive/2022/texmf-dist/tex/latex/base/article.cls
