@@ -1,5 +1,4 @@
 # native imports
-from matplotlib.pyplot import plot
 import numpy as np
 import pandas as pd
 import time as t
