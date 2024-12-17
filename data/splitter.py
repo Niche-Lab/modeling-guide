@@ -26,7 +26,7 @@ class Splitter:
         }
     }
     """
-    def __init__(self, X, y, K):
+    def __init__(self, X, y):
         """
         X: np.array, features matrix n x p
         y: np.array, target vector n x 1
@@ -34,18 +34,17 @@ class Splitter:
         """
         self.X = X
         self.y = y
-        self.K = K
         self.n = X.shape[0]
-        self.n_test = int((1 / K) * self.n)
 
-    def sample_splits(self, method):
+    def sample(self, method, K=5):
         """
         method: str or list, 
             'MC': Monte Carlo (random sampling with replacement)
             'KF': K-Fold (random sampling without replacement)
             'LOOCV': Leave-One-Out Cross-Validation
             list: a variable to split on. E.g., ["s1", "s1", "s2", "s2", "s3", "s3"...]
-        
+        K: int, number of splits
+
         return: dict, dictionary of splits
             dict_idx = {
                 0: [idx_test],
@@ -54,6 +53,9 @@ class Splitter:
                 K: [idx_test]
             }
         """
+        self.K = K
+        self.n_test = int((1 / K) * self.n)
+
         if isinstance(method, str):
             if method == 'MC':
                 dict_idx = self.sample_MC_idx()
@@ -61,6 +63,8 @@ class Splitter:
                 dict_idx = self.sample_KF_idx()
             elif method == "LOOCV":
                 dict_idx = self.sample_LOOCV_idx()
+            elif method == "In-Sample":
+                dict_idx = {0: np.arange(self.n)}
         else:
             dict_idx = self.sample_custom_idx(method)
     
@@ -100,17 +104,26 @@ class Splitter:
     def assign_splits(self, dict_idx):
         dict_splits = {}
         set_idx = set(range(self.n))
-
-        for k in range(len(dict_idx)):
-            dict_splits[k] = {}
-
-            idx_test = dict_idx[k]
-            idx_train = list(set_idx - set(idx_test))
-
-            dict_splits[k]['X_train'] = self.X[idx_train]
-            dict_splits[k]['X_test'] = self.X[idx_test]
-            dict_splits[k]['y_train'] = self.y[idx_train]
-            dict_splits[k]['y_test'] = self.y[idx_test]
+        if len(dict_idx) == 1:
+            # if in-sample  
+            dict_splits['idx_train'] = dict_idx[0]
+            dict_splits['idx_test'] = dict_idx[0]
+            dict_splits['X_train'] = self.X
+            dict_splits['X_test'] = self.X
+            dict_splits['y_train'] = self.y
+            dict_splits['y_test'] = self.y
+        else:
+            # if not in-sample
+            for k in range(len(dict_idx)):
+                dict_splits[k] = {}
+                idx_test = dict_idx[k]
+                idx_train = list(set_idx - set(idx_test))
+                dict_splits[k]['idx_train'] = idx_train
+                dict_splits[k]['idx_test'] = idx_test
+                dict_splits[k]['X_train'] = self.X[idx_train]
+                dict_splits[k]['X_test'] = self.X[idx_test]
+                dict_splits[k]['y_train'] = self.y[idx_train]
+                dict_splits[k]['y_test'] = self.y[idx_test]
 
         return dict_splits
 
