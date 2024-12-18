@@ -1,6 +1,7 @@
 from pathlib import Path
 import pandas as pd
 import numpy as np
+from sklearn.preprocessing import StandardScaler
 
 PATH_DATA = Path(__file__).parent / "spectral.csv"
 LS_WV = [
@@ -47,11 +48,17 @@ class SpectralData:
     def __init__(self):
         self.data = pd.read_csv(PATH_DATA)
     
-    def X(self, in_array=True, lidar=False):
+    def load(self, scale=True):
+        return self.X(scale), self.y()
+    
+    def X(self, in_array=True, lidar=False, scale=True):
         ls_wv = [str(w) for w in LS_WV_STR]
         if lidar:
             ls_wv = ls_wv + ["lidar"]
         pd_X = self.data.loc[:, ls_wv]
+        if scale:
+            scaler = StandardScaler()
+            pd_X = pd.DataFrame(scaler.fit_transform(pd_X), columns=ls_wv)
         return pd_X.to_numpy() if in_array else pd_X
 
     def y(self, cat=False):

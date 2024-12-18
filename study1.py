@@ -1,13 +1,24 @@
+"""
+This script generates a simulated dataset and evaluates the performance of
+different estimators. The output file contains columns:
+ - metric: the metric name (e.g., RMSE, MAE, RMSPE)
+ - estimator: the estimator name (e.g., In-Sample, 2-Fold CV)
+ - bias: the bias of the estimator
+ - variance: the variance of the estimator
+ - n: the available sample size
+ - i: the sampling iteration number
+"""
+
 # native imports
 import numpy as np
 import pandas as pd
 from tqdm import tqdm
 from pathlib import Path
+from sklearn.linear_model import LinearRegression
 # local imports
 from data.loader import SimulatedData
 from data.splitter import Splitter
 from evaluate import Evaluator, mae_var, rmspe_var, rmse_var
-from sklearn.linear_model import LinearRegression
 
 # constants
 SEED = 24061
@@ -110,6 +121,9 @@ def eval_trueG(splitter, n=N_UNSEEN_SAMPLE, p=N_FT, niter=N_UNSEEN_ITER):
 
 
 def concat_results(results, n, i):
+    """
+    Concatenate the results of the estimators and calculate bias and variance
+    """
     df_tmp = pd.DataFrame(columns=["metric", "mean", "var", "estimator"])
     for key in results.keys():
         if key != "TrueG":
