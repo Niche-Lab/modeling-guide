@@ -94,6 +94,7 @@ class Splitter:
 
     def sample_custom_idx(self, values):
         # use a custom list (values) to split the data
+        values = np.array(values)
         dict_idx = {}
         unique_levels = np.unique(values)
         for i, v in enumerate(unique_levels):

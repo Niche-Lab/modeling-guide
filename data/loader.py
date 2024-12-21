@@ -3,6 +3,9 @@ import pandas as pd
 import numpy as np
 from sklearn.preprocessing import StandardScaler
 
+# local imports
+from data.spectral import make_T, make_P, apply_effect, make_y
+
 PATH_DATA = Path(__file__).parent / "spectral.csv"
 LS_WV = [
     # https://cdn.sparkfun.com/assets/8/5/f/0/3/AS7265x_Design_Considerations.pdf
@@ -15,6 +18,44 @@ LS_WV_STR = [str(w) for w in LS_WV]
 LS_COV = ["is_kfarm", "pasture", "season"]
 LS_COL = ["id", "ndf", "ndfq50", "is_kfarm", "season", "pasture", "PC1", "PC2"]
 
+class SimulatedSpectralData:
+    
+    def __init__(self):
+        self.n = None
+        self.p = 300
+        # useful matrix
+        self.Tu, self.Pu, self.Xu = None, None, None
+        # detirmental matrix
+        self.Td, self.Pd, self.Xd = None, None, None
+        # feature matrix
+        self.X = None
+        self.y = None
+    
+    def sample(self, n, smallset=False, seed=None):
+        self.n = n
+        # useful matrix
+        Tu = make_T(n, sds=[2e-2, 1e-1], seed=seed)
+        Tu = apply_effect(Tu, effects=[1, 1.08, 1.05], seed=seed)
+        Pu = make_P(self.p, mus=[-30, 200], sds=[100, 60], amps=[.35, .24])
+        Xu = Tu @ Pu
+        # detrimental matrix
+        Td = make_T(n, sds=[1e-1, 2e-2], seed=seed)
+        Td = apply_effect(Td, effects=[1.05, 1, 1], seed=seed)
+        Pd = make_P(self.p, mus=[90, 345], sds=[40, 60], amps=[.06, .35])
+        Xd = Td @ Pd
+        # feature matrix
+        X = Xu + Xd + np.random.normal(0, 2e-5, (n, self.p))
+        # response variable derived from useful matrix (Xu)
+        y = make_y(Xu, seed=seed)
+        # assignment and return
+        self.Tu, self.Pu, self.Xu = Tu, Pu, Xu
+        self.Td, self.Pd, self.Xd = Td, Pd, Xd
+        self.X, self.y = X, y
+        if smallset:
+            idx_select = np.arange(self.p)[::self.p // 10] # select 10 features
+            self.X = self.X[:, idx_select]
+        return self.X, self.y
+            
 class SimulatedData:
     """
     - n: number of samples
