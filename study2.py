@@ -7,39 +7,33 @@ import numpy as np
 import pandas as pd
 from tqdm import tqdm
 from pathlib import Path
-from sklearn.linear_model import LinearRegression
 from sklearn.svm import SVR
-from sklearn.ensemble import RandomForestRegressor
 # local imports
-from data.loader import SimulatedData, SpectralData
+from data.loader import SimulatedData, SpectralData, SimulatedSpectralData
 from data.splitter import Splitter
 from evaluate import Evaluator
 
 # constants
 SEED = 24061
-N_ITER = 1000  # number of iterations
-N_SAMPLE = 100  # sample size
+N_ITER = 500  # number of iterations
+N_SAMPLE = 500  # sample size
 N_FT = 1000  # number of features
 N_FT_SELECT = 10  # number of features to select
 K = 5  # number of folds
-# HP_SPACE = dict({ # hyperparameter space for random forest
-#     "n_estimators": [2, 32, 128], # number of trees
-#     "max_depth": [1, 2, 4], 
-#     # "criterion": ["squared_error", "absolute_error"], # loss function
-# })
 HP_SPACE = dict({ # hyperparameter space for random forest
-    "C": [1e-2, 1e-1, 1e-0], # number of trees
-    "kernel": ["linear", "poly", "rbf", "sigmoid"],
+    "C": [1e-2, 1e-0], # number of trees
+    "kernel": ["linear", "rbf", "sigmoid"],
 })
 MODEL = SVR
 PATH_OUT = Path(__file__).resolve().parent / "out" / "study2.csv"
 
 def main():
-    np.random.seed(SEED)
     for i in tqdm(range(N_ITER), desc="Iteration"):
         # Simultated Data
-        X_sim, y_sim = SimulatedData(n=N_SAMPLE, p=N_FT).sample()
-        run(X_sim,  y_sim, i=i, dataset="simulated")    
+        X_sim, y_sim = SimulatedData(n=N_SAMPLE, p=N_FT).sample(seed=SEED + i)
+        run(X_sim,  y_sim, i=i, dataset="sim_null")    
+        X_sim, y_sim = SimulatedSpectralData().sample(n=N_SAMPLE, seed=SEED + i)
+        run(X_sim,  y_sim, i=i, dataset="sim_spec")
         # Spectral Data
         X_spec, y_spec = SpectralData().load()
         run(X_spec, y_spec, i=i, dataset="spectral")
@@ -48,6 +42,7 @@ def run(X, y, i, dataset):
     # sample the data splits
     splits = Splitter(X, y).sample(method="KF", K=K)
     # compare different strategies
+    # each strategy returns a 3-column dataframe: metric, mean, var
     dict_out = {
         "FS0_HT0": FS0_HT0(splits, X, y),
         "FS0_HT1": FS0_HT1(splits, X, y),

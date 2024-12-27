@@ -17,6 +17,7 @@ from pathlib import Path
 from sklearn.linear_model import LinearRegression
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.svm import SVR
+from sklearn.cross_decomposition import PLSRegression
 # local imports
 from data.loader import SimulatedData, SimulatedSpectralData
 from data.splitter import Splitter
@@ -29,20 +30,20 @@ N_SAMPLE = [50, 250, 500]  # sample size
 N_FT = 10  # number of features
 N_UNSEEN_ITER = 100  # number of times to sample unseen data
 N_UNSEEN_SAMPLE = 100  # sample size of unseen data
-MODEL = RandomForestRegressor
+MODEL = SVR
 PATH_OUT = Path(__file__).resolve().parent / "out" / "study1.csv"
 
 def main():
-    np.random.seed(SEED)
     # iterate over the sample sizes
     for n in tqdm(N_SAMPLE, desc="Sample Size"):
         # generate the data
         for i in tqdm(range(N_ITER), desc="Iteration"):
             for dataset in ["simple", "spectral"]:
                 if dataset == "simple":
-                    X, y = SimulatedData(n=n, p=N_FT).sample()
+                    X, y = SimulatedData(n=n, p=N_FT).sample(seed=SEED + i)
                 elif dataset == "spectral":
-                    X, y = SimulatedSpectralData().sample(n=n, smallset=True)
+                    X, y = SimulatedSpectralData().sample(
+                        n=n, smallset=True, seed=SEED + i)
                 splitter = Splitter(X, y)
                 eval(splitter, n, i, dataset)
             

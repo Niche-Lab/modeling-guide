@@ -39,7 +39,7 @@ def make_P(p, mus, sds, amps):
     for i in range(p): 
         P[:, i] = [amp * gaussian_pdf(i, mu, sd)\
             for mu, sd, amp in zip(mus, sds, amps)]
-    return P / P.std()
+    return P / P.std() # avoid small values in sine and cosine 
     
 def apply_effect(T, effects, seed=None):
     """
@@ -65,41 +65,28 @@ def apply_effect(T, effects, seed=None):
     return T
 
     
-def make_y(X, p_effect=10, noise=0.5, seed=None):
+def make_y(X, noise=1, seed=None):
     if seed:
         np.random.seed(seed)
     # standardize feature matrix
-    Xstd = StandardScaler().fit_transform(X)
+    #Xstd = StandardScaler().fit_transform(X)
     n, p = X.shape
 
-    # define linear and non-linear effects
-    n_linear = p_effect // 3
-    n_nonlinear = (p_effect // 3) * 2
-    idx_effects = np.random.choice(p, p_effect, replace=False)
-    # print("Linear effects: ", idx_effects[:n_linear])
-    # print("Non-linear effects: ", idx_effects[n_linear:])
+    # define non-linear effects
+    poly = 3
+    idx_effects = [50, 100, 180, 230] 
+    n_effects = len(idx_effects)
 
-    # linear effects
-    X_linear = Xstd[:, idx_effects[:n_linear]]
-    beta_linear = np.random.normal(0, 1, (n_linear, 1))
-    y_linear = (X_linear @ beta_linear).reshape(-1)
-    y_linear /= y_linear.std()
-    
-    # non-linear effects (sine and cosine)
-    X_nonlinear0 = Xstd[:, idx_effects[n_linear:n_nonlinear]]
-    X_nonlinear1 = Xstd[:, idx_effects[n_nonlinear:]]
-    y_nonlinear0 = np.sin(X_nonlinear0).mean(axis=1)
-    y_nonlinear1 = np.cos(X_nonlinear1**2).mean(axis=1)
-    y_nonlinear0 /= y_nonlinear0.std()
-    y_nonlinear1 /= y_nonlinear1.std()
-    
-    # combine effects to derive y
-    y = y_linear + y_nonlinear0 + y_nonlinear1
-    
+    deg = [i * np.pi / 4 for i in range(n_effects)]
+    x_nonlinear = X[: , idx_effects]
+    y = np.zeros(n)
+    for i in range(n_effects):
+        y += np.sin(x_nonlinear[:, i] ** poly + deg[i])
+   
     # apply noise
-    y = np.log(y - y.min() + 1)
-    y = StandardScaler().fit_transform(y.reshape(-1, 1)).reshape(-1)
-    y += np.random.normal(0, noise, n)
+    #y = np.log(y - y.min() + 1)
+    ystd = np.std(y)
+    y += np.random.normal(0, noise * ystd, n)
     
     # return
     return y

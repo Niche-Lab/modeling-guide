@@ -1,5 +1,3 @@
-
-
 # native
 import pandas as pd 
 # visualization
@@ -15,6 +13,7 @@ from data.splitter import Splitter
 from evaluate import Evaluator
 import numpy as np
 
+from study1 import eval_kfold, eval_loocv, eval_trueG, eval_insample
 
 evaluator = Evaluator("regression")
 
@@ -22,6 +21,69 @@ spectral_data = SimulatedSpectralData()
 X, y = spectral_data.sample(500, smallset=True)
 n, p = X.shape
 splitter = Splitter(X, y)
+splits = splitter.sample("LOOCV")
+out = eval_loocv(splitter)
+
+
+
+evaluator = Evaluator("regression")
+
+X2, y2 = spectral_data.sample(500, smallset=True)
+model = SVR().fit(X, y)
+y2p = model.predict(X2)
+plt.plot(y2, y2p, 'o')
+
+
+spectral_data = SimulatedSpectralData()
+X, y = spectral_data.sample(500, smallset=True)
+n, p = X.shape
+splitter = Splitter(X, y)
+splits = splitter.sample("LOOCV")
+out = eval_loocv(splitter)
+X2, y2 = spectral_data.sample(500, smallset=True)
+model = SVR().fit(X, y)
+y2p = model.predict(X2)
+plt.plot(y2, y2p, 'o')
+
+
+
+X, y = spectral_data.sample(500, smallset=True)
+splitter = Splitter(X, y)
+splits = splitter.sample("KF", K=5)
+X1_train, y1_train = splits[0]['X_train'], splits[0]['y_train']
+X1_test, y1_test = splits[0]['X_test'], splits[0]['y_test']
+X2, y2 = spectral_data.sample(100, smallset=True)
+
+
+evaluator = Evaluator("regression")
+model = SVR().fit(X1_train, y1_train)
+
+y1p = model.predict(X1_test)
+evaluator.log(y1_test, y1p)
+    
+y2p = model.predict(X2)
+evaluator.log(y2, y2p)
+evaluator.to_dataframe()
+    
+plt.plot(y1_test, y1p, 'o')
+plt.plot(y2, y2p, 'o')
+
+
+
+
+
+
+evaluator = Evaluator("regression")
+# step 1: fit the model with the available data
+X, y = splitter.X, splitter.y
+model = SVR().fit(X, y)
+model.predict()
+
+
+eval_trueG(splitter, "spectral")
+
+eval_trueG(splitter, "spectral", n=500)
+
 
 MODEL = RandomForestRegressor
 

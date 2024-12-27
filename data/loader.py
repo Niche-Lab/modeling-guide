@@ -32,21 +32,23 @@ class SimulatedSpectralData:
         self.y = None
     
     def sample(self, n, smallset=False, seed=None):
+        if seed is None:
+            seed = np.random.randint(1e6)
         self.n = n
         # useful matrix
         Tu = make_T(n, sds=[2e-2, 1e-1], seed=seed)
-        Tu = apply_effect(Tu, effects=[1, 1.08, 1.05], seed=seed)
+        Tu = apply_effect(Tu, effects=[1, 1.10, 1.07], seed=seed + 1)
         Pu = make_P(self.p, mus=[-30, 200], sds=[100, 60], amps=[.35, .24])
         Xu = Tu @ Pu
         # detrimental matrix
         Td = make_T(n, sds=[1e-1, 2e-2], seed=seed)
-        Td = apply_effect(Td, effects=[1.05, 1, 1], seed=seed)
+        Td = apply_effect(Td, effects=[1.07, 1, 1], seed=seed + 1)
         Pd = make_P(self.p, mus=[90, 345], sds=[40, 60], amps=[.06, .35])
         Xd = Td @ Pd
         # feature matrix
-        X = Xu + Xd + np.random.normal(0, 2e-5, (n, self.p))
+        X = Xu + Xd + np.random.normal(0, 1e-2, (n, self.p))
         # response variable derived from useful matrix (Xu)
-        y = make_y(Xu, seed=seed)
+        y = make_y(Xu, seed=seed + 2)
         # assignment and return
         self.Tu, self.Pu, self.Xu = Tu, Pu, Xu
         self.Td, self.Pd, self.Xd = Td, Pd, Xd
@@ -55,6 +57,13 @@ class SimulatedSpectralData:
             idx_select = np.arange(self.p)[::self.p // 10] # select 10 features
             self.X = self.X[:, idx_select]
         return self.X, self.y
+    
+    def cov(self):
+        n_season = self.n // 3
+        season = ["summer"] * n_season\
+                + ["fall"] * n_season\
+                + ["winter"] * n_season
+        return pd.Series(season, name="season")
             
 class SimulatedData:
     """
@@ -66,7 +75,9 @@ class SimulatedData:
         self.p = p
         self.X, self.y = self.sample()
     
-    def sample(self):
+    def sample(self, seed=None):
+        if seed:
+            np.random.seed(seed)
         X = np.random.normal(0, 1, (self.n, self.p))
         y = np.random.normal(0, 1, self.n)
         return X, y
