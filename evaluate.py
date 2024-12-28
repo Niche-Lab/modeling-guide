@@ -15,12 +15,25 @@ class Evaluator:
                 "RMSPE": rmspe,
                 "RSR": rsr
             })
+        elif task == "classification":
+            self.metrics = dict({
+                "accuracy": accuracy,
+                "precision": precision,
+                "recall": recall,
+                "f1": f1,
+                "f2": f2,
+                "f05": f05,
+                "mcc": mcc
+            })
         for m in self.metrics:
             self.logs[m] = []
     
-    def log(self, y, y_hat):
+    def log(self, y, y_hat, conf=None):
         y = np.array(y)
-        y_hat = np.array(y_hat)
+        if conf is not None:
+            y_hat = (np.array(y_hat) > conf).astype(int)
+        else:   
+            y_hat = np.array(y_hat)
         for k, func in self.metrics.items():
             metric = func(y, y_hat)
             self.logs[k].append(metric)
@@ -190,6 +203,13 @@ def f1(y, yhat):
     p = precision(y, yhat)
     r = recall(y, yhat)
     return 2 * (p * r) / (p + r)
+
+def f2(y, yhat):
+    return fbeta(y, yhat, beta=2)
+
+def f05(y, yhat):
+    return fbeta(y, yhat, beta=0.5)
+
 
 def fbeta(y, yhat, beta=2):
     """

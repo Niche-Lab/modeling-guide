@@ -30,7 +30,7 @@ N_SAMPLE = [50, 250, 500]  # sample size
 N_FT = 10  # number of features
 N_UNSEEN_ITER = 100  # number of times to sample unseen data
 N_UNSEEN_SAMPLE = 100  # sample size of unseen data
-MODEL = SVR
+MODEL = LinearRegression
 PATH_OUT = Path(__file__).resolve().parent / "out" / "study1.csv"
 
 def main():
