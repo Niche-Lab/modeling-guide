@@ -6,10 +6,12 @@ class Evaluator:
         self.logs = dict()
         if task == "regression":
             self.metrics = dict({       
+                # linearity metrics
                 "R2": r2,
                 "r": pearsonr,
                 "r2": pearsonr2,
                 "CCC": ccc,
+                # error-based metrics
                 "MAE": mae,
                 "RMSE": rmse,
                 "RMSPE": rmspe,
@@ -18,8 +20,18 @@ class Evaluator:
         elif task == "classification":
             self.metrics = dict({
                 "accuracy": accuracy,
+                # machine learning metrics
                 "precision": precision,
                 "recall": recall,
+                # medical diagnostics metrics
+                "sensitivity": sensitivity,
+                "specificity": specificity,
+                # self-explanatory metrics
+                "TPR": TPR,
+                "FNR": FNR,
+                "FPR": FPR,
+                "TNR": TNR,
+                # composite metrics
                 "f1": f1,
                 "f2": f2,
                 "f05": f05,
@@ -180,6 +192,8 @@ def accuracy(y, yhat):
     """
     return np.mean(y == yhat)
 
+# machine learning metrics
+
 def precision(y, yhat):
     """
     precision
@@ -190,12 +204,54 @@ def precision(y, yhat):
 
 def recall(y, yhat):
     """
-    recall
+    recall = sensitivity = true positive rate
     """
     tp = np.sum((y == 1) & (yhat == 1))
     fn = np.sum((y == 1) & (yhat == 0))
     return tp / (tp + fn)
 
+# medical diagnostics metrics
+def sensitivity(y, yhat):
+    """
+    sensitivity = recall = true positive rate
+    """
+    return recall(y, yhat)
+
+def specificity(y, yhat):
+    """
+    specificity = true negative rate
+    """
+    tn = np.sum((y == 0) & (yhat == 0))
+    fp = np.sum((y == 0) & (yhat == 1))
+    return tn / (tn + fp)
+
+# self-explanatory metrics
+def TPR(y, yhat):
+    """
+    true positive rate
+    """
+    return sensitivity(y, yhat)
+
+def FNR(y, yhat):
+    """
+    false negative rate
+    """
+    return 1 - sensitivity(y, yhat)
+
+def FPR(y, yhat):
+    """
+    false positive rate
+    """
+    return 1 - specificity(y, yhat)
+
+
+def TNR(y, yhat):
+    """
+    true negative rate
+    """
+    return specificity(y, yhat)     
+
+# composite metrics
 def f1(y, yhat):
     """
     f1 score
@@ -209,7 +265,6 @@ def f2(y, yhat):
 
 def f05(y, yhat):
     return fbeta(y, yhat, beta=0.5)
-
 
 def fbeta(y, yhat, beta=2):
     """
