@@ -36,7 +36,7 @@ class Splitter:
         self.y = y
         self.n = X.shape[0]
 
-    def sample(self, method, K=5):
+    def sample(self, method, K=5, seed=None):
         """
         method: str or list, 
             'MC': Monte Carlo (random sampling with replacement)
@@ -53,6 +53,8 @@ class Splitter:
                 K: [idx_test]
             }
         """
+        if seed:
+            np.random.seed(seed)
         self.K = K
         self.n_test = int((1 / K) * self.n)
 

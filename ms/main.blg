@@ -4,45 +4,45 @@ The top-level auxiliary file: main.aux
 The style file: unsrt.bst
 Database file #1: references.bib
 Warning--empty journal in lecun_generalization_1989
-You've used 41 entries,
+You've used 39 entries,
             1791 wiz_defined-function locations,
-            659 strings with 13112 characters,
-and the built_in function-call counts, 11974 in all, are:
-= -- 1018
-> -- 713
+            650 strings with 12711 characters,
+and the built_in function-call counts, 11402 in all, are:
+= -- 966
+> -- 685
 < -- 2
-+ -- 253
-- -- 212
-* -- 1140
-:= -- 1955
-add.period$ -- 126
-call.type$ -- 41
-change.case$ -- 40
++ -- 243
+- -- 204
+* -- 1084
+:= -- 1865
+add.period$ -- 120
+call.type$ -- 39
+change.case$ -- 38
 chr.to.int$ -- 0
-cite$ -- 42
-duplicate$ -- 389
-empty$ -- 1023
-format.name$ -- 212
-if$ -- 2497
+cite$ -- 40
+duplicate$ -- 371
+empty$ -- 971
+format.name$ -- 204
+if$ -- 2377
 int.to.chr$ -- 0
-int.to.str$ -- 41
-missing$ -- 42
-newline$ -- 209
-num.names$ -- 41
-pop$ -- 52
+int.to.str$ -- 39
+missing$ -- 40
+newline$ -- 199
+num.names$ -- 39
+pop$ -- 50
 preamble$ -- 1
 purify$ -- 0
 quote$ -- 0
-skip$ -- 150
+skip$ -- 144
 stack$ -- 0
-substring$ -- 1099
-swap$ -- 58
+substring$ -- 1037
+swap$ -- 56
 text.length$ -- 2
 text.prefix$ -- 0
 top$ -- 0
 type$ -- 0
 warning$ -- 1
-while$ -- 116
-width$ -- 43
-write$ -- 456
+while$ -- 110
+width$ -- 41
+write$ -- 434
 (There was 1 warning)

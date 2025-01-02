@@ -10,7 +10,7 @@ from evaluate import Evaluator
 SEED = 24061
 N_ITER = 500
 N_SAMPLE = 600
-K = 5
+K = 3
 MODEL = RandomForestRegressor
 PATH_OUT = Path(__file__).resolve().parent / "out" / "study3.csv"
 

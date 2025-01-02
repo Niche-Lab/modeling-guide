@@ -197,19 +197,6 @@ Edward~J. Jones, Thomas F.~A. Bishop, Brendan~P. Malone, Patrick~J. Hulme,
 \newblock {\em Computers and Electronics in Agriculture}, 192:106632, January
   2022.
 
-\bibitem{denholm_predicting_2020}
-S.~J. Denholm, W.~Brand, A.~P. Mitchell, A.~T. Wells, T.~Krzyzelewski, S.~L.
-  Smith, E.~Wall, and M.~P. Coffey.
-\newblock Predicting bovine tuberculosis status of dairy cows from mid-infrared
-  spectral data of milk using deep learning.
-\newblock {\em Journal of Dairy Science}, 103(10):9355--9367, October 2020.
-
-\bibitem{kandeel_ability_2019}
-S.A. Kandeel, A.A. Megahed, M.H. Ebeid, and P.D. Constable.
-\newblock Ability of milk {pH} to predict subclinical mastitis and intramammary
-  infection in quarters from lactating dairy cattle.
-\newblock {\em Journal of Dairy Science}, 102(2):1417--1427, February 2019.
-
 \bibitem{oleary_invited_2020}
 N.~W. O'Leary, D.~T. Byrne, A.~H. O'Connor, and L.~Shalloo.
 \newblock Invited review: {Cattle} lameness detection with accelerometers.
@@ -235,17 +222,18 @@ X.~Kang, X.~D. Zhang, and G.~Liu.
   supporting phase.
 \newblock {\em Journal of Dairy Science}, 103(11):10628--10638, November 2020.
 
-\bibitem{jensen_bayesian_2016}
-Dan~B. Jensen, Henk Hogeveen, and Albert De~Vries.
-\newblock Bayesian integration of sensor information and a multivariate dynamic
-  linear model for prediction of dairy cow mastitis.
-\newblock {\em Journal of Dairy Science}, 99(9):7344--7361, September 2016.
+\bibitem{denholm_predicting_2020}
+S.~J. Denholm, W.~Brand, A.~P. Mitchell, A.~T. Wells, T.~Krzyzelewski, S.~L.
+  Smith, E.~Wall, and M.~P. Coffey.
+\newblock Predicting bovine tuberculosis status of dairy cows from mid-infrared
+  spectral data of milk using deep learning.
+\newblock {\em Journal of Dairy Science}, 103(10):9355--9367, October 2020.
 
-\bibitem{delhez_diagnosing_2020}
-P.~Delhez, P.N. Ho, N.~Gengler, H.~Soyeurt, and J.E. Pryce.
-\newblock Diagnosing the pregnancy status of dairy cows: {How} useful is milk
-  mid-infrared spectroscopy?
-\newblock {\em Journal of Dairy Science}, 103(4):3264--3274, April 2020.
+\bibitem{kandeel_ability_2019}
+S.A. Kandeel, A.A. Megahed, M.H. Ebeid, and P.D. Constable.
+\newblock Ability of milk {pH} to predict subclinical mastitis and intramammary
+  infection in quarters from lactating dairy cattle.
+\newblock {\em Journal of Dairy Science}, 102(2):1417--1427, February 2019.
 
 \bibitem{chicco_advantages_2020}
 Davide Chicco and Giuseppe Jurman.
