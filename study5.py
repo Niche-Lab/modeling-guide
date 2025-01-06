@@ -10,11 +10,11 @@ N_ITER = 500
 BALANCED = [0.1, 0.3, 0.5, 0.7, 0.9] # portion of positive cases
 CONF = [0.1, 0.3, 0.5, 0.7, 0.9] # confidence level
 SEED = 24061
-PATH_OUT = Path(__file__).resolve().parent / "out" / "study5.csv"
+PATH_OUT = Path(__file__).resolve().parent / "out" / "study5_n.csv"
 BETA_POS_A = 5
 BETA_POS_B = 2
-BETA_NEG_A = 2
-BETA_NEG_B = 5
+BETA_NEG_A = 4
+BETA_NEG_B = 3
 
 def main():
     dict_eval = init_evaluators()

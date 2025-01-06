@@ -1,0 +1,39 @@
+\subsection{Experiment 1: Evaluation bias and variance of cross-validation}
+
+This experiment examined the reliability of CV in estimating model performance, with a focus on different performance estimators and their interaction with sample size. It is hypothesized that increasing the number of folds in CV will generally provide a more accurate estimate of model performance but will also lead to increased variance in each estimate, as suggested by the bias-variance trade-off theory. Additionally, sample size is considered a critical factor in reducing the bias difference between estimators, with larger sample sizes expected to mitigate the impact of estimator bias and improve the reliability of performance evaluation.
+
+Since K-fold CV employs a fraction (i.e., $K-1$ folds) of the data for training, it may provide a pessimistic estimate of model performance. 
+Such underestimation is explored in this experiment by comparing the performance metrics of K-fold CV with K set to 2, 5, and 10, as well as LOOCV where K equals the sample size N, and the "In-Sample" evaluation, which assesses model performance on the same dataset used for training, potentially leading to an overly optimistic bias. To gauge model performance, four metrics are employed: RMSE (Eq. ~\ref{eq_rmse}), MAE (Eq. ~\ref{eq_mae}), r (Eq. ~\ref{eq_r}), and $R^2$ (Eq. ~\ref{eq_R2}). The evaluation model is a linear regression with ten input features and one output target, all drawn from the null dataset. The sample sizes N are varied among 50, 250, and 500 to explore the dynamics between sample size and performance estimators. Each configuration is repeated across 500 iterations to assess the distribution of evaluation bias and variance.
+
+For each iteration, the dataset $\mathcal{D}={(X, y)}$ was sampled as per the simulation’s premise. In the case of K-fold CV, the dataset $\mathcal{D}$ was partitioned into K folds in which each fold is $\mathcal{D}_k={(X_k, y_k)}$. For the “In-Sample” approach, partitioning does not occur. The linear model $f$ is trained on the training set $\mathcal{D}_\text{-k}$ (denoted as $f_{\mathcal{D}_{\text{-k}}}$) to estimate regression coefficients $\beta$, which then predicts the target variable ${\hat{y}}_k$ from the test set $\mathcal{D}_k$. The procedure of K-fold CV can be expressed as:
+
+\begin{equation} \label{eq_kfoldcv}
+    \begin{split}
+	\text{Training: } \quad y_{\text{-k}} &= f_{\mathcal{D}_{\text{-k}}}(X_{\text{-k}})+\epsilon \\
+    &= X_{\text{-k}} \beta + \epsilon \\
+    \text{Testing: } \quad \hat{y}_k &= f_{\mathcal{D}_{\text{-k}}}(X_k) \\
+    &=X_k \beta \quad \quad \quad k=1,2,\ldots,K
+    \end{split}
+\end{equation}
+
+For the “In-Sample” performance estimator, predictions were made without splitting, as:
+
+\begin{equation} \label{eq_insample}
+    \begin{split}
+    	\text{Training: } \quad y &= f_\mathcal{D}(X) \\ &= X\beta + \epsilon \\
+        \text{Testing: } \quad \hat{y} &= f_\mathcal{D}(X) \\ &=X \beta
+    \end{split}
+\end{equation}
+
+Where:
+\begin{itemize}
+  \item \( X \) denotes the input regressors sampled from a standard normal distribution \( \mathcal{N}(0, 1) \) with dimensions \( N \times 10 \).
+  \item \( y \) denotes the target variable sampled from a standard normal distribution \( \mathcal{N}(0, 1) \) with dimensions \( N \times 1 \).
+  \item \( X_\text{-k} \) and \( y_\text{-k} \) are the input regressors and target variable in the training set \( \mathcal{D}_\text{-k} \).
+  \item \( X_k \) denotes the input regressors in the test set \( \mathcal{D}_k \).
+  \item \( \hat{y}_k \) denotes the predicted target variable in the test set \( \mathcal{D}_k \).
+  \item \( \beta \) denotes the estimated regression coefficient with dimensions \( 10 \times 1 \).
+  \item \( \epsilon \) denotes the error term assumed to be normally distributed.
+\end{itemize}
+
+Estimated performance $\mathbb{E}[\hat{g}(f_\mathcal{D})]$ was derived by averaging the performance metrics across all K folds as per Eq. ~\ref{eq_g_exp}. The bias and variance of the evaluation were calculated using Eqs. ~\ref{eq_bias} and ~\ref{eq_var}, respectively. To approximate true model performance $G(f_\mathcal{D})$, a hundred unseen datasets $\mathcal{D}^\ast$ were generated identically to $\mathcal{D}$, and the performance $G(f_\mathcal{D})$ was estimated by averaging the performance metrics across all $\mathcal{D}^\ast$. The detailed steps to compute evaluation bias and variance are provided in the supplementary materials.

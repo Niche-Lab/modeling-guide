@@ -21,7 +21,7 @@ N_FT = 1000  # number of features
 N_FT_SELECT = 10  # number of features to select
 K = 5  # number of folds
 HP_SPACE = dict({ # hyperparameter space for random forest
-    "C": [1e-2, 1e-0], # number of trees
+    "C": [1e-2, 1e-0], # regularization parameter 
     "kernel": ["linear", "rbf", "sigmoid"],
 })
 MODEL = SVR

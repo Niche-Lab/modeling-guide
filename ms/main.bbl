@@ -248,18 +248,129 @@ J.~M. Bowen, M.~J. Haskell, G.~A. Miller, C.~S. Mason, D.~J. Bell, and C-A.
   using feeding and activity behaviors.
 \newblock {\em Journal of Dairy Science}, 104(11):12009--12018, November 2021.
 
-\bibitem{ouellet_evaluation_2016}
-V.~Ouellet, E.~Vasseur, W.~Heuwieser, O.~Burfeind, X.~Maldague, and É.
-  Charbonneau.
-\newblock Evaluation of calving indicators measured by automated monitoring
-  devices to predict the onset of calving in {Holstein} dairy cows.
-\newblock {\em Journal of Dairy Science}, 99(2):1539--1548, February 2016.
+\bibitem{metz_note_2020}
+Maxime Metz, Alessandra Biancolillo, Matthieu Lesnoff, and Jean-Michel Roger.
+\newblock A note on spectral data simulation.
+\newblock {\em Chemometrics and Intelligent Laboratory Systems}, 200:103979,
+  May 2020.
 
-\bibitem{borchers_machine-learning-based_2017}
-M.R. Borchers, Y.M. Chang, K.L. Proudfoot, B.A. Wadsworth, A.E. Stone, and J.M.
-  Bewley.
-\newblock Machine-learning-based calving prediction from activity, lying, and
-  ruminating behaviors in dairy cattle.
-\newblock {\em Journal of Dairy Science}, 100(7):5664--5674, July 2017.
+\bibitem{chen_independent_2023}
+Chun-Peng~James Chen, Yang Hu, Xianran Li, Craig~F. Morris, Stephen Delwiche,
+  Arron~H. Carter, Camille Steber, and Zhiwu Zhang.
+\newblock An independent validation reveals the potential to predict
+  {Hagberg}–{Perten} falling number using spectrometers.
+\newblock {\em The Plant Phenome Journal}, 6(1):e20070, 2023.
+\newblock \_eprint: https://onlinelibrary.wiley.com/doi/pdf/10.1002/ppj2.20070.
+
+\bibitem{haque_recognition_2023}
+Md.~Ashraful Haque, Sudeep Marwaha, Chandan~Kumar Deb, Sapna Nigam, and Alka
+  Arora.
+\newblock Recognition of diseases of maize crop using deep learning models.
+\newblock {\em Neural Computing and Applications}, 35(10):7407--7421, April
+  2023.
+
+\bibitem{sibiya_computational_2019}
+Malusi Sibiya and Mbuyu Sumbwanyambe.
+\newblock A {Computational} {Procedure} for the {Recognition} and
+  {Classification} of {Maize} {Leaf} {Diseases} {Out} of {Healthy} {Leaves}
+  {Using} {Convolutional} {Neural} {Networks}.
+\newblock {\em AgriEngineering}, 1(1):119--131, March 2019.
+\newblock Number: 1 Publisher: Multidisciplinary Digital Publishing Institute.
+
+\bibitem{zoph_neural_2017}
+Barret Zoph and Quoc~V. Le.
+\newblock Neural {Architecture} {Search} with {Reinforcement} {Learning},
+  February 2017.
+\newblock arXiv:1611.01578 [cs].
+
+\bibitem{soares_successive_2013}
+Sófacles Figueredo~Carreiro Soares, Adriano~A. Gomes, Mario Cesar~Ugulino
+  Araujo, Arlindo Rodrigues~Galvão Filho, and Roberto Kawakami~Harrop Galvão.
+\newblock The successive projections algorithm.
+\newblock {\em TrAC Trends in Analytical Chemistry}, 42:84--98, January 2013.
+
+\bibitem{zhang_automated_2019}
+Yanchao Zhang, Junfeng Gao, Haiyan Cen, Yongliang Lu, Xiaoyue Yu, Yong He, and
+  Jan~G. Pieters.
+\newblock Automated spectral feature extraction from hyperspectral images to
+  differentiate weedy rice and barnyard grass from a rice crop.
+\newblock {\em Computers and Electronics in Agriculture}, 159:42--49, April
+  2019.
+
+\bibitem{shahinfar_prediction_2019}
+Saleh Shahinfar, Khama Kelman, and Lewis Kahn.
+\newblock Prediction of sheep carcass traits from early-life records using
+  machine learning.
+\newblock {\em Computers and Electronics in Agriculture}, 156:159--177, January
+  2019.
+
+\bibitem{st-pierre_invited_2001}
+N.~R. St-Pierre.
+\newblock \textit{{Invited} {Review}:} {Integrating} {Quantitative} {Findings}
+  from {Multiple} {Studies} {Using} {Mixed} {Model} {Methodology1}.
+\newblock {\em Journal of Dairy Science}, 84(4):741--755, April 2001.
+
+\bibitem{de_oliveira_genomic_2020}
+Amanda~Avelar de~Oliveira, Marcio F.~R. Resende, Luís Felipe~Ventorim Ferrão,
+  Rodrigo~Rampazo Amadeu, Lauro José~Moreira Guimarães, Claudia~Teixeira
+  Guimarães, Maria~Marta Pastina, and Gabriel Rodrigues~Alves Margarido.
+\newblock Genomic prediction applied to multiple traits and environments in
+  second season maize hybrids.
+\newblock {\em Heredity}, 125(1):60--72, August 2020.
+\newblock Publisher: Nature Publishing Group.
+
+\bibitem{lopez-cruz_leveraging_2023}
+Marco Lopez-Cruz, Fernando~M. Aguate, Jacob~D. Washburn, Natalia de~Leon,
+  Shawn~M. Kaeppler, Dayane~Cristina Lima, Ruijuan Tan, Addie Thompson,
+  Laurence~Willard De~La~Bretonne, and Gustavo de~los Campos.
+\newblock Leveraging data from the {Genomes}-to-{Fields} {Initiative} to
+  investigate genotype-by-environment interactions in maize in {North}
+  {America}.
+\newblock {\em Nature Communications}, 14(1):6904, October 2023.
+\newblock Publisher: Nature Publishing Group.
+
+\bibitem{buczinski_validation_2018}
+S.~Buczinski, G.~Fecteau, J.~Dubuc, and D.~Francoz.
+\newblock Validation of a clinical scoring system for bovine respiratory
+  disease complex diagnosis in preweaned dairy calves using a {Bayesian}
+  framework.
+\newblock {\em Preventive Veterinary Medicine}, 156:102--112, August 2018.
+
+\bibitem{lu_-field_2017}
+Jiang Lu, Jie Hu, Guannan Zhao, Fenghua Mei, and Changshui Zhang.
+\newblock An in-field automatic wheat disease diagnosis system.
+\newblock {\em Computers and Electronics in Agriculture}, 142:369--379,
+  November 2017.
+
+\bibitem{su_advanced_2020}
+Wen-Hao Su.
+\newblock Advanced {Machine} {Learning} in {Point} {Spectroscopy}, {RGB}- and
+  {Hyperspectral}-{Imaging} for {Automatic} {Discriminations} of {Crops} and
+  {Weeds}: {A} {Review}.
+\newblock {\em Smart Cities}, 3(3):767--792, September 2020.
+\newblock Number: 3 Publisher: Multidisciplinary Digital Publishing Institute.
+
+\bibitem{gao_retrieval-augmented_2024}
+Yunfan Gao, Yun Xiong, Xinyu Gao, Kangxiang Jia, Jinliu Pan, Yuxi Bi, Yi~Dai,
+  Jiawei Sun, Meng Wang, and Haofen Wang.
+\newblock Retrieval-{Augmented} {Generation} for {Large} {Language} {Models}:
+  {A} {Survey}, March 2024.
+\newblock arXiv:2312.10997.
+
+\bibitem{salemi_evaluating_2024}
+Alireza Salemi and Hamed Zamani.
+\newblock Evaluating {Retrieval} {Quality} in {Retrieval}-{Augmented}
+  {Generation}, April 2024.
+\newblock arXiv:2404.13781.
+
+\bibitem{minni_exploring_2024}
+N.~Minni, N.~Rehna, and P.~M. Harikrishnaa.
+\newblock Exploring {Machine} {Learning} {Algorithms} for {Accurate} {Breast}
+  {Cancer} {Classification}: {A} {Comparative} {Analysis} {Using} {F2}
+  {Metric}.
+\newblock In B.~Rama Devi, Kishore Kumar, M.~Raju, K.~Srujan Raju, and Mathini
+  Sellathurai, editors, {\em Proceedings of {Fifth} {International}
+  {Conference} on {Computer} and {Communication} {Technologies}}, pages
+  153--162, Singapore, 2024. Springer Nature.
 
 \end{thebibliography}

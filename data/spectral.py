@@ -1,5 +1,4 @@
 import numpy as np
-from sklearn.preprocessing import StandardScaler
 
 def make_T(n, sds, seed=None):
     """
@@ -15,12 +14,7 @@ def make_T(n, sds, seed=None):
     if seed:
         np.random.seed(seed)
     m = len(sds) # number of latent components
-    T = np.ones((n, m))
-
-    # add random noise to each component for all samples
-    for i in range(m):
-        T[:, i] += np.random.normal(0, sds[i], n)
-
+    T = np.random.normal(1, sds, (n, m))
     return T
 
 def make_P(p, mus, sds, amps):
