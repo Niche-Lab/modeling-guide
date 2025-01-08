@@ -64,14 +64,13 @@ Yann LeCun.
 \newblock Generalization and {Network} {Design} strategies.
 \newblock 1989.
 
-\bibitem{ghaffari_metabolomics_2019}
-Morteza~H. Ghaffari, Amirhossein Jahanbekam, Hassan Sadri, Katharina Schuh,
-  Georg Dusel, Cornelia Prehn, Jerzy Adamski, Christian Koch, and Helga
-  Sauerwein.
-\newblock Metabolomics meets machine learning: {Longitudinal} metabolite
-  profiling in serum of normal versus overconditioned cows and pathway
-  analysis.
-\newblock {\em Journal of Dairy Science}, 102(12):11561--11585, December 2019.
+\bibitem{zhang_automated_2019}
+Yanchao Zhang, Junfeng Gao, Haiyan Cen, Yongliang Lu, Xiaoyue Yu, Yong He, and
+  Jan~G. Pieters.
+\newblock Automated spectral feature extraction from hyperspectral images to
+  differentiate weedy rice and barnyard grass from a rice crop.
+\newblock {\em Computers and Electronics in Agriculture}, 159:42--49, April
+  2019.
 
 \bibitem{rovere_prediction_2021}
 G.~Rovere, G.~de~los Campos, A.~L. Lock, L.~Worden, A.~I. Vazquez, K.~Lee, and
@@ -288,14 +287,6 @@ Sófacles Figueredo~Carreiro Soares, Adriano~A. Gomes, Mario Cesar~Ugulino
   Araujo, Arlindo Rodrigues~Galvão Filho, and Roberto Kawakami~Harrop Galvão.
 \newblock The successive projections algorithm.
 \newblock {\em TrAC Trends in Analytical Chemistry}, 42:84--98, January 2013.
-
-\bibitem{zhang_automated_2019}
-Yanchao Zhang, Junfeng Gao, Haiyan Cen, Yongliang Lu, Xiaoyue Yu, Yong He, and
-  Jan~G. Pieters.
-\newblock Automated spectral feature extraction from hyperspectral images to
-  differentiate weedy rice and barnyard grass from a rice crop.
-\newblock {\em Computers and Electronics in Agriculture}, 159:42--49, April
-  2019.
 
 \bibitem{shahinfar_prediction_2019}
 Saleh Shahinfar, Khama Kelman, and Lewis Kahn.

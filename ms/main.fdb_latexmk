@@ -1,12 +1,12 @@
 # Fdb version 3
-["bibtex main"] 1736121844 "main.aux" "main.bbl" "main" 1736122414
+["bibtex main"] 1736122956 "main.aux" "main.bbl" "main" 1736368904
   "/usr/local/texlive/2022/texmf-dist/bibtex/bst/base/unsrt.bst" 1292289607 18030 1376b4b231b50c66211e47e42eda2875 ""
-  "main.aux" 1736122414 25838 4df7d340afe23fccd18c3d72f1f5ccce "pdflatex"
+  "main.aux" 1736368904 25779 9e043ca10c95873eb5bc0baa6d2c5609 "pdflatex"
   "references.bib" 1736116986 185176 5655fd1c5e40e8ddb181598064f76704 ""
   (generated)
   "main.bbl"
   "main.blg"
-["pdflatex"] 1736122413 "/Users/niche/projects/modeling-guide/ms/main.tex" "main.pdf" "main" 1736122414
+["pdflatex"] 1736368902 "/Users/niche/projects/modeling-guide/ms/main.tex" "main.pdf" "main" 1736368904
   "/Users/niche/projects/modeling-guide/ms/main.tex" 1736121682 2552 3a14795bbfcae0ca59b341cf270ba655 ""
   "/usr/local/texlive/2022/texmf-dist/fonts/enc/dvips/base/8r.enc" 1165713224 4850 80dc9bab7f31fb78a000ccfed0e27cab ""
   "/usr/local/texlive/2022/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc" 1136849721 2971 def0b6c1f0b107b3b936def894055589 ""
@@ -152,8 +152,8 @@
   "/usr/local/texlive/2022/texmf-var/fonts/map/pdftex/updmap/pdftex.map" 1647878959 4410336 7d30a02e9fa9a16d7d1f8d037ba69641 ""
   "/usr/local/texlive/2022/texmf-var/web2c/pdftex/pdflatex.fmt" 1653548333 2826449 efc62155213334d950078f5c3674eab5 ""
   "/usr/local/texlive/2022/texmf.cnf" 1647878952 577 209b46be99c9075fd74d4c0369380e8c ""
-  "_0_abstract.tex" 1736121733 2036 24d220f823c2471760fbaf3698ad9541 ""
-  "_1a_modeling.tex" 1736107506 16216 cc183c4cddd380a4c59169332076b622 ""
+  "_0_abstract.tex" 1736368902 2036 24d220f823c2471760fbaf3698ad9541 ""
+  "_1a_modeling.tex" 1736122966 16238 670a3e1a47636254bfd0a57fcde2415d ""
   "_1b_metrics.tex" 1736087587 21098 1daec2aca952228f23db58f09b628335 ""
   "_1c_objectives.tex" 1736058546 1410 97ca1f90ff6457d4b658aa874d3a182c ""
   "_2a_dataset.tex" 1736012503 11612 f058e6be528a0a7a7de4dc9412ae66d1 ""
@@ -163,11 +163,11 @@
   "_2e_study4.tex" 1736088043 3008 c11c682f24a2b653807c5dcb1da538d0 ""
   "_2f_study5.tex" 1736058586 3922 2ffa15e278c262d0c6a80e6b76f1cbb9 ""
   "_3a_study1.tex" 1736110211 10929 c35abbf90416b83d2bb2bcb3c7c87675 ""
-  "_3b_study2.tex" 1736111444 4980 c1b032bbe7d2d059edf70e4b8e7f4d8d ""
-  "_3c_study3.tex" 1736122413 4413 a3365e82a78bac4482d00b95df755532 ""
+  "_3b_study2.tex" 1736131959 4980 c1b032bbe7d2d059edf70e4b8e7f4d8d ""
+  "_3c_study3.tex" 1736122423 4413 a3365e82a78bac4482d00b95df755532 ""
   "_3d_study4.tex" 1736113691 4255 b9f1bab9b807054822560a4187cb3036 ""
   "_3e_study5.tex" 1736122366 8970 b6d1f8d1cb2f6911b3a62400d9fe506d ""
-  "_4_conclusion.tex" 1736122315 2089 6088c48ab75cd51e66fdfb18230af73a ""
+  "_4_conclusion.tex" 1736122674 2476 8556e8e7766299fe77607958d800e954 ""
   "_9_sup.tex" 1736064083 14619 0e5939a16f740fb506a08478d743a26c ""
   "arxiv.sty" 1713239088 7641 73d629a9ecdf79da8148f7f0df8c6662 ""
   "fig_1.jpg" 1736011960 1142341 9b6dabc97cac346a29ba10f9ed9ad688 ""
@@ -183,9 +183,9 @@
   "fig_9.jpg" 1736012140 1304351 2c27b9696749f6e37d085cf04f406320 ""
   "fig_s2_schemes.jpg" 1715114274 1639407 097d3cd55892f9f2d68cb4440cbe8e49 ""
   "fig_s3_block.jpg" 1736060534 802054 7803d409ac3c985ab779e2ec616940f6 ""
-  "main.aux" 1736122414 25838 4df7d340afe23fccd18c3d72f1f5ccce "pdflatex"
-  "main.bbl" 1736121844 16791 c7ff194062a24ea5604687e27fd4941e "bibtex main"
-  "main.out" 1736122414 7501 825eb1181762d793506f07481c8b4974 "pdflatex"
+  "main.aux" 1736368904 25779 9e043ca10c95873eb5bc0baa6d2c5609 "pdflatex"
+  "main.bbl" 1736122956 16357 5095ad4b3f052730626e16fc7851245a "bibtex main"
+  "main.out" 1736368904 7501 825eb1181762d793506f07481c8b4974 "pdflatex"
   "main.tex" 1736121682 2552 3a14795bbfcae0ca59b341cf270ba655 ""
   "orcid.pdf" 1713238604 12397 91d5d508c0f091a7cee0cca88f1680c0 ""
   (generated)
