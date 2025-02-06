@@ -1,0 +1,48 @@
+This is BibTeX, Version 0.99d (TeX Live 2022)
+Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
+The top-level auxiliary file: main.aux
+The style file: unsrt.bst
+Database file #1: references.bib
+Warning--empty journal in lecun_generalization_1989
+You've used 53 entries,
+            1791 wiz_defined-function locations,
+            736 strings with 16376 characters,
+and the built_in function-call counts, 14929 in all, are:
+= -- 1261
+> -- 905
+< -- 3
++ -- 321
+- -- 268
+* -- 1371
+:= -- 2450
+add.period$ -- 168
+call.type$ -- 53
+change.case$ -- 52
+chr.to.int$ -- 0
+cite$ -- 54
+duplicate$ -- 497
+empty$ -- 1279
+format.name$ -- 268
+if$ -- 3128
+int.to.chr$ -- 0
+int.to.str$ -- 53
+missing$ -- 51
+newline$ -- 274
+num.names$ -- 55
+pop$ -- 81
+preamble$ -- 1
+purify$ -- 0
+quote$ -- 0
+skip$ -- 200
+stack$ -- 0
+substring$ -- 1256
+swap$ -- 79
+text.length$ -- 3
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 0
+warning$ -- 1
+while$ -- 145
+width$ -- 55
+write$ -- 597
+(There was 1 warning)

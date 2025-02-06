@@ -1,0 +1,35 @@
+# Block Cross Validation
+
+## Background
+
+Blocking is an essential approach in experimental design to control for variations that can confound the variable of interest. For instance, Lahart et al. (2019) investigated the dry matter intake of grazing cows using mid-infrared (MIR) spectroscopy technology across multiple herds under varying experimental conditions. Given the significant variation between herds, which may contribute to individual differences in both dry matter intake and MIR spectra, it is crucial to consider the herd as a blocking factor before evaluating the predictability of dry matter intake using MIR spectra. This consideration should also extend to model validation. In the cited study, variations in dry matter intake, the primary focus of the prediction model, were observed to exceed one standard deviation among some herds. In cross-validation, if samples from the same herd are assigned to different folds, with one fold used as the test set, the model is likely to achieve high accuracy. This accuracy may largely result from explaining the inter-herd variation rather than individual variations in dry matter intake, leading to an overestimation of model performance. To avoid this pitfall, block cross-validation, where each block (i.e., herd in this example) is used as a fold, is recommended for unbiased model validation.
+
+Literature reviews have indicated that block cross-validation effectively evaluates model performance on external or unseen datasets (Bresolin 2020). In the same study by Lahart (2019), three cross-validation strategies were compared: random cross-validation, which randomly assigns samples to folds; within-herd validation, training and testing the model within each herd; and across-herd validation, where each herd is used as a fold and tested in turn. The results showed that performance estimates in block CV were noticeably lower than the other two strategies, supporting the hypothesis that ignoring block effects inflates model performance. Other studies considering block effects, including diet (Grelet et al. 2020), herd (Rovere 2021), and farm location (Adriaens 2020, Mota 2022), have shown similar results in cross-validation, demonstrating block CV's effectiveness in evaluating model performance on external datasets.
+
+## Objectives and Hypothesis
+
+The objective of this simulation study is to demonstrate how regular cross-validation (random CV), which randomly assigns samples to folds without considering block effects, could overestimate model performance. This study also includes a block cross-validation (block CV), where each block serves as a fold, as a benchmark. The hypothesis is that the model performance estimated by random CV will be significantly higher than the estimation by block CV.
+
+
+## Simulation Design
+
+This study simulate a regression task with 100 instances across ten feaetures, denoted as $X$, and one single response vairalbe, $Y$. Both $X$ and $Y$ are derived from a standard normal distribution. To introduce a block factor, the study groups every 20 observations into a block, with each block incrementally increasing by $b$ units from zero, where $b$ was simulated from 0.5 to 3.0 with an increment of 0.5. Within these ten features, one is substituted as the block level, represented by an integer from 0 to 4, augmented with random noise drawn from a standard normal distribution. This setup aims to simulate a scenario where the predictors primarily capture block variation, given the null expectation in predictability when using ten random variables $X$ to forecast another random variable $Y$.
+
+The study investigates two model validation strategies: block Cross-Validation (CV) and random CV, both utilizing a 5-fold cross-validation method. In block CV, each block serves as a separate fold, while in random CV, samples are randomly allocated to each fold (Figure x1). The predictive model is linear regression, and the performance is evaluated using Pearson's correlation coefficient. This simulation runs for 1000 iterations, with $X$ and $Y$ being resampled in each cycle. A one-tailed t-test is employed to assess if the mean estimated performance significantly exceeds zero. Additionally, an Analysis of Variance (ANOVA) table is calculated when $b$ is 0.5
+to ascertain if the simulated block variation notably exceeds the assumed individual variation, which represents the primary interest.
+
+## Result
+
+Table x. ANOVA results for a single iteration of the simulated data with $b$ = 0.5. SS: sum of squares; DF: degree of freedom; MS: mean square; F: F-statistic; p: p-value.
+
+Figure x1. Illustration of fold assignment in block cross validation (left) and random cross validation (right). Folds are color-coded, and the block effect is set to 3 in this example.
+
+Figure x2. Bias in model performance estimation by block CV and random CV across 1000 iterations. The dashed line represents the null hypothesis that the mean performance estimate is zero.
+
+An ANOVA table (Table x), computed from a single iteration for illustrative purposes, demonstrates that the simulated data exhibits block variation significantly greater than the residual variance. The result (Figure x2) shows that regardless of the amplitude of block effects in this simulation study, the Block CV strategy consistently yields a mean performance estimate close to zero, while the Random CV strategy consistently and significantly overestimates the model performance (p-value < 0.001). This finding supports the hypothesis that Random CV tends to overestimate model performance when block variation predominates over residual variation.
+
+## Section Conclusion
+
+In conclusion, block CV proves to be a vital tool in assessing the generalizability and accuracy of a predictive model, especially in contexts where block effects, such as herd variations, play a significant role in both the predicting featrures and response variable. The random CV strategy, which randomly assigns samples to folds without considering block effects, tends to overestimate model performance. This study recommends that block CV be used as a benchmark in model validation, especially when block effects are present.
+
+These outcomes robustly support the hypothesis that Random CV is inclined to inflate model performance assessments when block variation is a predominant factor over individual variations. This overestimation can be misleading, particularly in studies where block effects, such as herd variations, are significant and cannot be ignored. The findings underscore the necessity of adopting Block CV in scenarios where block effects are expected to influence the outcome. This approach not only ensures a more accurate and realistic evaluation of model performance but also highlights the potential pitfalls of conventional cross-validation methods in specific research contexts. By acknowledging and adjusting for block effects, Block CV provides a more reliable framework for predictive modeling, especially in fields where such effects are integral to the study design.

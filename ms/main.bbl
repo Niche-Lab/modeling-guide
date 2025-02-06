@@ -1,0 +1,367 @@
+\begin{thebibliography}{10}
+
+\bibitem{cheng_efficient_2017}
+Hao Cheng, Dorian~J. Garrick, and Rohan~L. Fernando.
+\newblock Efficient strategies for leave-one-out cross validation for genomic
+  best linear unbiased prediction.
+\newblock {\em Journal of Animal Science and Biotechnology}, 8(1):38, May 2017.
+
+\bibitem{van_dixhoorn_indicators_2018}
+I.~D.~E. van Dixhoorn, R.~M. de~Mol, J.~T.~N. van~der Werf, S.~van Mourik, and
+  C.~G. van Reenen.
+\newblock Indicators of resilience during the transition period in dairy cows:
+  {A} case study.
+\newblock {\em Journal of Dairy Science}, 101(11):10271--10282, November 2018.
+
+\bibitem{hastie_elements_2009}
+T.~Hastie, R.~Tibshirani, and J.H. Friedman.
+\newblock {\em The {Elements} of {Statistical} {Learning}: {Data} {Mining},
+  {Inference}, and {Prediction}}.
+\newblock Springer series in statistics. Springer, 2009.
+
+\bibitem{cawley_over-fitting_2010}
+Gavin~C. Cawley and Nicola~L.C. Talbot.
+\newblock On {Over}-fitting in {Model} {Selection} and {Subsequent} {Selection}
+  {Bias} in {Performance} {Evaluation}.
+\newblock {\em The Journal of Machine Learning Research}, 11:2079--2107, August
+  2010.
+
+\bibitem{hoerl_ridge_1970}
+Arthur~E. Hoerl and Robert~W. Kennard.
+\newblock Ridge {Regression}: {Biased} {Estimation} for {Nonorthogonal}
+  {Problems}.
+\newblock {\em Technometrics}, 12(1):55--67, 1970.
+\newblock Publisher: [Taylor \& Francis, Ltd., American Statistical
+  Association, American Society for Quality].
+
+\bibitem{tibshirani_regression_1996}
+Robert Tibshirani.
+\newblock Regression {Shrinkage} and {Selection} {Via} the {Lasso}.
+\newblock {\em Journal of the Royal Statistical Society: Series B
+  (Methodological)}, 58(1):267--288, January 1996.
+
+\bibitem{drucker_support_1996}
+Harris Drucker, Chris J.~C. Burges, Linda Kaufman, Alex Smola, and Vladimir
+  Vapnik.
+\newblock Support vector regression machines.
+\newblock In {\em Proceedings of the 9th {International} {Conference} on
+  {Neural} {Information} {Processing} {Systems}}, {NIPS}'96, pages 155--161,
+  Cambridge, MA, USA, December 1996. MIT Press.
+
+\bibitem{abdi_partial_2003}
+Hervé Abdi.
+\newblock Partial {Least} {Square} {Regression} {PLS}-{Regression}.
+\newblock {\em Encyclopedia of social sciences research methods}, pages
+  792--795, 2003.
+
+\bibitem{breiman_random_2001}
+Leo Breiman.
+\newblock Random {Forests}.
+\newblock {\em Machine Learning}, 45(1):5--32, October 2001.
+
+\bibitem{lecun_generalization_1989}
+Yann LeCun.
+\newblock Generalization and {Network} {Design} strategies.
+\newblock 1989.
+
+\bibitem{zhang_automated_2019}
+Yanchao Zhang, Junfeng Gao, Haiyan Cen, Yongliang Lu, Xiaoyue Yu, Yong He, and
+  Jan~G. Pieters.
+\newblock Automated spectral feature extraction from hyperspectral images to
+  differentiate weedy rice and barnyard grass from a rice crop.
+\newblock {\em Computers and Electronics in Agriculture}, 159:42--49, April
+  2019.
+
+\bibitem{rovere_prediction_2021}
+G.~Rovere, G.~de~los Campos, A.~L. Lock, L.~Worden, A.~I. Vazquez, K.~Lee, and
+  R.~J. Tempelman.
+\newblock Prediction of fatty acid composition using milk spectral data and its
+  associations with various mid-infrared spectral regions in {Michigan}
+  {Holsteins}.
+\newblock {\em Journal of Dairy Science}, 104(10):11242--11258, October 2021.
+
+\bibitem{becker_predicting_2021}
+C.~A. Becker, A.~Aghalari, M.~Marufuzzaman, and A.~E. Stone.
+\newblock Predicting dairy cattle heat stress using machine learning
+  techniques.
+\newblock {\em Journal of Dairy Science}, 104(1):501--524, January 2021.
+
+\bibitem{lahart_predicting_2019}
+B.~Lahart, S.~McParland, E.~Kennedy, T.M. Boland, T.~Condon, M.~Williams,
+  N.~Galvin, B.~McCarthy, and F.~Buckley.
+\newblock Predicting the dry matter intake of grazing dairy cows using infrared
+  reflectance spectroscopy analysis.
+\newblock {\em Journal of Dairy Science}, 102(10):8907--8918, October 2019.
+
+\bibitem{bresolin_infrared_2020}
+Tiago Bresolin and João R.~R. Dórea.
+\newblock Infrared {Spectrometry} as a {High}-{Throughput} {Phenotyping}
+  {Technology} to {Predict} {Complex} {Traits} in {Livestock} {Systems}.
+\newblock {\em Frontiers in Genetics}, 11, 2020.
+
+\bibitem{grelet_potential_2020}
+C.~Grelet, E.~Froidmont, L.~Foldager, M.~Salavati, M.~Hostens, C.~P. Ferris,
+  K.~L. Ingvartsen, M.~A. Crowe, M.~T. Sorensen, J.~A. Fernandez~Pierna,
+  A.~Vanlierde, N.~Gengler, and F.~Dehareng.
+\newblock Potential of milk mid-infrared spectra to predict nitrogen use
+  efficiency of individual dairy cows in early lactation.
+\newblock {\em Journal of Dairy Science}, 103(5):4435--4445, May 2020.
+
+\bibitem{adriaens_productive_2020}
+I.~Adriaens, N.~C. Friggens, W.~Ouweltjes, H.~Scott, B.~Aernouts, and
+  J.~Statham.
+\newblock Productive life span and resilience rank can be predicted from
+  on-farm first-parity sensor time series but not using a common equation
+  across farms.
+\newblock {\em Journal of Dairy Science}, 103(8):7155--7171, August 2020.
+
+\bibitem{mota_real-time_2022}
+Lucio F.~M. Mota, Diana Giannuzzi, Vittoria Bisutti, Sara Pegolo, Erminio
+  Trevisi, Stefano Schiavon, Luigi Gallo, David Fineboym, Gil Katz, and Alessio
+  Cecchinato.
+\newblock Real-time milk analysis integrated with stacking ensemble learning as
+  a tool for the daily prediction of cheese-making traits in {Holstein} cattle.
+\newblock {\em Journal of Dairy Science}, 105(5):4237--4255, May 2022.
+
+\bibitem{spoliansky_development_2016}
+Roii Spoliansky, Yael Edan, Yisrael Parmet, and Ilan Halachmi.
+\newblock Development of automatic body condition scoring using a low-cost
+  3-dimensional {Kinect} camera.
+\newblock {\em Journal of Dairy Science}, 99(9):7714--7725, September 2016.
+
+\bibitem{yukun_automatic_2019}
+Sun Yukun, Huo Pengju, Wang Yujie, Cui Ziqi, Li~Yang, Dai Baisheng, Li~Runze,
+  and Zhang Yonggen.
+\newblock Automatic monitoring system for individual dairy cows based on a deep
+  learning framework that provides identification via body parts and estimation
+  of body condition score.
+\newblock {\em Journal of Dairy Science}, 102(11):10140--10151, November 2019.
+
+\bibitem{song_automated_2018}
+X.~Song, E.A.M. Bokkers, P.P.J. Van Der~Tol, P.W.G. Groot~Koerkamp, and
+  S.~Van~Mourik.
+\newblock Automated body weight prediction of dairy cows using 3-dimensional
+  vision.
+\newblock {\em Journal of Dairy Science}, 101(5):4448--4459, May 2018.
+
+\bibitem{xavier_use_2022}
+C.~Xavier, Y.~Le~Cozler, L.~Depuille, A.~Caillot, A.~Lebreton, C.~Allain, J.~M.
+  Delouard, L.~Delattre, T.~Luginbuhl, P.~Faverdin, and A.~Fischer.
+\newblock The use of 3-dimensional imaging of {Holstein} cows to estimate body
+  weight and monitor the composition of body weight change throughout
+  lactation.
+\newblock {\em Journal of Dairy Science}, 105(5):4508--4519, May 2022.
+
+\bibitem{mantysaari_body_2019}
+P.~Mäntysaari, E.A. Mäntysaari, T.~Kokkonen, T.~Mehtiö, S.~Kajava,
+  C.~Grelet, P.~Lidauer, and M.H. Lidauer.
+\newblock Body and milk traits as indicators of dairy cow energy status in
+  early lactation.
+\newblock {\em Journal of Dairy Science}, 102(9):7904--7916, September 2019.
+
+\bibitem{frizzarin_predicting_2021}
+M.~Frizzarin, I.~C. Gormley, D.~P. Berry, T.~B. Murphy, A.~Casa, A.~Lynch, and
+  S.~McParland.
+\newblock Predicting cow milk quality traits from routinely available milk
+  spectra using statistical machine learning methods.
+\newblock {\em Journal of Dairy Science}, 104(7):7438--7447, July 2021.
+
+\bibitem{appuhamy_prediction_2016}
+J.~A. D. R.~N. Appuhamy, J.~V. Judy, E.~Kebreab, and P.~J. Kononoff.
+\newblock Prediction of drinking water intake by dairy cows.
+\newblock {\em Journal of Dairy Science}, 99(9):7191--7205, September 2016.
+
+\bibitem{de_souza_predicting_2018}
+R.~A. de~Souza, R.~J. Tempelman, M.~S. Allen, W.~P. Weiss, J.~K. Bernard, and
+  M.~J. VandeHaar.
+\newblock Predicting nutrient digestibility in high-producing dairy cows.
+\newblock {\em Journal of Dairy Science}, 101(2):1123--1135, February 2018.
+
+\bibitem{dorea_mining_2018}
+J.~R.~R. Dórea, G.~J.~M. Rosa, K.~A. Weld, and L.~E. Armentano.
+\newblock Mining data from milk infrared spectroscopy to improve feed intake
+  predictions in lactating dairy cows.
+\newblock {\em Journal of Dairy Science}, 101(7):5878--5889, July 2018.
+
+\bibitem{lin_concordance_1989}
+L.~I. Lin.
+\newblock A concordance correlation coefficient to evaluate reproducibility.
+\newblock {\em Biometrics}, 45(1):255--268, March 1989.
+
+\bibitem{jones_identifying_2022}
+Edward~J. Jones, Thomas F.~A. Bishop, Brendan~P. Malone, Patrick~J. Hulme,
+  Brett~M. Whelan, and Patrick Filippi.
+\newblock Identifying causes of crop yield variability with interpretive
+  machine learning.
+\newblock {\em Computers and Electronics in Agriculture}, 192:106632, January
+  2022.
+
+\bibitem{oleary_invited_2020}
+N.~W. O'Leary, D.~T. Byrne, A.~H. O'Connor, and L.~Shalloo.
+\newblock Invited review: {Cattle} lameness detection with accelerometers.
+\newblock {\em Journal of Dairy Science}, 103(5):3895--3911, May 2020.
+
+\bibitem{stojkov_hot_2018}
+J.~Stojkov, G.~Bowers, M.~Draper, T.~Duffield, P.~Duivenvoorden, M.~Groleau,
+  D.~Haupstein, R.~Peters, J.~Pritchard, C.~Radom, N.~Sillett, W.~Skippon,
+  H.~Trépanier, and D.~Fraser.
+\newblock Hot topic: {Management} of cull dairy cows—{Consensus} of an expert
+  consultation in {Canada}.
+\newblock {\em Journal of Dairy Science}, 101(12):11170--11174, December 2018.
+
+\bibitem{alsaaod_automatic_2019}
+Maher Alsaaod, Mahmoud Fadul, and Adrian Steiner.
+\newblock Automatic lameness detection in cattle.
+\newblock {\em The Veterinary Journal}, 246:35--44, April 2019.
+
+\bibitem{kang_accurate_2020}
+X.~Kang, X.~D. Zhang, and G.~Liu.
+\newblock Accurate detection of lameness in dairy cattle with computer vision:
+  {A} new and individualized detection strategy based on the analysis of the
+  supporting phase.
+\newblock {\em Journal of Dairy Science}, 103(11):10628--10638, November 2020.
+
+\bibitem{denholm_predicting_2020}
+S.~J. Denholm, W.~Brand, A.~P. Mitchell, A.~T. Wells, T.~Krzyzelewski, S.~L.
+  Smith, E.~Wall, and M.~P. Coffey.
+\newblock Predicting bovine tuberculosis status of dairy cows from mid-infrared
+  spectral data of milk using deep learning.
+\newblock {\em Journal of Dairy Science}, 103(10):9355--9367, October 2020.
+
+\bibitem{kandeel_ability_2019}
+S.A. Kandeel, A.A. Megahed, M.H. Ebeid, and P.D. Constable.
+\newblock Ability of milk {pH} to predict subclinical mastitis and intramammary
+  infection in quarters from lactating dairy cattle.
+\newblock {\em Journal of Dairy Science}, 102(2):1417--1427, February 2019.
+
+\bibitem{chicco_advantages_2020}
+Davide Chicco and Giuseppe Jurman.
+\newblock The advantages of the {Matthews} correlation coefficient ({MCC}) over
+  {F1} score and accuracy in binary classification evaluation.
+\newblock {\em BMC Genomics}, 21(1):6, January 2020.
+
+\bibitem{bowen_early_2021}
+J.~M. Bowen, M.~J. Haskell, G.~A. Miller, C.~S. Mason, D.~J. Bell, and C-A.
+  Duthie.
+\newblock Early prediction of respiratory disease in preweaning dairy calves
+  using feeding and activity behaviors.
+\newblock {\em Journal of Dairy Science}, 104(11):12009--12018, November 2021.
+
+\bibitem{metz_note_2020}
+Maxime Metz, Alessandra Biancolillo, Matthieu Lesnoff, and Jean-Michel Roger.
+\newblock A note on spectral data simulation.
+\newblock {\em Chemometrics and Intelligent Laboratory Systems}, 200:103979,
+  May 2020.
+
+\bibitem{chen_independent_2023}
+Chun-Peng~James Chen, Yang Hu, Xianran Li, Craig~F. Morris, Stephen Delwiche,
+  Arron~H. Carter, Camille Steber, and Zhiwu Zhang.
+\newblock An independent validation reveals the potential to predict
+  {Hagberg}–{Perten} falling number using spectrometers.
+\newblock {\em The Plant Phenome Journal}, 6(1):e20070, 2023.
+\newblock \_eprint: https://onlinelibrary.wiley.com/doi/pdf/10.1002/ppj2.20070.
+
+\bibitem{haque_recognition_2023}
+Md.~Ashraful Haque, Sudeep Marwaha, Chandan~Kumar Deb, Sapna Nigam, and Alka
+  Arora.
+\newblock Recognition of diseases of maize crop using deep learning models.
+\newblock {\em Neural Computing and Applications}, 35(10):7407--7421, April
+  2023.
+
+\bibitem{sibiya_computational_2019}
+Malusi Sibiya and Mbuyu Sumbwanyambe.
+\newblock A {Computational} {Procedure} for the {Recognition} and
+  {Classification} of {Maize} {Leaf} {Diseases} {Out} of {Healthy} {Leaves}
+  {Using} {Convolutional} {Neural} {Networks}.
+\newblock {\em AgriEngineering}, 1(1):119--131, March 2019.
+\newblock Number: 1 Publisher: Multidisciplinary Digital Publishing Institute.
+
+\bibitem{zoph_neural_2017}
+Barret Zoph and Quoc~V. Le.
+\newblock Neural {Architecture} {Search} with {Reinforcement} {Learning},
+  February 2017.
+\newblock arXiv:1611.01578 [cs].
+
+\bibitem{soares_successive_2013}
+Sófacles Figueredo~Carreiro Soares, Adriano~A. Gomes, Mario Cesar~Ugulino
+  Araujo, Arlindo Rodrigues~Galvão Filho, and Roberto Kawakami~Harrop Galvão.
+\newblock The successive projections algorithm.
+\newblock {\em TrAC Trends in Analytical Chemistry}, 42:84--98, January 2013.
+
+\bibitem{shahinfar_prediction_2019}
+Saleh Shahinfar, Khama Kelman, and Lewis Kahn.
+\newblock Prediction of sheep carcass traits from early-life records using
+  machine learning.
+\newblock {\em Computers and Electronics in Agriculture}, 156:159--177, January
+  2019.
+
+\bibitem{st-pierre_invited_2001}
+N.~R. St-Pierre.
+\newblock \textit{{Invited} {Review}:} {Integrating} {Quantitative} {Findings}
+  from {Multiple} {Studies} {Using} {Mixed} {Model} {Methodology1}.
+\newblock {\em Journal of Dairy Science}, 84(4):741--755, April 2001.
+
+\bibitem{de_oliveira_genomic_2020}
+Amanda~Avelar de~Oliveira, Marcio F.~R. Resende, Luís Felipe~Ventorim Ferrão,
+  Rodrigo~Rampazo Amadeu, Lauro José~Moreira Guimarães, Claudia~Teixeira
+  Guimarães, Maria~Marta Pastina, and Gabriel Rodrigues~Alves Margarido.
+\newblock Genomic prediction applied to multiple traits and environments in
+  second season maize hybrids.
+\newblock {\em Heredity}, 125(1):60--72, August 2020.
+\newblock Publisher: Nature Publishing Group.
+
+\bibitem{lopez-cruz_leveraging_2023}
+Marco Lopez-Cruz, Fernando~M. Aguate, Jacob~D. Washburn, Natalia de~Leon,
+  Shawn~M. Kaeppler, Dayane~Cristina Lima, Ruijuan Tan, Addie Thompson,
+  Laurence~Willard De~La~Bretonne, and Gustavo de~los Campos.
+\newblock Leveraging data from the {Genomes}-to-{Fields} {Initiative} to
+  investigate genotype-by-environment interactions in maize in {North}
+  {America}.
+\newblock {\em Nature Communications}, 14(1):6904, October 2023.
+\newblock Publisher: Nature Publishing Group.
+
+\bibitem{buczinski_validation_2018}
+S.~Buczinski, G.~Fecteau, J.~Dubuc, and D.~Francoz.
+\newblock Validation of a clinical scoring system for bovine respiratory
+  disease complex diagnosis in preweaned dairy calves using a {Bayesian}
+  framework.
+\newblock {\em Preventive Veterinary Medicine}, 156:102--112, August 2018.
+
+\bibitem{lu_-field_2017}
+Jiang Lu, Jie Hu, Guannan Zhao, Fenghua Mei, and Changshui Zhang.
+\newblock An in-field automatic wheat disease diagnosis system.
+\newblock {\em Computers and Electronics in Agriculture}, 142:369--379,
+  November 2017.
+
+\bibitem{su_advanced_2020}
+Wen-Hao Su.
+\newblock Advanced {Machine} {Learning} in {Point} {Spectroscopy}, {RGB}- and
+  {Hyperspectral}-{Imaging} for {Automatic} {Discriminations} of {Crops} and
+  {Weeds}: {A} {Review}.
+\newblock {\em Smart Cities}, 3(3):767--792, September 2020.
+\newblock Number: 3 Publisher: Multidisciplinary Digital Publishing Institute.
+
+\bibitem{gao_retrieval-augmented_2024}
+Yunfan Gao, Yun Xiong, Xinyu Gao, Kangxiang Jia, Jinliu Pan, Yuxi Bi, Yi~Dai,
+  Jiawei Sun, Meng Wang, and Haofen Wang.
+\newblock Retrieval-{Augmented} {Generation} for {Large} {Language} {Models}:
+  {A} {Survey}, March 2024.
+\newblock arXiv:2312.10997.
+
+\bibitem{salemi_evaluating_2024}
+Alireza Salemi and Hamed Zamani.
+\newblock Evaluating {Retrieval} {Quality} in {Retrieval}-{Augmented}
+  {Generation}, April 2024.
+\newblock arXiv:2404.13781.
+
+\bibitem{minni_exploring_2024}
+N.~Minni, N.~Rehna, and P.~M. Harikrishnaa.
+\newblock Exploring {Machine} {Learning} {Algorithms} for {Accurate} {Breast}
+  {Cancer} {Classification}: {A} {Comparative} {Analysis} {Using} {F2}
+  {Metric}.
+\newblock In B.~Rama Devi, Kishore Kumar, M.~Raju, K.~Srujan Raju, and Mathini
+  Sellathurai, editors, {\em Proceedings of {Fifth} {International}
+  {Conference} on {Computer} and {Communication} {Technologies}}, pages
+  153--162, Singapore, 2024. Springer Nature.
+
+\end{thebibliography}

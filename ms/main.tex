@@ -1,0 +1,99 @@
+\documentclass{article}
+
+\usepackage{arxiv}
+
+\usepackage[utf8]{inputenc} % allow utf-8 input
+\usepackage[T1]{fontenc}    % use 8-bit T1 fonts
+\usepackage{hyperref}       % hyperlinks
+\usepackage{url}            % simple URL typesetting
+\usepackage{booktabs}       % professional-quality tables
+\usepackage{amsfonts}       % blackboard math symbols
+\usepackage{amsmath}        % popular math symbols
+\usepackage{nicefrac}       % compact symbols for 1/2, etc.
+\usepackage{microtype}      % microtypography
+\usepackage{multirow}        % multirow in tables
+\usepackage{lipsum}		% Can be removed after putting your text content
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{natbib}
+\usepackage{doi}
+\usepackage{subcaption} % subfigures
+\usepackage{setspace} % double spacing
+\usepackage{lineno} % line numbering
+\numberwithin{equation}{section}
+\graphicspath{ {.} }
+
+\title{Common Pitfalls in Evaluating Model Performance and Strategies for Avoidance in Agricultural Studies}
+
+\author{
+	\href{https://orcid.org/0000-0002-2018-0702}{\includegraphics[scale=0.06]{orcid.pdf}\hspace{1mm}C. P. James Chen}\thanks{Corresponding author: James Chen \texttt{<niche@vt.edu>}}\\
+	School of Animal Sciences\\
+	Virginia Tech\\
+	Blacksburg, VA 24061 \\
+	\texttt{niche@vt.edu} \\
+    \And
+	\href{https://orcid.org/0000-0001-5713-012X}{\includegraphics[scale=0.06]{orcid.pdf}\hspace{1mm}Robin R. White} \\
+	School of Animal Sciences\\
+	Virginia Tech\\
+	Blacksburg, VA 24061 \\
+	\texttt{rrwhite@vt.edu} \\
+    \And
+	\href{}{\hspace{1mm}Ryan Wright} \\
+	School of Animal Sciences\\
+	Virginia Tech\\
+	Blacksburg, VA 24061 \\
+	\texttt{ryanw22@vt.edu}
+}
+
+
+
+\renewcommand{\shorttitle}{\textit{Common Pitfalls in Evaluating Model Performance}}
+
+\doublespacing
+\linenumbers
+
+\begin{document}
+\maketitle
+
+\input{_0_abstract.tex}
+
+\newpage
+\section{Introduction}
+\input{_1a_modeling.tex}
+\input{_1b_metrics.tex}
+\input{_1c_objectives.tex}
+
+\newpage
+\section{Materials and Methods}
+\input{_2a_dataset.tex}
+\input{_2b_study1.tex}
+\input{_2c_study2.tex}
+\input{_2d_study3.tex}
+\input{_2e_study4.tex}
+\input{_2f_study5.tex}
+
+\newpage
+\section{Results and Discussion}
+\input{_3a_study1.tex}
+\input{_3b_study2.tex}
+\input{_3c_study3.tex}
+\input{_3d_study4.tex}
+\input{_3e_study5.tex}
+\newpage
+
+\input{_4_conclusion.tex}
+
+\newpage
+%Bibliography
+\bibliographystyle{unsrt}
+\bibliography{references}
+
+\newpage
+
+\renewcommand{\theequation}{S.\arabic{equation}}
+\renewcommand{\thefigure}{S.\arabic{figure}}
+\renewcommand{\thetable}{S.\arabic{table}}
+
+\input{_9_sup.tex}
+
+\end{document}

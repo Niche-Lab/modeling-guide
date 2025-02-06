@@ -1,0 +1,212 @@
+\subsection{Model Performance Metrics}
+
+Model performance metrics serve as quantitative indicators for evaluating model performance. They are critical for benchmarking various modeling approaches and for evaluating hypotheses underpinning these different approaches. Choosing appropriate metrics to support hypothesis testing is crucial, as in-ideal selection may lead to overly optimistic conclusions. Due to the different goals of regression and classification tasks, it is critical to ensure that these different model types are evaluated using different metrics. As such, metrics for regression and classification are discussed individually.
+
+\subsubsection{Metrics in Regression Tasks}
+
+\begin{table}[H]
+    \caption{Summary of model performance metrics for regression tasks.}
+    \centering
+    \begin{tabular}{llll}
+        \toprule
+        Metric & Type & Scale-invariant & Range \\
+        \midrule
+        Root mean square error (RMSE) & Error-based & No & [0, $\infty$] \\
+        Mean absolute error (MAE) & Error-based & No & [0, $\infty$] \\
+        Root mean squared percentage error (RMSPE) & Error-based & Yes & [0, $\infty$] \\
+        Root mean standard deviation ratio (RSR) & Error-based & Yes & [0, $\infty$] \\
+        Pearson's correlation coefficient (r) & Linearity-based  & Yes & [-1, 1] \\
+        Coefficient of determination (R$^2$) & Linearity-based & Yes & [-$\infty$, 1] \\
+        Lin's concordance correlation coefficient (CCC) & Linearity-based & Yes & [-1, 1] \\
+        \bottomrule
+    \end{tabular}
+    \label{tab:metrics-reg}
+\end{table}
+
+Regression models aim to predict continuous variables and are commonly employed in diverse applications, such as estimating body condition scores \citep{spoliansky_development_2016, yukun_automatic_2019}, body weight \citep{song_automated_2018,xavier_use_2022}, milk composition \citep{rovere_prediction_2021,mota_real-time_2022,mantysaari_body_2019,frizzarin_predicting_2021}, efficiency of feed resource usage \citep{grelet_potential_2020, appuhamy_prediction_2016,de_souza_predicting_2018}, and early-lactation behavior \citep{van_dixhoorn_indicators_2018}. The metrics in regression tasks evaluate the agreement between the predicted value $\hat{y}$ and the true values $y$. The agreement can be generally quantified in two ways: error-based metrics and linearity-based metrics. The metrics are summarized in Table~\ref{tab:metrics-reg}. 
+
+Error-based metrics focus on the deviation of each pair of predicted and true values, while linearity-based metrics consider overall linear relationships between the predictions and the ground truth values. The RMSE and the mean absolute error (MAE) are two common error-based metrics:
+
+\begin{equation} \label{eq_rmse}
+\text{RMSE} = \sqrt{\frac{1}{n} \sum_{i=1}^{n} (y_i - \hat{y}_i)^2}
+\end{equation}
+
+\begin{equation} \label{eq_mae}
+    \text{MAE} = \frac{1}{n} \sum_{i=1}^{n} |y_i - \hat{y}_i|
+\end{equation}
+
+where $y_i$ and $\hat{y}_i$ are the true and predicted values, respectively, and $n$ is the sample size. Both metrics preserve the scale of the original data, making them easy to interpret in real-world units. Additionally, compared to MAE, RMSE penalizes large errors more due to the squared term, making it more sensitive to outliers. Monitoring animal body weight is a common practice to aid in the management of dairy cows. Studies by Song et al. and Xavier et al. have utilized RMSE to assess the effectiveness of three-dimensional cameras in estimating dairy cow body weight, yielding RMSE values of 41.2 kg and 12.1 kg, respectively \citep{song_automated_2018,xavier_use_2022}. These figures provide a straightforward value for farmers to gauge whether the prediction error is tolerable, considering their specific operational costs and management thresholds. In essence, RMSE translates complex model accuracy into practical insights for productive agricultural units.
+When evaluating the same model across different traits, which may have different scales, a common practice is to express error metrics in a scale-free manner. This can be achieved by expressing RMSE as a percent of the deviation from the observed value, such as root mean squared percentage error (RMSPE), or as a Root Mean Standard Deviation Ratio (RSR) that normalizes the RMSE by the standard deviation of the observed values:
+
+\begin{equation} \label{eq_rmspe}
+    \text{RMSPE} = \sqrt{\frac{1}{n} \sum_{i=1}^{n} (\frac{y_i - \hat{y}_i}{y_i})^2}
+\end{equation}
+
+\begin{equation} \label{eq_rsr}
+    \text{RSR} = \frac{\text{RMSE}}{\sigma_y}
+\end{equation}
+
+where $\sigma_y$ is the standard deviation of the observed values. When expressed as a percent, RMSPE typically ranges from 0 and above, with values closer to 0 indicating perfect prediction. Much like expressing RMSE as a percent, RSR is valuable to interpret RMSE in terms of the context of the variance in the observations. Values below 1 suggest that the model yields predictions less variable than the standard deviation, while values above 1 suggest that the prediction is imprecise.
+
+On the other hand, Pearson's correlation coefficients (r) and the coefficient of determination (R$^2$) are two common linearity-based metrics:
+\begin{equation} \label{eq_r}
+    \begin{aligned}
+    r &= \frac{\text{cov}(y, \hat{y})}{\sigma_y \sigma_{\hat{y}}} \\
+    &= \frac{\sum_{i=1}^{n} (y_i - \bar{y})(\hat{y}_i - \bar{\hat{y}})}{\sqrt{\sum_{i=1}^{n} (y_i - \bar{y})^2 \sum_{i=1}^{n} (\hat{y}_i - \bar{\hat{y}})^2}}
+    \end{aligned}
+\end{equation}
+
+\begin{equation} \label{eq_R2}
+    \begin{aligned}
+    R^2 &= 1 - \frac{SS_{\text{residual}}}{SS_{\text{total}}} \\
+    &= 1 - \frac{\sum_{i=1}^{n} (y_i - \hat{y}_i)^2}{\sum_{i=1}^{n} (y_i - \bar{y})^2}
+    \end{aligned}
+\end{equation}
+
+where \(SS_{\text{residual}}\) is the residual sum of squares and \(SS_{\text{total}}\) is the total sum of squares. Each \(y_i\) and \(\hat{y}_i\) are the ith elements of the actual response vector \(y\) and the predicted response vector \(\hat{y}\), respectively. \(\bar{y}\) and \(\bar{\hat{y}}\) are their respective means. Both \(r^2\) and \(R^2\) are scale invariant, meaning their values are unaffected by the scale of the observed data because they are normalized by the variation in the denominator.
+
+The correlation coefficient \(r\) measures the strength of the linear relationship between two continuous variables, \(y\) and \(\hat{y}\), and ranges from -1 to 1. A value of 0 indicates no prediction accuracy in the evaluated model. One special characteristic of correlation \(r\) is that it is unaffected by the scale of the predictions or biases; it focuses on the relative changes in the predicted values compared to the true values. Thus, even if the prediction biases are scaled up or down, the correlation \(r\) between \(\hat{y}\) and \(y\) remains the same. This property is particularly useful when the focus is more on ranking predictions rather than their absolute values. For example, this metric has been used to evaluate models that identify high-performing production individuals, demonstrating the ability to predict nutrient digestibility in dairy cows \citep{de_souza_predicting_2018} and to select models based on their ability to rank traits such as feed intake and milk composition in dairy cows \citep{dorea_mining_2018,rovere_prediction_2021}.
+
+The coefficient of determination \(R^2\) quantifies model performance from the proportion of variance in the dependent variable that is predictable from the independent variables. It ranges from negative infinity to 1, where 1 indicates that the model explains all the variance in the dependent variable, and 0 indicates that the model performs no better than predicting all samples as the mean of the observed values. \(R^2\) is useful in comparing multiple regression models, as demonstrated in studies that regress body weight of dairy cows on a set of morphological traits \citep{xavier_use_2022}, examine the relationship between milk spectral profiles and nitrogen utilization efficiency \citep{grelet_potential_2020}, and evaluate the predictive performance of milk fatty acid composition \citep{mantysaari_body_2019}.
+
+It worth noting that much of the existing literature has misinterpreted the relationship between $r$ and $R^2$. The coefficient of determination $R^2$ is not always equivalent to the square of the correlation coefficient $r^2$. The equivalence only holds when the same dataset is used for both model fitting and evaluation in a least squares regression model. The model assumes a zero covariance between the fitted residual and the predicted values $\hat{y}$, and it also assumes that the residuals (i.e., prediction biases) are centered on zero. In practice when predictions are made on new data, those assumptions are often violated, leading to discrepancies between $r^2$ and $R^2$. A details derivation of the equivalence is provided in Equation ~\ref{eq_pf_cov} ~\ref{eq_pf_r2} in the Appendix.
+
+
+In addition to \(r^2\) and \(R^2\), another linearity-based metric is Lin's concordance correlation coefficient (CCC) \citep{lin_concordance_1989}:
+
+\begin{equation} \label{eq_ccc}
+\begin{aligned}
+\text{CCC} &= \frac{2r \sigma_y \sigma_{\hat{y}}}{\sigma_y^2 + \sigma_{\hat{y}}^2 + (\bar{y} - \bar{\hat{y}})^2} \\
+&= \frac{2 \text{cov}(y, \hat{y})}{\sigma_y^2 + \sigma_{\hat{y}}^2 + (\bar{y} - \bar{\hat{y}})^2}
+\end{aligned}
+\end{equation}
+
+where $r$ is the Pearson correlation coefficient. The CCC is a comprehensive metric because it considers both the correlation and the scale bias between the predicted and true values. It fills the gap left by \(r^2\) where the scale bias is ignored. Geometrically, CCC measures how well the predicted values \(\hat{y}\) fall on the 45-degree line in a scatter plot of the predicted (x-axis) and true values (y-axis). It is advantageous over \(R^2\) because it consistently ranges from -1 to 1, making it easier to interpret and compare across different studies. The CCC is crucial when accurate predictions are required for both the scale and the rank of the trait of interest, such as in studies predicting cotton crop yields based on soil and terrain profiles \citep{jones_identifying_2022}.
+
+\subsubsection{Metrics in Classification Tasks}
+
+Classification models aim to predict categorical outcomes such as 'healthy' or 'sick,' 'susceptible' or 'resistant,' and 'high yield' or 'low yield.’ To evaluate classification performance, one must first establish a confidence threshold to dichotomize the prediction probabilities. For instance, if a classification model predict a sample as 'sick' with a 0.7 probability, and the threshold is set at 0.5. Since the 0.7 prediction probability exceeds the threshold, the sample is predicted as a positive sample. It is worth mentioning that this threshold is adjustable to fine-tune model performance for particular focus, such as minimizing false positives or false negatives. All classification metrics are derived from the confusion matrix, which summarizes the model's performance in a 2x2 table, where the rows represent the actual classes and the columns represent the predicted classes.
+
+\begin{table}[H]
+    \caption{Confusion matrix for binary classification.}
+    \centering
+    \begin{tabular}{ll|cc}
+        \toprule
+        \multicolumn{2}{c|}{\multirow{2}{*}{}} & \multicolumn{2}{c}{Predicted} \\
+        \multicolumn{2}{c|}{} & Positive & Negative \\
+        \midrule
+        \multirow{2}{*}{Actual} & Positive & True Positive (TP) & False Negative (FN) \\
+        & Negative & False Positive (FP) & True Negative (TN) \\
+        \bottomrule
+    \end{tabular}
+    \label{tab:confusion-matrix}
+\end{table}
+
+
+The confusion matrix (Table~\ref{tab:confusion-matrix}) consists of four components: true positives (TP), true negatives (TN), false positives (FP), and false negatives (FN). Most common metrics used in classification tasks are summarized in Table~\ref{tab:metrics-cls}.
+
+\begin{table}[H]
+    \caption{Summary of model performance metrics for classification tasks.}
+    \centering
+    \begin{tabular}{llll}
+        \toprule
+        Metric & Denominator & Focus \\
+        \midrule
+        True positive rate (TPR) & Actual positives & Correctness \\
+        True negative rate (TNR) & Actual negatives & Correctness \\
+        False negative rate (FNR) & Actual positives & Error \\
+        False positive rate (FPR) & Actual negatives & Error \\
+        \midrule
+        Sensitivity & Actual positives & Correctness \\
+        Specificity & Actual negatives & Correctness \\
+        \midrule
+        Precision & Predicted positives & Correctness \\
+        Recall & Actual positives & Correctness \\
+        \midrule
+        Accuracy & All samples & Balance \\
+        F1 score & All samples & Balance \\
+        F-beta score & All samples & Balance \\
+        MCC & All samples & Balance \\
+        \bottomrule
+    \end{tabular}
+    \label{tab:metrics-cls}
+\end{table}
+
+The metrics can be characterized by two key factors: their denominator and their focus on either correctness or error. Understanding the denominator of a metric helps clarify its scope of interest. For instance, if one wants to evaluate how well the model correctly predicts positive samples, metrics that use actual positives as the denominator should be prioritized.
+It is noted that in Table~\ref{tab:metrics-cls}, the metrics are organized in four subsections. The metrics in the first subsection have self-explanatory names, each emphasizing a specific aspect of the model’s performance:
+
+
+\begin{equation} \label{eq_TPR}
+    \begin{split}
+    \text{True positive rate (TPR)} &= \text{Sensitivity}\\
+                    &= \text{Recall}\\
+                    &= \frac{\text{TP}}{\text{Total Actual Positives}}\\
+    \end{split}
+\end{equation}
+
+\begin{equation} \label{eq_TNR}
+    \begin{split}
+    \text{True negative rate (TNR)} &= \text{Specificity}\\
+                    &= \frac{\text{TN}}{\text{Total Actual Negatives}}\\
+    \end{split}
+\end{equation}
+
+Both TPR and TNR focus on the correctness of the model's predictions, but TPR is concerned with positive samples, while TNR is concerned with negative samples. High TPR is essential where missing a positive case has serious consequences, or where false positives are easily rectifiable. For instance, detecting lameness or abnormal gait is crucial, as these can indicate underlying pathologies \citep{oleary_invited_2020} and impact welfare-related transport decisions \citep{stojkov_hot_2018}. An automated detection system \citep{oleary_invited_2020, alsaaod_automatic_2019,kang_accurate_2020} with high TPR can mitigate economic losses by flagging at-risk cows. The benefit here lies in the feasibility of re-examining false positives, thus preventing more severe outcomes from undetected cases. 
+
+
+In contrast, the false negative rate (FNR) and false positive rate (FPR) focus on the model's errors:
+
+$$
+\text{False negative rate (FNR)} = \frac{\text{FN}}{\text{Total Actual Positives}}
+$$
+
+$$
+\text{False positive rate (FPR)} = \frac{\text{FP}}{\text{Total Actual Negatives}}
+$$
+
+The second section of Table~\ref{tab:metrics-cls} includes sensitivity and specificity, which are equivalent to TPR and TNR, respectively. These terms are widely used in medical diagnostics due to their emphasis on accurately identifying true positive and true negative cases, which are critical requirement for tests and screenings for disease detection.
+
+The third section includes precision and recall, which focus on different aspects of positive cases. 
+Machine learning community used to report precision and recall together, as the community focus more on the positive samples than the negative samples. For example, in computer vision applications, how well a model can correctly classify and localize the object of interest (positives) from an image is more important than how well the model can correctly know what area is irreleavnt background (negatives). Precision evaluates the correctness of the predicted positive cases, ensuring that the predictions are accurate, while recall measures the completeness of identifying all actual positive cases, emphasizing the model’s ability to capture true positives. Precision measure the trustworthiness of positive predictions made by the model (Eq.~\ref{eq_precision}). High precision is crucial in scenarios where false positives incur significant costs. For instance, in contexts where clinical treatments and culling are expensive, such as detecting bovine tuberculosis \citep{denholm_predicting_2020} or mastitis \citep{kandeel_ability_2019} using non-invasive methods, a high-precision model is crucial to minimize unnecessary costs and interventions from false positives. Precision and recall are a pair of metrics commonly used in machine learning applications, particularly in multi-class classification or detection scenarios. In these contexts, the evaluation of negative samples (i.e., non-positive samples) is often replaced by examining the precision and recall for each individual class. This approach allows for a more granular assessment of the model’s performance across all classes, ensuring that both the quality of predictions and the ability to identify all relevant samples are accounted for.
+
+\begin{equation} \label{eq_precision}
+    \begin{split}
+    \text{Precision} &= \frac{\text{TP}}{\text{Total Predicted Positives}}
+    \end{split}
+\end{equation}
+
+The last section of Table~\ref{tab:metrics-cls} includes accuracy, F1 score, F-beta score, and Matthews Correlation Coefficient (MCC). These metrics offer a balanced evaluation of the model’s performance by taking into account both correctness and error rates, as well as both positive and negative samples. Among them, accuracy is the most straightforward metric for evaluating classification models, as it measures the proportion of correctly classified samples out of the total samples.
+
+\begin{equation} \label{eq_accuracy}
+    \begin{split}
+\text{Accuracy} &= \frac{\text{Total Correct Predictions}}{\text{Total Predictions}} \\
+        &= \frac{\text{TP} + \text{TN}}{\text{TP} + \text{TN} + \text{FP} + \text{FN}}
+    \end{split}
+\end{equation}
+
+It summarizes an overall model performance by calculating the proportion of correctly classified samples among all samples. Nonetheless, accuracy can be misleading when the classes are imbalanced. For example, if a study predicting the presence of a specific event, of which the prevalence was only 10\%. In this case, a model that predicts all samples as negative would achieve an accuracy of 90\%, which is misleadingly high. 
+The F1 score, which is the harmonic mean of precision and recall (i.e., TPR), provides a balanced measure of model performance:
+
+\begin{equation} \label{eq_f1}
+    \text{F1} = 2 \times \frac{\text{Precision} \times \text{Recall}}{\text{Precision} + \text{Recall}}
+\end{equation}
+
+Unlike accuracy, the F1 score considers both false positives and false negatives by balancing precision and recall, making it a more reliable metric for imbalanced datasets. A variant of the F1 score is the F-beta score, which allows for the adjustment of the balance between precision and recall by introducing a weight parameter $\beta$:
+
+\begin{equation} \label{eq_fbeta}
+    \text{F-beta} = (1 + \beta^2) \times \frac{\text{Precision} \times \text{Recall}}{\beta^2 \times \text{Precision} + \text{Recall}}
+\end{equation}
+
+A common variant is the F2 score, which places more emphasis on false negatives (i.e., recall) than false positives, by setting $\beta = 2$:
+
+\begin{equation} \label{eq_f2}
+    \text{F2} = 5 \times \frac{\text{Precision} \times \text{Recall}}{4 \times \text{Precision} + \text{Recall}}
+\end{equation}
+
+Lastly, the Matthews correlation coefficient (MCC) considers both positive and negative samples in the dataset, providing a balanced measure of a model's performance \citep{chicco_advantages_2020}. It is defined as:
+
+\begin{equation} \label{eq_mcc}
+    \text{MCC} = \frac{\text{TP} \times \text{TN} - \text{FP} \times \text{FN}}{\sqrt{(\text{TP} + \text{FP})(\text{TP} + \text{FN})(\text{TN} + \text{FP})(\text{TN} + \text{FN})}}
+\end{equation}
+
+The equation ~\ref{eq_mcc} symmetrically incorporates all four components of TP, TN, FP, and FN). This symmetry makes MCC invariant to class distribution changes. The coefficient ranges from -1 to 1, where 1 indicates perfect classification, 0 indicates no better performance than random guessing, and -1 signifies total disagreement between prediction and observation. In a case study that used feeding and daily activity behaviors to diagnose Bovine Respiratory Disease in dairy calves, MCC proved particularly insightful \citep{bowen_early_2021}. The models in this study exhibited strong performance on negative samples (i.e., healthy calves), which were more prevalent, resulting in high specificity. However, sensitivity was relatively low at 0.54. In this context, MCC, with a value of 0.36, provided a more nuanced and representative measure of model performance, especially given the skew towards negative samples
