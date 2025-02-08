@@ -320,6 +320,27 @@ Marco Lopez-Cruz, Fernando~M. Aguate, Jacob~D. Washburn, Natalia de~Leon,
 \newblock {\em Nature Communications}, 14(1):6904, October 2023.
 \newblock Publisher: Nature Publishing Group.
 
+\bibitem{renard_understanding_2024}
+Xavier Renard, Thibault Laugel, and Marcin Detyniecki.
+\newblock Understanding prediction discrepancies in classification.
+\newblock {\em Machine Learning}, 113(10):7997--8026, October 2024.
+
+\bibitem{wang_investigating_2024}
+Xiao Wang, Xue Liu, Yanfang Wang, Xuyuan Kang, Ruoxi Geng, Ao~Li, Fu~Xiao,
+  Changhao Zhang, and Da~Yan.
+\newblock Investigating the deviation between prediction accuracy metrics and
+  control performance metrics in the context of an ice-based thermal energy
+  storage system.
+\newblock {\em Journal of Energy Storage}, 91:112126, June 2024.
+
+\bibitem{ma_multisource_2023}
+Yuchi Ma, Zhengwei Yang, and Zhou Zhang.
+\newblock Multisource {Maximum} {Predictor} {Discrepancy} for {Unsupervised}
+  {Domain} {Adaptation} on {Corn} {Yield} {Prediction}.
+\newblock {\em IEEE Transactions on Geoscience and Remote Sensing}, 61:1--15,
+  2023.
+\newblock Conference Name: IEEE Transactions on Geoscience and Remote Sensing.
+
 \bibitem{buczinski_validation_2018}
 S.~Buczinski, G.~Fecteau, J.~Dubuc, and D.~Francoz.
 \newblock Validation of a clinical scoring system for bovine respiratory

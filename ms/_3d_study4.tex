@@ -3,7 +3,7 @@
 \begin{figure}[H]
     \centering
     \includegraphics[width=1\textwidth]{fig_9.jpg}
-    \caption{The heatmap of different metrics in response to the bias and variance error in regression tasks where the ground truth variance is 4.}
+    \caption{Heatmaps illustrating various metrics as functions of the bias and standard deviation (Std.) of the prediction error in a regression task, where the ground truth values have a Std. of 4.}
     \label{fig:s4_reg}
 \end{figure}
 
@@ -16,5 +16,3 @@ $R^2$ is a widely used metric in the machine learning community and offers good 
 Error-based metrics like RMSE and MAE are often compared for their robustness to outliers. Due to the squared error term in RMSE, it is more sensitive to large prediction errors. Interestingly, when analyzing their response to increases in bias error, RMSE and MAE exhibit identical trends: a 1-unit increase in bias error results in a 1-unit increase in both metrics. However, differences emerge along the variance error axis, where MAE increases by only 0.8 units per unit increase in variance error, whereas RMSE increases by 1 unit. This indicates that MAE is more robust to variance-related errors than RMSE, making it better suited for handling outlier predictions.
 
 RSR, on the other hand, standardizes RMSE by the standard deviation of the ground truth values. In this experiment, where the ground truth values were generated from a normal distribution with a standard deviation of 2, RSR serves as a direct comparison to RMSE. While RMSE reflects the original error scale, RSR normalizes the error scale to the ground truth variance, resulting in values that are always half those of RMSE. This property makes RSR an excellent metric for comparing model performance across multiple datasets with varying variance levels. RSR provides a uniform standard for performance evaluation while retaining the capability to capture error amplitude, which linearity-based metrics like $r$ and CCC lack.
-
-

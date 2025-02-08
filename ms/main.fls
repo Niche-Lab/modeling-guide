@@ -1,8 +1,8 @@
-PWD /Users/niche/projects/modeling-guide/ms
+PWD /Users/niche/Library/CloudStorage/SynologyDrive-Cloud/03_papers/modeling-guide/ms
 INPUT /usr/local/texlive/2022/texmf.cnf
 INPUT /usr/local/texlive/2022/texmf-dist/web2c/texmf.cnf
 INPUT /usr/local/texlive/2022/texmf-var/web2c/pdftex/pdflatex.fmt
-INPUT /Users/niche/projects/modeling-guide/ms/main.tex
+INPUT /Users/niche/Library/CloudStorage/SynologyDrive-Cloud/03_papers/modeling-guide/ms/main.tex
 OUTPUT main.log
 INPUT /usr/local/texlive/2022/texmf-dist/tex/latex/base/article.cls
 INPUT /usr/local/texlive/2022/texmf-dist/tex/latex/base/article.cls

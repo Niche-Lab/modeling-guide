@@ -3,10 +3,9 @@
 \begin{figure}[H]
     \centering
     \includegraphics[width=1\textwidth]{fig_10.jpg}
-    \caption{A 5 × 5 grid of performance metrics, with each cell representing a unique combination of balance and confidence threshold. The inspected metrics focus on one sample distribution at a time. The model is simulated to have higher false positive predictions than false negative predictions with a beta distribution of $\alpha=4$ and $\beta=3$ for the negative class.} 
+    \caption{Heatmaps displaying performance metrics across a 5×5 grid, where each cell corresponds to a unique combination of balance level and confidence threshold. These metrics are calculated exclusively for either positive or negative class label. The simulation is configured such that the model produces more false positive than false negative predictions, with the negative class following a beta distribution ($\alpha = 4, \beta = 3$).} 
     \label{fig:s5_1}
 \end{figure}
-
 
 Except for precision, metrics focused on a single sample distribution (i.e., actual positives or negatives) are unaffected by class imbalance (Figure~\ref{fig:s5_1}). For instance, the TPR remains stable at 0.989 with a confidence threshold of 0.3, regardless of the proportion of positive samples. This stability arises because such metrics evaluate only one distribution at a time, making them invariant to shifts in class balance.
 
@@ -27,6 +26,8 @@ In summary, each pair of metrics (TPR and TNR, precision and recall) offers a un
     \caption{A 5 × 5 grid of performance metrics, with each cell representing a unique combination of balance and confidence threshold. The inspected metrics focus on multiple sample distributions simultaneously. The prediction model is simulated to have higher false positive rate than false negative rate.}
     \label{fig:s5_2}
 \end{figure}
+
+
 
 Metrics that capture multiple aspects of model performance offer more comprehensive insights into a model’s effectiveness (Figure~\ref{fig:s5_2}). The heatmap in this experiment illustrates extreme scenarios at its corners, highlighting metric strengths and limitations. For example, the top-left corner features predominantly negative samples with mostly positive predictions, leading to many false positives, while the bottom-right corner features predominantly positive samples with mostly negative predictions, resulting in false negatives. The other corners illustrate cases where predictions align overwhelmingly with the majority class, allowing naive models to achieve high performance purely due to class imbalance rather than true predictive power. Effective metrics must assess performance beyond such “background effects.”
 
